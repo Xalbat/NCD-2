@@ -46,6 +46,22 @@ public class Avion {
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
 	
+	//Constructeurs
+	public Avion() {}
+	
+	public Avion(int idAvion, int hauteurMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+			boolean etat, SituationAvion situation) {
+		super();
+		this.idAvion = idAvion;
+		this.hauteurMax = hauteurMax;
+		this.capacite = capacite;
+		this.rotationMax = rotationMax;
+		this.rotation = rotation;
+		this.tempsMontee = tempsMontee;
+		this.etat = etat;
+		this.situation = situation;
+	}
+	
 	//Getters Setters
 	public int getIdAvion() {
 		return idAvion;

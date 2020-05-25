@@ -6,4 +6,5 @@ public class Views {
 	public static class Common{}
 	public static class Compte extends Common{}
 	public static class Avion extends Common{}
+	public static class Pilote extends Common{}
 }
