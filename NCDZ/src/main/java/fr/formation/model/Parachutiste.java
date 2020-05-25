@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Parachutiste {
 	
 	@Id
-	@Column(name = "numeroLicence")
+	@Column(name = "numero-licence")
 	private int numeroLicence;
 	
 	@Column(name = "nom", nullable = false)
@@ -30,7 +30,7 @@ public class Parachutiste {
 	private LocalDate dateLicence;
 	
 	@ManyToOne
-	@JoinColumn(name = "parachute", nullable = false)
+	@JoinColumn(name = "id_parachute", nullable = false)
 	private Parachute parachute;
 
 	

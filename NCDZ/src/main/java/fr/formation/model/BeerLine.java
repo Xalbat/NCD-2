@@ -20,15 +20,16 @@ import fr.formation.model.Saut;
 public class BeerLine {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBeerLine;
 	
-	@NotNull
 	@OneToOne
+	@NotNull
 	private Saut saut;
 	
-	@NotNull
 	@OneToOne
+	@NotNull
 	private Parachutiste parachutiste;
 	
 

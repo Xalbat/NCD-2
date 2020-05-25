@@ -22,23 +22,23 @@ public class Pilote {
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pilote")
+	@Column(name = "id")
 	@JsonView(Views.Pilote.class)
 	private int idPilote;
 	
-	@Column(name = "PILOTE_NOM", nullable = false)
+	@Column(name = "nom", nullable = false)
 	@JsonView(Views.Pilote.class)
 	private String nom;
 	
-	@Column(name = "PILOTE_PRENOM", nullable = false)
+	@Column(name = "prenom", nullable = false)
 	@JsonView(Views.Pilote.class)
 	private String prenom;
 	
-	@Column(name = "PILOTE_LICENCE", nullable = false)
+	@Column(name = "licence", nullable = false)
 	@JsonView(Views.Pilote.class)
 	private int licence;
 
-	@OneToMany(mappedBy = "idAvion")
+	@OneToMany(mappedBy = "id_avion")
 	private List<Avion> listeAvion;
 
 	//Getters & Setters

@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 public class Saut {
 	
 	@Id
-	@Column(name = "id_saut")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSaut;
 	

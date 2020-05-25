@@ -14,16 +14,17 @@ public class Compte {
 	//Attributs
 	
 	@Id
+	@Column(name = "id_compte")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int idCompte;
 	
 	@Column(name = "login", length = 25, nullable = false)
 	protected String login;
 
-	@Column(name = "password", length = 50, nullable = false)
+	@Column(name = "password", length = 250, nullable = false)
 	protected String password;
 	
-	@Column(name="typecompte", length = 20, insertable = false, updatable = false)
+	@Column(name="type_compte", length = 20, insertable = false, updatable = false)
 	protected String typeCompte;
 
 	
