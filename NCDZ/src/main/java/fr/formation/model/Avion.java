@@ -22,7 +22,7 @@ public class Avion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "AVION_ID")
 	@JsonView(Views.Common.class)
-	private int id;
+	private int idAvion;
 	@Column(name = "AVION_HAUTEUR", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int hauteurMax;
@@ -47,11 +47,11 @@ public class Avion {
 	private SituationAvion situation;
 	
 	//Getters Setters
-	public int getId() {
-		return id;
+	public int getIdAvion() {
+		return idAvion;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdAvion(int id) {
+		this.idAvion = id;
 	}
 	public int getHauteurMax() {
 		return hauteurMax;
@@ -81,7 +81,7 @@ public class Avion {
 	//toString
 	@Override
 	public String toString() {
-		return "Avion [id=" + id + ", hauteurMax=" + hauteurMax + ", capacite=" + capacite + ", rotationMax="
+		return "Avion [id=" + idAvion + ", hauteurMax=" + hauteurMax + ", capacite=" + capacite + ", rotationMax="
 				+ rotationMax + ", rotation=" + rotation + "]";
 	}
 	
