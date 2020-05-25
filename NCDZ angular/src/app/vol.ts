@@ -7,5 +7,5 @@ export class Vol {
     public avion: Avion;
     public parachutiste : Parachutiste; 
     
-    constructor(public id?: number,public situationVol?: string, public respoVol?:Parachutiste, public respoSol?:Parachutiste){}
+    constructor(public id?: number,public situationVol?: string, public respoVol?:Parachutiste, public respoSol?:Parachutiste, public dateVisite?: Date){}
 }
