@@ -1,3 +1,3 @@
 export class Pilote {
-    constructor(public PILOTE_ID?: number, public PILOTE_NOM?: string, public PILOTE_PRENOM?: string, public PILOTE_LICENCE?: number){}
+    constructor(public idPilote?: number, public nom?: string, public prenom?: string, public licence?: number){}
 }

@@ -5,5 +5,5 @@ export class Vol {
     public pilote: Pilote;
     public avion: Avion;
 
-    constructor(public id?: number,public situation_vol?: string){}
+    constructor(public id?: number,public situationVol?: string){}
 }
