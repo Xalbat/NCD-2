@@ -37,8 +37,11 @@ public class Parachutiste {
 	@JoinColumn(name = "parachutiste", nullable = false)
 	private Parachutiste dernierPlieur;
 
-
-
+	
+	//______________________________________________________________________
+	
+	
+	
 	public int getNumeroLicence() {
 		return numeroLicence;
 	}

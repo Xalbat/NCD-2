@@ -2,6 +2,9 @@ package fr.formation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -9,6 +12,10 @@ import javax.persistence.Table;
 public class Compte {
 	
 	//Attributs
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected int idCompte;
 	
 	@Column(name = "login", length = 25, nullable = false)
 	protected String login;
