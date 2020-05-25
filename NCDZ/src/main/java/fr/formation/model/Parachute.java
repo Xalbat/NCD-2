@@ -24,7 +24,7 @@ public class Parachute {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "nomHarnais", nullable = false)
+	@Column(name = "nom_harnais", nullable = false)
 	private String nomHarnais;
 	
 	@Column(name = "type_securite", nullable = false)

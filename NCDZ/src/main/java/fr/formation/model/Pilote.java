@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -21,7 +22,7 @@ public class Pilote {
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PILOTE_ID")
+	@Column(name = "id_pilote")
 	@JsonView(Views.Pilote.class)
 	private int idPilote;
 	
@@ -37,7 +38,7 @@ public class Pilote {
 	@JsonView(Views.Pilote.class)
 	private int licence;
 
-	@ManyToMany(mappedBy = "idAvion")
+	@OneToMany(mappedBy = "idAvion")
 	private List<Avion> listeAvion;
 
 	//Getters & Setters

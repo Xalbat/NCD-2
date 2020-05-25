@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -18,20 +21,23 @@ import javax.validation.constraints.NotNull;
 public class Saut {
 	
 	@Id
+	@Column(name = "id_saut")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSaut;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn(name = "id_vol")
 	@NotNull
 	private Vol vol;
 	
-	@Column
+	@Column(name = "altitude")
 	@NotNull
-	private int hauteur;
+	private int altitude;
 	
-	@Column
+	@OneToMany
+	@JoinColumn(name = "list_parachutiste")
 	@NotNull
-	private List<Integer> listParachutiste = new ArrayList<Integer>();
+	private List<Parachutiste> listParachutiste = new ArrayList<Parachutiste>();
 	
 	@Column
 	@NotNull
@@ -51,16 +57,16 @@ public class Saut {
 	public void setVol(Vol vol) {
 		this.vol = vol;
 	}
-	public int getHauteur() {
-		return this.hauteur;
+	public int getAltitude() {
+		return this.altitude;
 	}
-	public void setHauteur(int hauteur) {
-		this.hauteur = hauteur;
+	public void setAltitude(int altitude) {
+		this.altitude = altitude;
 	}
-	public List<Integer> getListParachutiste() {
+	public List<Parachutiste> getListParachutiste() {
 		return this.listParachutiste;
 	}
-	public void setListParachutiste(List<Integer> listParachutiste) {
+	public void setListParachutiste(List<Parachutiste> listParachutiste) {
 		this.listParachutiste = listParachutiste;
 	}
 	public boolean isTandem() {

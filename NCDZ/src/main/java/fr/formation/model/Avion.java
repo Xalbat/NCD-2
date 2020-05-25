@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.formation.enumerator.EtatAvion;
+import fr.formation.enumerator.SituationAvion;
 import fr.formation.projection.Views;
 
 @Entity
@@ -24,25 +25,32 @@ public class Avion {
 	@Column(name = "AVION_ID")
 	@JsonView(Views.Common.class)
 	private int idAvion;
+	
 	@Column(name = "AVION_HAUTEUR", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int hauteurMax;
+	
 	@Column(name = "AVION_CAPACITE", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int capacite;
+	
 	@Column(name = "AVION_ROTATIONMAX", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
+	
 	@Column(name = "AVION_ROTATION", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotation;
+	
 	@Column(name = "AVION_TEMPSMONTEE", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int tempsMontee;
+	
 	@Column(name = "AVION_ETAT")
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private EtatAvion etat;
+	
 	@Column(name = "AVION_SITUATION", nullable = false)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
