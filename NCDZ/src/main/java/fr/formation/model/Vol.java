@@ -23,9 +23,11 @@ public class Vol {
 	@Column(name="id")
 	private int id;
 	
+	@ManyToOne
 	@Column(name="pilote")
 	private Pilote pilote;
 	
+	@OneToOne
 	@Column(name="avion")
 	private Avion avion;
 	
