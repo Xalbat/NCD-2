@@ -12,7 +12,7 @@ import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
 
 @Entity
-@Table(name = "Parachute")
+@Table(name = "parachute")
 public class Parachute {
 
 	@Id
