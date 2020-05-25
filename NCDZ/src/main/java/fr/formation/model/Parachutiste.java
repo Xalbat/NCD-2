@@ -2,33 +2,41 @@ package fr.formation.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "parachutiste")
 public class Parachutiste {
 	
-	
+	@Id
+	@Column(name = "numeroLicence")
 	private int numeroLicence;
 	
-	
-	
+	@Column(name = "nom", nullable = false)
 	private String nom;
 	
-	
-	
+	@Column(name = "prenom", nullable = false)
 	private String prenom;
 	
-	
-	
+	@Column(name = "date_visite", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateLicence;
 	
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "parachute", nullable = false)
 	private Parachute parachute;
+
 	
 	
+	// -----------   Getter Setter -------------- //
 	
-	private Parachutiste dernierPlieur;
-
-
-
 	public int getNumeroLicence() {
 		return numeroLicence;
 	}
@@ -86,18 +94,5 @@ public class Parachutiste {
 	public void setParachute(Parachute parachute) {
 		this.parachute = parachute;
 	}
-
-
-
-	public Parachutiste getDernierPlieur() {
-		return dernierPlieur;
-	}
-
-
-
-	public void setDernierPlieur(Parachutiste dernierPlieur) {
-		this.dernierPlieur = dernierPlieur;
-	}
-	
 	
 }

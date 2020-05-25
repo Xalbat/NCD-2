@@ -1,40 +1,56 @@
 package fr.formation.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
 
+@Entity
+@Table(name = "parachute")
 public class Parachute {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
-	
+	@Column(name = "nomHarnais", nullable = false)
 	private String nomHarnais;
 	
-	
+	@Column(name = "nom_securite", nullable = false)
 	private String nomSecurite;
 	
-	
+	@Column(name = "nom_voile_principale", nullable = false)
 	private String nomVoilePricipale;
 	
-	
+	@Column(name = "taille_voile_principale", nullable = false)
 	private String tailleVoilePricipale;
 	
-	
+	@Column(name = "nom_voile_secours", nullable = false)
 	private String nomVoileSecours;
 	
-	
+	@Column(name = "taille_voile_secours", nullable = false)
 	private String tailleVoileSecours;
 	
+	@OneToOne
+	@Column(name = "revision", nullable = false)
+	private Revision revision;
 	
-	private int revision;
-	
-	
+	@Column(name = "proprietaire", nullable = false)
 	private Proprietaire proprietaire;
 	
-	
+	@Column(name = "etat_parachute", nullable = false)
 	private EtatParachute etatParachute;
 
+	
 
+	// -----------   Getter Setter -------------- //
 	
 	public int getId() {
 		return id;
@@ -106,12 +122,12 @@ public class Parachute {
 	}
 
 
-	public int getRevision() {
+	public Revision getRevision() {
 		return revision;
 	}
 
 
-	public void setRevision(int revision) {
+	public void setRevision(Revision revision) {
 		this.revision = revision;
 	}
 
