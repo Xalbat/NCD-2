@@ -40,4 +40,50 @@ public class Revision {
 	
 	
 	
+	// -----------   Getter Setter -------------- //
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDate getDatePliagePrimaire() {
+		return datePliagePrimaire;
+	}
+
+	public void setDatePliagePrimaire(LocalDate datePliagePrimaire) {
+		this.datePliagePrimaire = datePliagePrimaire;
+	}
+
+	public Parachutiste getPlieurVoilePrimaire() {
+		return plieurVoilePrimaire;
+	}
+
+	public void setPlieurVoilePrimaire(Parachutiste plieurVoilePrimaire) {
+		this.plieurVoilePrimaire = plieurVoilePrimaire;
+	}
+
+	public LocalDate getDatePliageSecours() {
+		return datePliageSecours;
+	}
+
+	public void setDatePliageSecours(LocalDate datePliageSecours) {
+		this.datePliageSecours = datePliageSecours;
+	}
+
+	public Parachutiste getPlieurVoileSecours() {
+		return plieurVoileSecours;
+	}
+
+	public void setPlieurVoileSecours(Parachutiste plieurVoileSecours) {
+		this.plieurVoileSecours = plieurVoileSecours;
+	}
+
+	
+	
+	
+	
 }

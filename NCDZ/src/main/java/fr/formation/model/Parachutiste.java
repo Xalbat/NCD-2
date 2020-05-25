@@ -32,11 +32,10 @@ public class Parachutiste {
 	@ManyToOne
 	@JoinColumn(name = "parachute", nullable = false)
 	private Parachute parachute;
-	
-	@ManyToOne
-	@JoinColumn(name = "parachutiste", nullable = false)
-	private Parachutiste dernierPlieur;
 
+	
+	
+	// -----------   Getter Setter -------------- //
 	
 	public int getNumeroLicence() {
 		return numeroLicence;
@@ -95,18 +94,5 @@ public class Parachutiste {
 	public void setParachute(Parachute parachute) {
 		this.parachute = parachute;
 	}
-
-
-
-	public Parachutiste getDernierPlieur() {
-		return dernierPlieur;
-	}
-
-
-
-	public void setDernierPlieur(Parachutiste dernierPlieur) {
-		this.dernierPlieur = dernierPlieur;
-	}
-	
 	
 }

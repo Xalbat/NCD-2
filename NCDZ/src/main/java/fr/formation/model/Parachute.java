@@ -39,16 +39,18 @@ public class Parachute {
 	private String tailleVoileSecours;
 	
 	@OneToOne
-	@Column(name = "nom", nullable = false)
+	@Column(name = "revision", nullable = false)
 	private Revision revision;
 	
-	
+	@Column(name = "proprietaire", nullable = false)
 	private Proprietaire proprietaire;
 	
-	
+	@Column(name = "etat_parachute", nullable = false)
 	private EtatParachute etatParachute;
 
+	
 
+	// -----------   Getter Setter -------------- //
 	
 	public int getId() {
 		return id;
