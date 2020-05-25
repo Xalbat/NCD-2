@@ -22,36 +22,36 @@ public class Avion {
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "AVION_ID")
+	@Column(name = "id")
 	@JsonView(Views.Common.class)
 	private int idAvion;
 	
-	@Column(name = "AVION_HAUTEUR", nullable = false)
+	@Column(name = "altitude", nullable = false)
 	@JsonView(Views.Avion.class)
-	private int hauteurMax;
+	private int altitudeMax;
 	
-	@Column(name = "AVION_CAPACITE", nullable = false)
+	@Column(name = "capacite", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int capacite;
 	
-	@Column(name = "AVION_ROTATIONMAX", nullable = false)
+	@Column(name = "rotation_ max", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
 	
-	@Column(name = "AVION_ROTATION", nullable = false)
+	@Column(name = "rotation", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotation;
 	
-	@Column(name = "AVION_TEMPSMONTEE", nullable = false)
+	@Column(name = "temps_montee", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int tempsMontee;
 	
-	@Column(name = "AVION_ETAT")
+	@Column(name = "etat")
 	@Enumerated(EnumType.STRING)
-	@JsonView(Views.Avion.class)
+	@JsonView({Views.Avion.class, Views.Pilote.class})
 	private EtatAvion etat;
 	
-	@Column(name = "AVION_SITUATION", nullable = false)
+	@Column(name = "situation", nullable = false)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
@@ -59,11 +59,11 @@ public class Avion {
 	//Constructeurs
 	public Avion() {}
 	
-	public Avion(int idAvion, int hauteurMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
 			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
-		this.hauteurMax = hauteurMax;
+		this.altitudeMax = altitudeMax;
 		this.capacite = capacite;
 		this.rotationMax = rotationMax;
 		this.rotation = rotation;
@@ -79,11 +79,11 @@ public class Avion {
 	public void setIdAvion(int id) {
 		this.idAvion = id;
 	}
-	public int getHauteurMax() {
-		return hauteurMax;
+	public int getAltitudeMax() {
+		return altitudeMax;
 	}
-	public void setHauteurMax(int hauteurMax) {
-		this.hauteurMax = hauteurMax;
+	public void setAltitudeMax(int altitudeMax) {
+		this.altitudeMax = altitudeMax;
 	}
 	public int getCapacite() {
 		return capacite;
@@ -107,7 +107,7 @@ public class Avion {
 	//toString
 	@Override
 	public String toString() {
-		return "Avion [id=" + idAvion + ", hauteurMax=" + hauteurMax + ", capacite=" + capacite + ", rotationMax="
+		return "Avion [id=" + idAvion + ", altitudeMax=" + altitudeMax + ", capacite=" + capacite + ", rotationMax="
 				+ rotationMax + ", rotation=" + rotation + "]";
 	}
 	

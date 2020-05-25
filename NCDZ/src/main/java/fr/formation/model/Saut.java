@@ -14,6 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.projection.Views;
+
 
 
 @Entity
@@ -23,24 +27,29 @@ public class Saut {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.Common.class)
 	private int idSaut;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_vol")
 	@NotNull
+	@JsonView(Views.Saut.class)
 	private Vol vol;
 	
 	@Column(name = "altitude")
 	@NotNull
+	@JsonView(Views.Saut.class)
 	private int altitude;
 	
 	@OneToMany
 	@JoinColumn(name = "list_parachutiste")
 	@NotNull
+	@JsonView(Views.Saut.class)
 	private List<Parachutiste> listParachutiste = new ArrayList<Parachutiste>();
 	
 	@Column
 	@NotNull
+	@JsonView(Views.Saut.class)
 	private boolean tandem;
 
 	//___________________________________________________________

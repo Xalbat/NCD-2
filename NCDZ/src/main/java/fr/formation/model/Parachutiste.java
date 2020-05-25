@@ -11,26 +11,36 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.projection.Views;
+
 @Entity
 @Table(name = "parachutiste")
 public class Parachutiste {
 	
 	@Id
 	@Column(name = "numero-licence")
+	@JsonView({Views.Common.class, Views.Vol.class})
 	private int numeroLicence;
 	
 	@Column(name = "nom", nullable = false)
+	@JsonView(Views.Common.class)
 	private String nom;
 	
 	@Column(name = "prenom", nullable = false)
+	@JsonView(Views.Parachutiste.class)
 	private String prenom;
 	
-	@Column(name = "date_visite", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "date_visite", nullable = false)
+	//@Temporal(TemporalType.DATE)
+	@JsonView(Views.Parachutiste.class)
 	private LocalDate dateLicence;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_parachute", nullable = false)
+	@JsonView({Views.Parachutiste.class, Views.Vol.class})
 	private Parachute parachute;
 
 	

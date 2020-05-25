@@ -23,11 +23,11 @@ public class Pilote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	@JsonView(Views.Pilote.class)
-	private int idPilote;
+	@JsonView(Views.Common.class)
+	private int idPilote;	//	Attention !! c'est probablement pas utilie car la licence de pilotage peux probablement servir de clef unique !
 	
 	@Column(name = "nom", nullable = false)
-	@JsonView(Views.Pilote.class)
+	@JsonView({Views.Pilote.class, Views.Vol.class})
 	private String nom;
 	
 	@Column(name = "prenom", nullable = false)
@@ -35,12 +35,15 @@ public class Pilote {
 	private String prenom;
 	
 	@Column(name = "licence", nullable = false)
-	@JsonView(Views.Pilote.class)
+	@JsonView({Views.Pilote.class, Views.Vol.class})
 	private int licence;
 
 	@OneToMany(mappedBy = "idAvion")
+	@JsonView(Views.Pilote.class)
 	private List<Avion> listeAvion;
 
+	
+	
 	//Getters & Setters
 	public int getIdPilote() {
 		return idPilote;

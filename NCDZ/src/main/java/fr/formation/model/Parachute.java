@@ -12,9 +12,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
 import fr.formation.enumerator.TypeSecurite;
+import fr.formation.projection.Views;
 
 @Entity
 @Table(name = "parachute")
@@ -23,38 +26,48 @@ public class Parachute {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	@JsonView(Views.Common.class)
+	private int idParachute;
 	
 	@Column(name = "nom_harnais", nullable = false)
+	@JsonView(Views.Parachute.class)
 	private String nomHarnais;
 	
 	@Column(name = "type_securite", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
+	@JsonView(Views.Parachute.class)
 	private TypeSecurite typeSecurite;
 	
 	@Column(name = "nom_voile_principale", nullable = false)
+	@JsonView(Views.Parachute.class)
 	private String nomVoilePricipale;
 	
 	@Column(name = "taille_voile_principale", nullable = false)
+	@JsonView(Views.Parachute.class)
 	private String tailleVoilePricipale;
 	
 	@Column(name = "nom_voile_secours", nullable = false)
+	@JsonView(Views.Parachute.class)
 	private String nomVoileSecours;
 	
 	@Column(name = "taille_voile_secours", nullable = false)
+	@JsonView(Views.Parachute.class)
 	private String tailleVoileSecours;
 	
 	@OneToOne
 	@JoinColumn(name = "revision")
 	@NotNull
+	@JsonView({Views.Parachute.class, Views.Vol.class})
 	private Revision revision;
 	
 	@Column(name = "proprietaire", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Parachute.class)
 	private Proprietaire proprietaire;
 	
 	@Column(name = "etat_parachute", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Parachutiste.class)
 	private EtatParachute etatParachute;
 
 	
@@ -63,13 +76,11 @@ public class Parachute {
 
 	// -----------   Getter Setter -------------- //
 	
-	public int getId() {
-		return id;
+	public int getIdParachute() {
+		return idParachute;
 	}
-
-
-	public void setId(int id) {
-		this.id = id;
+	public void setIdParachute(int id) {
+		this.idParachute = id;
 	}
 
 

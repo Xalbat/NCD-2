@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -24,11 +25,13 @@ public class BeerLine {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBeerLine;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "id_saut")
 	@NotNull
 	private Saut saut;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "id_parachutiste")
 	@NotNull
 	private Parachutiste parachutiste;
 	

@@ -15,8 +15,10 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.formation.enumerator.SituationVol;
+import fr.formation.projection.Views;
 
 @Entity
 @Table(name="vol")
@@ -25,37 +27,48 @@ public class Vol {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	@JsonView(Views.Common.class)
+	private int idVol;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_pilote")
+	@JsonView(Views.Vol.class)
 	private Pilote pilote;
 	
 	@OneToOne
+	@JsonView(Views.Vol.class)
 	private Avion avion;
 	
 	@Column(name="situation_vol")
+	@JsonView({Views.Common.class, Views.Saut.class})
 	private SituationVol situationVol;
 	
 	@OneToOne
 	@JoinColumn(name="id_respo_vol")
+	@JsonView({Views.Vol.class, Views.Saut.class})
 	private Parachutiste respoVol;
 	
 	@ManyToOne
 	@JoinColumn(name="id_respo_sol")
+	@JsonView({Views.Vol.class, Views.Saut.class})
 	private Parachutiste respoSol;
 	
 	@Column(name = "date", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonView(Views.Common.class)
 	private LocalDate date;
 
-	public int getId() {
-		return id;
+	
+	
+	//_______________________________________________________
+	//	Getters & Setters
+	public int getIdVol() {
+		return idVol;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdVol(int idVol) {
+		this.idVol = idVol;
 	}
 
 	public Pilote getPilote() {

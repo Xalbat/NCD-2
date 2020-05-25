@@ -13,6 +13,10 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.projection.Views;
+
 @Entity
 @Table(name = "Revision")
 public class Revision {
@@ -20,22 +24,27 @@ public class Revision {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	@JsonView(Views.Common.class)
+	private int idRevision;
 	
 	@Column(name = "date_dernier_pliage_primaire", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonView(Views.Common.class)
 	private LocalDate datePliagePrimaire;
 	
 	@ManyToOne
 	@JoinColumn(name = "plieur_voile_primaire", nullable = false)
+	@JsonView(Views.Common.class)
 	private Parachutiste plieurVoilePrimaire;
 	
 	@Column(name = "date_dernier_pliage_secours", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")	
+	@JsonView(Views.Common.class)
 	private LocalDate datePliageSecours;
 	
 	@ManyToOne
 	@JoinColumn(name = "plieur_voile_secours", nullable = false)
+	@JsonView(Views.Common.class)
 	private Parachutiste plieurVoileSecours;
 	
 	
@@ -44,12 +53,12 @@ public class Revision {
 	
 	// -----------   Getter Setter -------------- //
 	
-	public int getId() {
-		return id;
+	public int getIdRevision() {
+		return idRevision;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdRevision(int idRevision) {
+		this.idRevision = idRevision;
 	}
 
 	public LocalDate getDatePliagePrimaire() {
