@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { AvionnageComponent } from './avionnage/avionnage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    AvionnageComponent
   ],
   imports: [
     BrowserModule
