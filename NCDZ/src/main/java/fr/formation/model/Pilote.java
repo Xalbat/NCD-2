@@ -38,7 +38,7 @@ public class Pilote {
 	@JsonView(Views.Pilote.class)
 	private int licence;
 
-	@OneToMany(mappedBy = "id_avion")
+	@OneToMany(mappedBy = "idAvion")
 	private List<Avion> listeAvion;
 
 	//Getters & Setters
