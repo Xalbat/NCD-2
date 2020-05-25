@@ -2,14 +2,18 @@ package fr.formation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
+import fr.formation.enumerator.TypeSecurite;
 
 @Entity
 @Table(name = "parachute")
@@ -23,8 +27,9 @@ public class Parachute {
 	@Column(name = "nomHarnais", nullable = false)
 	private String nomHarnais;
 	
-	@Column(name = "nom_securite", nullable = false)
-	private String nomSecurite;
+	@Column(name = "type_securite", nullable = false)
+	@Enumerated(EnumType.ORDINAL)
+	private TypeSecurite typeSecurite;
 	
 	@Column(name = "nom_voile_principale", nullable = false)
 	private String nomVoilePricipale;
@@ -39,16 +44,20 @@ public class Parachute {
 	private String tailleVoileSecours;
 	
 	@OneToOne
-	@Column(name = "revision", nullable = false)
+	@NotNull
 	private Revision revision;
 	
 	@Column(name = "proprietaire", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Proprietaire proprietaire;
 	
 	@Column(name = "etat_parachute", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private EtatParachute etatParachute;
 
 	
+	
+	public Parachute() {}
 
 	// -----------   Getter Setter -------------- //
 	
@@ -72,13 +81,13 @@ public class Parachute {
 	}
 
 
-	public String getNomSecurite() {
-		return nomSecurite;
+	public TypeSecurite getNomSecurite() {
+		return typeSecurite;
 	}
 
 
-	public void setNomSecurite(String nomSecurite) {
-		this.nomSecurite = nomSecurite;
+	public void setNomSecurite(TypeSecurite nomSecurite) {
+		this.typeSecurite = nomSecurite;
 	}
 
 

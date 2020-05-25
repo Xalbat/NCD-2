@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.formation.enumerator.EtatAvion;
 import fr.formation.projection.Views;
 
 @Entity
@@ -39,10 +40,11 @@ public class Avion {
 	@JsonView(Views.Avion.class)
 	private int tempsMontee;
 	@Column(name = "AVION_ETAT")
+	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
-	private boolean etat;
+	private EtatAvion etat;
 	@Column(name = "AVION_SITUATION", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
 	
@@ -50,7 +52,7 @@ public class Avion {
 	public Avion() {}
 	
 	public Avion(int idAvion, int hauteurMax, int capacite, int rotationMax, int rotation, int tempsMontee,
-			boolean etat, SituationAvion situation) {
+			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
 		this.hauteurMax = hauteurMax;

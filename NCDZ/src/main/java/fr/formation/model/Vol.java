@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name="vol")
 public class Vol {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
