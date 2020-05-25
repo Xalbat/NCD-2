@@ -2,17 +2,21 @@ package fr.formation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
+
 import fr.formation.projection.Views;
 
 @Entity
 @Table(name = "avion")
 public class Avion {
+	
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +35,16 @@ public class Avion {
 	@Column(name = "AVION_ROTATION", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotation;
+	@Column(name = "AVION_TEMPSMONTEE", nullable = false)
+	@JsonView(Views.Avion.class)
+	private int tempsMontee;
 	@Column(name = "AVION_ETAT")
 	@JsonView(Views.Avion.class)
 	private boolean etat;
+	@Column(name = "CARD_SITUATION", nullable = false)
+	@Enumerated(EnumType.ORDINAL)
+	@JsonView(Views.Avion.class)
+	private SituationAvion situation;
 	
 	//Getters Setters
 	public int getId() {
