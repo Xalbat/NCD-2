@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +35,9 @@ public class Parachutiste {
 	@JoinColumn(name = "id_parachute", nullable = false)
 	private Parachute parachute;
 
-	
+	@Column(name="niveau_parachutiste", nullable = false)
+	@Enumerated(EnumType.ORDINAL)
+	private Niveau niveauParachutiste;
 	
 	
 	public Parachutiste() {}

@@ -94,22 +94,22 @@ public class Parachute {
 
 
 	public String getNomVoilePricipale() {
-		return nomVoilePricipale;
+		return nomVoilePrincipale;
 	}
 
 
 	public void setNomVoilePricipale(String nomVoilePricipale) {
-		this.nomVoilePricipale = nomVoilePricipale;
+		this.nomVoilePrincipale = nomVoilePricipale;
 	}
 
 
 	public String getTailleVoilePricipale() {
-		return tailleVoilePricipale;
+		return tailleVoilePrincipale;
 	}
 
 
 	public void setTailleVoilePricipale(String tailleVoilePricipale) {
-		this.tailleVoilePricipale = tailleVoilePricipale;
+		this.tailleVoilePrincipale = tailleVoilePricipale;
 	}
 
 
