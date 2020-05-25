@@ -33,10 +33,10 @@ public class Parachute {
 	private TypeSecurite typeSecurite;
 	
 	@Column(name = "nom_voile_principale", nullable = false)
-	private String nomVoilePricipale;
+	private String nomVoilePrincipale;
 	
 	@Column(name = "taille_voile_principale", nullable = false)
-	private String tailleVoilePricipale;
+	private String tailleVoilePrincipale;
 	
 	@Column(name = "nom_voile_secours", nullable = false)
 	private String nomVoileSecours;
