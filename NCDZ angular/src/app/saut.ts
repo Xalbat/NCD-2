@@ -4,5 +4,5 @@ import { Parachutiste } from './parachutiste';
 export class Saut {
     public vol: Vol;
     public parachutiste: Parachutiste;
-    constructor(public idSaut?: number, public hauteur?: number, public tandem?: boolean ){}
+    constructor(public idSaut?: number, public altitude?: number, public tandem?: boolean ){}
 }
