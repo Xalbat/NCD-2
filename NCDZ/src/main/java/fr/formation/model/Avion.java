@@ -22,36 +22,36 @@ public class Avion {
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "AVION_ID")
+	@Column(name = "id")
 	@JsonView(Views.Common.class)
 	private int idAvion;
 	
-	@Column(name = "AVION_HAUTEUR", nullable = false)
+	@Column(name = "hauteur", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int hauteurMax;
 	
-	@Column(name = "AVION_CAPACITE", nullable = false)
+	@Column(name = "capacite", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int capacite;
 	
-	@Column(name = "AVION_ROTATIONMAX", nullable = false)
+	@Column(name = "rotation_max", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
 	
-	@Column(name = "AVION_ROTATION", nullable = false)
+	@Column(name = "rotation", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotation;
 	
-	@Column(name = "AVION_TEMPSMONTEE", nullable = false)
+	@Column(name = "temps_montee", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int tempsMontee;
 	
-	@Column(name = "AVION_ETAT")
+	@Column(name = "etat")
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private EtatAvion etat;
 	
-	@Column(name = "AVION_SITUATION", nullable = false)
+	@Column(name = "situation", nullable = false)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
