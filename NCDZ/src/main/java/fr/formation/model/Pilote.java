@@ -3,15 +3,19 @@ package fr.formation.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.formation.projection.Views;
 
+@Entity
+@Table(name = "pilote")
 public class Pilote {
 	
 	//Attributs
@@ -33,7 +37,7 @@ public class Pilote {
 	@JsonView(Views.Pilote.class)
 	private int licence;
 
-	@OneToMany(mappedBy = "idAvion")
+	@ManyToMany(mappedBy = "idAvion")
 	private List<Avion> listeAvion;
 
 	//Getters & Setters

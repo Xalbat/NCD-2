@@ -41,7 +41,7 @@ public class Avion {
 	@Column(name = "AVION_ETAT")
 	@JsonView(Views.Avion.class)
 	private boolean etat;
-	@Column(name = "CARD_SITUATION", nullable = false)
+	@Column(name = "AVION_SITUATION", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
