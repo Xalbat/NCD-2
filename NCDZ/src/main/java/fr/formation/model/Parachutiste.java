@@ -38,10 +38,6 @@ public class Parachutiste {
 	private Parachutiste dernierPlieur;
 
 	
-	//______________________________________________________________________
-	
-	
-	
 	public int getNumeroLicence() {
 		return numeroLicence;
 	}
