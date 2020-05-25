@@ -40,6 +40,8 @@ public class Revision {
 	
 	
 	
+	public Revision() {}
+	
 	// -----------   Getter Setter -------------- //
 	
 	public int getId() {

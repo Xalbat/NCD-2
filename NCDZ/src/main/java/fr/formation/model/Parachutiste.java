@@ -35,8 +35,13 @@ public class Parachutiste {
 
 	
 	
+	
+	public Parachutiste() {}
+	
 	// -----------   Getter Setter -------------- //
 	
+
+
 	public int getNumeroLicence() {
 		return numeroLicence;
 	}

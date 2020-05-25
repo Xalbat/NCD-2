@@ -55,6 +55,8 @@ public class Parachute {
 	private EtatParachute etatParachute;
 
 	
+	
+	public Parachute() {}
 
 	// -----------   Getter Setter -------------- //
 	
