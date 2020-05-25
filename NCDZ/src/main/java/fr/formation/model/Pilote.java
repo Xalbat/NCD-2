@@ -3,20 +3,36 @@ package fr.formation.model;
 import java.util.List;
 
 import javax.persistence.Column;
+<<<<<<< HEAD
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+=======
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+>>>>>>> boot
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.formation.projection.Views;
 
+<<<<<<< HEAD
+=======
+@Entity
+@Table(name = "pilote")
+>>>>>>> boot
 public class Pilote {
 	
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
 	@Column(name = "PILOTE_ID")
 	@JsonView(Views.Pilote.class)
 	private int idPilote;
@@ -34,6 +50,25 @@ public class Pilote {
 	private int licence;
 
 	@OneToMany(mappedBy = "idAvion")
+=======
+	@Column(name = "id")
+	@JsonView(Views.Pilote.class)
+	private int idPilote;
+	
+	@Column(name = "nom", nullable = false)
+	@JsonView(Views.Pilote.class)
+	private String nom;
+	
+	@Column(name = "prenom", nullable = false)
+	@JsonView(Views.Pilote.class)
+	private String prenom;
+	
+	@Column(name = "licence", nullable = false)
+	@JsonView(Views.Pilote.class)
+	private int licence;
+
+	@OneToMany(mappedBy = "id_avion")
+>>>>>>> boot
 	private List<Avion> listeAvion;
 
 	//Getters & Setters
