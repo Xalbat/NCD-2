@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
@@ -43,15 +44,15 @@ public class Parachute {
 	private String tailleVoileSecours;
 	
 	@OneToOne
-	@Column(name = "revision", nullable = false)
+	@NotNull
 	private Revision revision;
 	
 	@Column(name = "proprietaire", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	private Proprietaire proprietaire;
 	
 	@Column(name = "etat_parachute", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	private EtatParachute etatParachute;
 
 	
