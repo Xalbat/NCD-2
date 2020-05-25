@@ -1,31 +1,35 @@
 package fr.formation.model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 import fr.formation.enumerator.EtatParachute;
 import fr.formation.enumerator.Proprietaire;
 
 public class Parachute {
 
+	@Id
 	private int id;
 	
-	
+	@Column
 	private String nomHarnais;
 	
-	
+	@Column
 	private String nomSecurite;
 	
-	
+	@Column
 	private String nomVoilePricipale;
 	
-	
+	@Column
 	private String tailleVoilePricipale;
 	
-	
+	@Column
 	private String nomVoileSecours;
 	
-	
+	@Column
 	private String tailleVoileSecours;
 	
-	
+	@Column
 	private int revision;
 	
 	
