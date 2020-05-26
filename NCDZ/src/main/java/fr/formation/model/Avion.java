@@ -77,7 +77,7 @@ public class Avion {
 	//Constructeurs
 	public Avion() {}
 
-	/*	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+	public Avion(String idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
 			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
@@ -88,7 +88,7 @@ public class Avion {
 		this.tempsMontee = tempsMontee;
 		this.etat = etat;
 		this.situation = situation;
-	}*/
+	}
 
 	//Getters Setters
 	public String getIdAvion() {

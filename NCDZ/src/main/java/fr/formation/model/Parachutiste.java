@@ -57,7 +57,7 @@ public class Parachutiste {
 	@JsonView({Views.Parachutiste.class, Views.Vol.class})
 	private Parachute parachute;
 
-	//Relation n°1 inverse
+	//Relation n°2 inverse
 	@ManyToMany
 	@JoinTable(name = "liste_parachutiste_saut",
 	uniqueConstraints = @UniqueConstraint(columnNames = { "id_parachutiste", "id_saut" }),
