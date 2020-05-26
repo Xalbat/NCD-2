@@ -1,3 +1,5 @@
+<script src="https://kit.fontawesome.com/0b05006757.js" crossorigin="anonymous"></script>
+
 
 <div class="card-header">
 	<h5 class="card-title">Inscription d'un parachutiste</h5>
@@ -7,37 +9,38 @@
 	<div class="form-group row">
 		<label for="dateVisite" class="col-sm-2 col-form-label">Nom : </label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="nomParachutiste" [(ngModel)]="formParachutiste.nomParachutiste" />
+			<input type="text" class="form-control" id="nomParachutiste"  />
 		</div>
     </div>
     
     <div class="form-group row">
 		<label for="dateVisite" class="col-sm-2 col-form-label">Prenom : </label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="prenomParachutiste" [(ngModel)]="formParachutiste.prenomParachutiste" />
+			<input type="text" class="form-control" id="prenomParachutiste"  />
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="prix" class="col-sm-2 col-form-label">Numero de license : </label>
+		<label for="prix" class="col-sm-2 col-form-label">Numero de licence : </label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" id="numeroLicence" [(ngModel)]="formParachutiste.numeroLicence" />
+			<input type="number" class="form-control" id="numeroLicence"/>
 		</div>
     </div>
     
     <div class="form-group row">
 		<label for="prix" class="col-sm-2 col-form-label">Numero du parachute (0 si parachute perso) : </label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" id="numeroParachute" [(ngModel)]="formParachutiste.numeroParachute" />
+			<input type="number" class="form-control" id="numeroParachute" />
 		</div>
 	</div>
 
 	
 
 	<div class="card-footer text-right">
-		<button *ngIf="!isEditing" (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter</button>
-		<button *ngIf="isEditing" (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
-		<button *ngIf="isEditing" (click)="supprimerParachutiste()" class="btn btn-warning m-1">Supprimer</button>
+		<button  (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter <i class="fas fa-parachute-box"></i> </button>
+		<script src="https://kit.fontawesome.com/0b05006757.js" crossorigin="anonymous"></script>
+		<button  (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
+		<!-- <button  (click)="supprimerParachutiste()" class="btn btn-warning m-1">Supprimer</button> -->
 	</div>
 
 
