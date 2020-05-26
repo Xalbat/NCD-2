@@ -29,7 +29,7 @@ import fr.formation.projection.Views;
 public class Parachutiste {
 	
 	@Id
-	@Column(name = "numero_licence")
+	@Column(name = "numero_licence",  length = 20)
 	@JsonView({Views.Common.class, Views.Vol.class})
 	private int numeroLicence;
 	
