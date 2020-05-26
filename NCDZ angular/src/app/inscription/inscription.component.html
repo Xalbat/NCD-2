@@ -35,14 +35,41 @@
 	
 
 	<div class="card-footer text-right">
-		<button  (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter <fa-icon [icon]="faParachuteBox"></fa-icon> </button>
-
-		
-		<button  (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
-		<!-- <button  (click)="supprimerParachutiste()" class="btn btn-warning m-1">Supprimer</button> -->
+		<button *ngIf="!isEditing" (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter <fa-icon [icon]="faParachuteBox"></fa-icon> </button>
+		<button *ngIf="!isEditing" (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
+		<button *ngIf="!isEditing" (click)="annulerModification" class="btn btn-danger m-1">Supprimer</button> 
 	</div>
 
-
-
-
 </div>
+
+
+
+<h3>Liste des parachutistes inscrits</h3>
+
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Prenom</th>
+			<th>Numero de Licence</th>
+			<th>Numero de parachute</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr *ngFor="let parachutiste of srvParachutiste.parachutistes" >
+			<td>{{ parachutiste.nom }}</td>
+			<td>{{ parachutiste.prenom }}</td>
+			<td>{{ parachutiste.numeroLicence }}</td>
+			<td> </td>
+			
+
+			<td>
+				<button (click)="editerParachutiste(parachutiste)" class="btn btn-warning m-1">Editer</button>
+				<button  (click)="supprimerParachutiste(parachutiste)" class="btn btn-warning m-1">Supprimer</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

@@ -29,7 +29,7 @@ export class InscriptionComponent implements OnInit {
     this.formParachutiste = new Parachutiste();
   }
 
-  /*public annulerModification() {
+  public annulerModification() {
     this.isEditing = false;
     this.formParachutiste = new Parachutiste();
   }
@@ -38,7 +38,7 @@ export class InscriptionComponent implements OnInit {
     this.formParachutiste = JSON.parse(JSON.stringify(parachutiste));
     this.isEditing = true;
   }
-*/
+
   public supprimerParachutiste(Parachutiste) {
     this.srvParachutiste.delete(Parachutiste);
   }
