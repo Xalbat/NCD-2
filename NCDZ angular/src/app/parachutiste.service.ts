@@ -35,10 +35,10 @@ export class ParachutisteService {
   }
 
   public delete(parachutiste) {
-    this.http.delete<Boolean>(`${ this.apiUrl }/${ Parachutiste.numeroLicence }`, this.appConfig.httpOptions)
+    this.http.delete<Boolean>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, this.appConfig.httpOptions)
         .subscribe(resp => {
           if (resp) {
-            let index = this.parachutistes.indexOf(Parachutiste);
+            let index = this.parachutistes.indexOf(parachutiste);
             this.parachutistes.splice(index, 1);
           }
         });
