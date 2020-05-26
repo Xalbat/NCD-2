@@ -1,39 +1,66 @@
 
 <div class="card m-3">
 	<div class="card-header">
-		<h5 class="card-title">Envie d'un Jump Solo? </h5>
-	</div>
-	
+        <h5 class="card-title">Demande de saut</h5>
+
+            <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                <label class="btn btn-outline-warning active">
+                    <input (click)="changeIsGroup(false)" name="typeSaut" type="radio" value = "Solo"> Solo
+                </label>
+                <label class="btn btn-outline-warning">
+                    <input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value ="Group"> Group
+                </label>
+            </div>
+                
+    </div>
+    
 	<div class="card-body"> 
-        <label >Donne nous ton nom : </label>
-        <select name="nom"  [(ngModel)]="saut.parachutiste">  
-            <option *ngFor="let parachutiste of srvParachutiste.parachutistes" >
-                {{parachutiste.nom}} {{parachutiste.numero_licence}}
-            </option>
-        </select>
-    </div>
-    <div class="form-group row">
-        <label > A quelle hauteur veux tu sauter : </label>
-        <select [(ngModel)]="saut.altitude">
-                <option>1200</option>
-                    <option>  1600 </option>
-                        <option>  2000 </option>
-                            <option>  2500 </option>
-                                <option>  4000 </option>
-                                    <option>  6000 </option>
-        </select>
-    </div>
-    <div class="form-group row">
-        <label >Et surtout ton numéro de parachute :</label>
-        <div>
-            <input type="number" id="id_parachute" [(ngModel)]="parachutiste.parachute" />
+       
+        <h3 *ngIf = isGroup >Ajouter un parachutiste</h3>
+            <div class="form-group row">
+                <label for="nom" class="col-sm-2 col-form-label">Ton nom: </label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="prenom" [(ngModel)]="parachutiste.nom">
+                        <option *ngFor="let parachutiste of srvParachutiste.parachutistes" [(ngValue)] = parachutiste.nom>
+                            {{ parachutiste.prenom }} {{ parachutiste.nom }} n° de licence :{{ parachutiste.numeroLicence }}
+                        </option>
+                    </select>
+                </div>  
+            </div>
+
+            <div *ngIf = !isGroup class="form-group row">
+                <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                    <label class="btn btn-outline-primary">
+                        <input (click)="changeIsTandem(false)" [(ngModel)]="saut.tandem" name="tandem" type="radio" value ="false"> Seul
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input (click)="changeIsTandem(true)" [(ngModel)]="saut.tandem" name="tandem" type="radio" value ="true"> Tandem
+                    </label>
+                </div>
+            </div>
+        
+            <div *ngIf = isGroup>
+                <button (click)="ajouterParachutiste()" class="btn btn-primary m-1">Ajouter</button>
+            </div>
+        
+    
+        <div class="form-group row">
+            <label for="altitude" class="col-sm-2 col-form-label"> Altitude : </label>
+            <div class="col-sm-10">
+                <select class="form-control" name="altitude" [(ngModel)]="saut.altitude">
+                    <option value="1200">1200m</option>
+                    <option value="1600">1600m</option>
+                    <option value="2000">2000m</option>
+                    <option value="2500">2500m</option>
+                    <option value="4000">4000m</option>
+                    <option value="6000">6000m</option>
+                </select>
+            </div>
         </div>
+
+
     </div>
-</div>
-<!--
-
-
         <div class="card-footer text-right">
             <button (click)="ajouterSaut()" class="btn btn-success m-1">Lets jump now</button>
         </div>
-    -->
+</div>

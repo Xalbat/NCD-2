@@ -19,7 +19,7 @@ export class ParachutisteService {
 
   public reload() {
     this.http.get<Array<Parachutiste>>(this.apiUrl)
-        .subscribe(parachutistes => this.parachutistes = this.parachutistes);
+        .subscribe(parachutistes => this.parachutistes = parachutistes);
   }
 
 
