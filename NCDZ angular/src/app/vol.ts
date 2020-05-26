@@ -9,6 +9,7 @@ export class Vol {
     public parachutiste : Parachutiste; 
     public sauts : Array<Saut> = []
     constructor(public id?: number,public situationVol?: string, public respoVol?:Parachutiste, public respoSol?:Parachutiste, public dateVisite?: Date){}
+
     getNbParachutistes(){
         let nbPara = 0;
         this.sauts.forEach(s =>{
@@ -16,4 +17,5 @@ export class Vol {
         })
         return nbPara
     }
+
 }
