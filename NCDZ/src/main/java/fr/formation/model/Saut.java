@@ -32,6 +32,7 @@ public class Saut {
 	@JsonView(Views.Common.class)
 	private int idSaut;
 	
+	//Relation n°1 directe
 	@ManyToOne
 	@JoinColumn(name = "id_vol")
 	@JsonView(Views.Saut.class)
@@ -42,6 +43,8 @@ public class Saut {
 	@JsonView(Views.Saut.class)
 	private int altitude;
 	
+	
+	//Relation n°2 directe
 	/*@OneToMany
 	@JoinColumn(name = "list_parachutiste")*/
 	@ManyToMany
@@ -51,7 +54,7 @@ public class Saut {
 	inverseJoinColumns = @JoinColumn(name = "id_parachutiste", referencedColumnName = "numero_licence"))
 	@NotNull
 	@JsonView(Views.Saut.class)
-	private List<Parachutiste> listParachutiste = new ArrayList<Parachutiste>();
+	private List<Parachutiste> listParachutiste;
 	
 	@Column
 	@NotNull

@@ -1,6 +1,7 @@
 package fr.formation.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -52,6 +57,16 @@ public class Parachutiste {
 	@JsonView({Views.Parachutiste.class, Views.Vol.class})
 	private Parachute parachute;
 
+	//Relation n°1 inverse
+	@ManyToMany
+	@JoinTable(name = "liste_parachutiste_saut",
+	uniqueConstraints = @UniqueConstraint(columnNames = { "id_parachutiste", "id_saut" }),
+	joinColumns = @JoinColumn(name = "id_parachutiste", referencedColumnName = "numero_licence"),
+	inverseJoinColumns = @JoinColumn(name = "id_saut", referencedColumnName = "id"))
+	@NotNull
+	@JsonView(Views.Parachutiste.class)
+	private List<Saut> listSaut;
+	
 	
 	
 	
