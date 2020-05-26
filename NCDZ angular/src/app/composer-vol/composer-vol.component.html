@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <form>
-            <select class="form-control form-control-sm" [(ngModel)]="avion">
-                <option *ngFor="let a of avionsDisponibles;let i = index">avion {{i}}</option>
+            <select class="form-control form-control-sm" [(ngModel)]="avion" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let a of avionsDisponibles;let i = index" [value]="a">avion {{i}}</option>
             </select>
         </form>
     </div>
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="card-body">
-              
+              {{avion.altitude}}
             </div>
           </div>        
     </div>

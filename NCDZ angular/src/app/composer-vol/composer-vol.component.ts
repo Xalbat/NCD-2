@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange } from '@angular/core';
 import { Avion } from '../avion';
 import { Parachutiste } from '../parachutiste';
 import { Saut } from '../saut';
@@ -20,8 +20,13 @@ export class ComposerVolComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("init")
     this.loadListeAvionsDispo()
     this.loadListesPara()
+  }
+
+  test(){
+    console.log(this.avion)
   }
 
   loadListeAvionsDispo(){
