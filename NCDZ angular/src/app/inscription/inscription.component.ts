@@ -10,7 +10,7 @@ import { faParachuteBox } from '@fortawesome/free-solid-svg-icons';
 })
 export class InscriptionComponent implements OnInit {
   public formParachutiste: Parachutiste = new Parachutiste();
-  private isEditing = false;
+  isEditing = false;
   faParachuteBox = faParachuteBox
 
   constructor(private srvParachutiste: ParachutisteService) { }
