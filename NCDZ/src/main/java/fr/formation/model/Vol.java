@@ -37,6 +37,7 @@ public class Vol {
 	@JsonView(Views.Vol.class)
 	private Pilote pilote;
 	
+	//Relation n°3 directe
 	@OneToOne
 	@JoinColumn(name = "id_avion")
 	@JsonView(Views.Vol.class)
