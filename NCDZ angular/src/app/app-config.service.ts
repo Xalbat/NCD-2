@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class AppConfigService {
   public url: string = "http://localhost:8181/api";
-
+  public httpOptions: Object = null;
   constructor() { }
 }

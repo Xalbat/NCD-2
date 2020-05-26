@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Parachutiste } from '../parachutiste';
-import { CompteService } from '../compte.service';
-import { Compte } from '../compte';
+import { ParachutisteService } from '../parachutiste.service';
 
 @Component({
   selector: 'app-inscription',
@@ -9,14 +8,36 @@ import { Compte } from '../compte';
   styleUrls: ['./inscription.component.css']
 })
 export class InscriptionComponent implements OnInit {
-  public formInscription: Compte = new Compte();
-  constructor(private srvCompte: CompteService) { }
+  public formParachutiste: Parachutiste = new Parachutiste();
+  private isEditing = false;
+
+  constructor(private srvParachutiste: ParachutisteService) { }
 
   ngOnInit(){
-    this.srvCompte.reload();
+    this.srvParachutiste.reload();
   }
-  public inscription() {
-    this.srvCompte.ajouterParachutiste(this.formInscription);
-    this.formInscription = new Compte();
+  public ajouterParachutiste() {
+    this.srvParachutiste.add(this.formParachutiste);
+    this.formParachutiste = new Parachutiste();
+  }
+
+  public modifierParachutiste() {
+    this.isEditing = false;
+    this.srvParachutiste.update(this.formParachutiste);
+    this.formParachutiste = new Parachutiste();
+  }
+
+  public annulerModification() {
+    this.isEditing = false;
+    this.formParachutiste = new Parachutiste();
+  }
+
+  public editerParachutiste(parachutiste) {
+    this.formParachutiste = JSON.parse(JSON.stringify(parachutiste));
+    this.isEditing = true;
+  }
+
+  public supprimerParachutiste(Parachutiste) {
+    this.srvParachutiste.delete(Parachutiste);
   }
 }
