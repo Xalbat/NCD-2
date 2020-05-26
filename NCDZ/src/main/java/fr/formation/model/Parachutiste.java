@@ -21,7 +21,7 @@ import fr.formation.projection.Views;
 public class Parachutiste {
 	
 	@Id
-	@Column(name = "numero-licence")
+	@Column(name = "numero_licence")
 	@JsonView({Views.Common.class, Views.Vol.class})
 	private int numeroLicence;
 	
