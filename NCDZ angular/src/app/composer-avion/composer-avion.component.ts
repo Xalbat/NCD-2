@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Avion } from '../avion';
-import { Parachutiste } from '../parachutiste';
-import { Vol } from '../vol';
-import { EtatAvion } from '../etat-avion.enum';
-import { SituationAvion } from '../situation-avion.enum';
+
+import { Avion } from '../classes/avion';
+import { Parachutiste } from '../classes/parachutiste';
+import { Vol } from '../classes/vol';
+import { EtatAvion } from '../enums/etat-avion.enum';
+import { SituationAvion } from '../enums/situation-avion.enum';
 
 @Component({
   selector: 'composer-avion',

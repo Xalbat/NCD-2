@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SautService } from '../saut.service';
-import { Saut } from '../saut';
-import { ParachutisteService } from '../parachutiste.service';
-import { Parachutiste } from '../parachutiste';
+
+import { SautService } from '../services/saut.service';
+import { ParachutisteService } from '../services/parachutiste.service';
+import { Saut } from '../classes/saut';
+import { Parachutiste } from '../classes/parachutiste';
 
 @Component({
   selector: 'app-avionnage',

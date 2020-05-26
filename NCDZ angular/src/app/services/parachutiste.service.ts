@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app-config.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Parachutiste } from './parachutiste';
+import { AppConfigService } from '../app-config.service';
+import { Parachutiste } from '../classes/parachutiste';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
-import { SituationAvion } from './situation-avion.enum';
-import { EtatAvion } from './etat-avion.enum';
+import { SituationAvion } from '../enums/situation-avion.enum';
+import { EtatAvion } from '../enums/etat-avion.enum';
 import { Vol } from './vol';
 
 export class Avion {

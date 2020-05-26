@@ -1,7 +1,7 @@
 import { RevisionParachute } from './revision-parachute';
-import { Proprietaire } from './proprietaire.enum';
-import { EtatParachute } from './etat-parachute.enum';
-import { TypeSecurite } from './type-securite.enum';
+import { Proprietaire } from '../enums/proprietaire.enum';
+import { EtatParachute } from '../enums/etat-parachute.enum';
+import { TypeSecurite } from '../enums/type-securite.enum';
 
 export class Parachute {
     public typeSecurite: TypeSecurite;

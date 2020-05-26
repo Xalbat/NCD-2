@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Parachutiste } from '../parachutiste';
-import { ParachutisteService } from '../parachutiste.service';
 import { faParachuteBox } from '@fortawesome/free-solid-svg-icons';
+
+import { ParachutisteService } from '../services/parachutiste.service';
+import { Parachutiste } from '../classes/parachutiste';
 
 @Component({
   selector: 'app-inscription',

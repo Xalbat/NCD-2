@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app-config.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Avion } from './avion';
+import { AppConfigService } from '../app-config.service';
+import { Saut } from '../classes/saut';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AvionService {
+export class SautService {
   private apiUrl: string="";
-  public avions: Array<Avion>=[];
+  public sauts: Array<Saut>=[];
 
   constructor(private appConfig: AppConfigService, private http: HttpClient, private router: Router) { 
-    this.apiUrl = `${ this.appConfig.url}/avion`
+    this.apiUrl = `${ this.appConfig.url}/saut`
   }
 
-  public loadCurrentAvions() {
-    this.http.get<Array<Avion>>(this.apiUrl)
-    .subscribe(avions => this.avions = avions);
+  public loadCurrentSauts() {
+    this.http.get<Array<Saut>>(this.apiUrl)
+    .subscribe(sauts => this.sauts = sauts);
   }
 
-  public createMatch(saut) {
+  public createSaut(saut) {
     this.http.post<Saut>(this.apiUrl, saut)
     .subscribe();
   }
