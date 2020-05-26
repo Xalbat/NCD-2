@@ -81,7 +81,7 @@ public class AvionApiController {
 	 */
 	@PutMapping("/{id}")
 	@JsonView(Views.Avion.class)
-	public Avion update(@PathVariable String id, @RequestBody Avion avion) {
+	public Avion update(@PathVariable int id, @RequestBody Avion avion) {
 		avion.setIdAvion(id);
 		this.daoAvion.save(avion);
 		return avion;

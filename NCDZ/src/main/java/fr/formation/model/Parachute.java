@@ -46,7 +46,7 @@ public class Parachute {
 	@JsonView(Views.Parachute.class)
 	private int tailleVoilePricipale;
 	
-	@Column(name = "nom_voile_secours", nullable = false)
+	@Column(name = "nom_voile_secours", nullable = false, length = 25)
 	@JsonView(Views.Parachute.class)
 	private String nomVoileSecours;
 	
@@ -65,7 +65,7 @@ public class Parachute {
 	@JsonView(Views.Parachute.class)
 	private Proprietaire proprietaire;
 	
-	@Column(name = "etat_parachute")
+	@Column(name = "etat_parachute", length = 15)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Parachutiste.class)
 	private EtatParachute etatParachute;

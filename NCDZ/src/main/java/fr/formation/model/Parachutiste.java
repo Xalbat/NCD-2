@@ -38,7 +38,7 @@ public class Parachutiste {
 	private String nom;
 	
 	@Column(name = "prenom", nullable = false, length = 25)
-	@JsonView(Views.Parachutiste.class)
+	@JsonView(Views.Common.class)
 	private String prenom;
 	
 	@Column(name = "niveau", nullable = false, length = 25)

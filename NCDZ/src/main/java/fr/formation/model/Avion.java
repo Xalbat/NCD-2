@@ -23,9 +23,14 @@ public class Avion {
 
 	//Attributs
 	@Id
-	@Column(name = "id", length = 10)
+	@Column(name = "id")
 	@JsonView(Views.Common.class)
-	private String idAvion;
+	private int idAvion;
+	
+	@Column(name = "matricule", length = 10)
+	@JsonView(Views.Common.class)
+	@NotNull
+	private String matricule;
 
 	@Column(name = "modele", length = 25)
 	@JsonView(Views.Common.class)
@@ -58,12 +63,12 @@ public class Avion {
 	@Positive
 	private int tempsMontee;
 
-	@Column(name = "etat")
+	@Column(name = "etat", length = 15)
 	@Enumerated(EnumType.STRING)
 	@JsonView({Views.Avion.class, Views.Pilote.class})
 	private EtatAvion etat;
 
-	@Column(name = "situation", nullable = false)
+	@Column(name = "situation", length = 15)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
@@ -77,10 +82,11 @@ public class Avion {
 	//Constructeurs
 	public Avion() {}
 
-	public Avion(String idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+	public Avion(int idAvion, String matricule, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
 			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
+		this.matricule = matricule;
 		this.altitudeMax = altitudeMax;
 		this.capacite = capacite;
 		this.rotationMax = rotationMax;
@@ -91,12 +97,19 @@ public class Avion {
 	}
 
 	//Getters Setters
-	public String getIdAvion() {
+	public int getIdAvion() {
 		return idAvion;
 	}
-	public void setIdAvion(String idAvion) {
+	public void setIdAvion(int idAvion) {
 		this.idAvion = idAvion;
 	}
+	public String getMatricule() {
+		return matricule;
+	}
+	public void setMatricul(String matricule) {
+		this.matricule = matricule;
+	}
+
 	public int getAltitudeMax() {
 		return altitudeMax;
 	}

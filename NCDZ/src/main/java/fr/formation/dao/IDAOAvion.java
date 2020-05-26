@@ -8,5 +8,7 @@ public interface IDAOAvion extends JpaRepository<Avion, Integer> {
 	
 //	@Query("SELECT COUNT(m) FROM MonsterEntity m")
 //	public Integer countNombreMonstre();
+	
+	
 
 }
