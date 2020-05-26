@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -18,58 +20,64 @@ import fr.formation.projection.Views;
 @Entity
 @Table(name = "avion")
 public class Avion {
-	
+
 	//Attributs
 	@Id
 	@Column(name = "id", length = 10)
 	@JsonView(Views.Common.class)
 	private String idAvion;
-	
+
 	@Column(name = "modele", length = 25)
 	@JsonView(Views.Common.class)
 	private String modele;
-	
+
 	@Column(name = "altitude")
 	@Positive
 	@JsonView(Views.Avion.class)
 	private int altitudeMax;
-	
+
 	@Column(name = "capacite", nullable = false)
 	@Positive
 	@NotNull
 	@JsonView(Views.Avion.class)
 	private int capacite;
-	
+
 	@Column(name = "rotation_max", nullable = false)
 	@Positive
 	@NotNull
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
-	
+
 	@Column(name = "rotation")
 	@JsonView(Views.Avion.class)
 	@Positive
 	private int rotation;
-	
+
 	@Column(name = "temps_montee")
 	@JsonView(Views.Avion.class)
 	@Positive
 	private int tempsMontee;
-	
+
 	@Column(name = "etat")
 	@Enumerated(EnumType.STRING)
 	@JsonView({Views.Avion.class, Views.Pilote.class})
 	private EtatAvion etat;
-	
+
 	@Column(name = "situation", nullable = false)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
-	
+
+	//Relation n°3 inverse
+	@OneToOne
+	@JoinColumn
+	@JsonView(Views.Avion.class)
+	private Vol vol;
+
 	//Constructeurs
 	public Avion() {}
-	
-/*	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+
+	/*	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
 			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
@@ -81,7 +89,7 @@ public class Avion {
 		this.etat = etat;
 		this.situation = situation;
 	}*/
-	
+
 	//Getters Setters
 	public String getIdAvion() {
 		return idAvion;
@@ -132,14 +140,14 @@ public class Avion {
 		this.situation = situation;
 	}
 
-	
+
 	//toString
 	@Override
 	public String toString() {
 		return "Avion [id=" + idAvion + ", altitudeMax=" + altitudeMax + ", capacite=" + capacite + ", rotationMax="
 				+ rotationMax + ", rotation=" + rotation + "]";
 	}
-	
-	
-	
+
+
+
 }
