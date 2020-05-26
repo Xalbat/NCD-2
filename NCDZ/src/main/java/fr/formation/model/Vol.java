@@ -36,10 +36,11 @@ public class Vol {
 	private Pilote pilote;
 	
 	@OneToOne
+	@JoinColumn(name = "id_avion")
 	@JsonView(Views.Vol.class)
 	private Avion avion;
 	
-	@Column(name="situation_vol")
+	@Column(name = "situation_vol")
 	@JsonView({Views.Common.class, Views.Saut.class})
 	private SituationVol situationVol;
 	

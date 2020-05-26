@@ -24,7 +24,7 @@ import fr.formation.projection.Views;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/avion")
+@RequestMapping("/api/pilote")
 public class PiloteApiController {
 /*
 	Gère les pilotes du coté de l'administrateur

@@ -59,7 +59,7 @@ public class Avion {
 	//Constructeurs
 	public Avion() {}
 	
-	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+/*	public Avion(int idAvion, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
 			EtatAvion etat, SituationAvion situation) {
 		super();
 		this.idAvion = idAvion;
@@ -70,7 +70,7 @@ public class Avion {
 		this.tempsMontee = tempsMontee;
 		this.etat = etat;
 		this.situation = situation;
-	}
+	}*/
 	
 	//Getters Setters
 	public int getIdAvion() {
@@ -103,6 +103,25 @@ public class Avion {
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
 	}
+	public int getTempsMontee() {
+		return tempsMontee;
+	}
+	public void setTempsMontee(int tempsMontee) {
+		this.tempsMontee = tempsMontee;
+	}
+	public EtatAvion getEtat() {
+		return etat;
+	}
+	public void setEtat(EtatAvion etat) {
+		this.etat = etat;
+	}
+	public SituationAvion getSituation() {
+		return situation;
+	}
+	public void setSituation(SituationAvion situation) {
+		this.situation = situation;
+	}
+
 	
 	//toString
 	@Override

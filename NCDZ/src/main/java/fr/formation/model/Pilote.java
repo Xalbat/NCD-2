@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -38,7 +41,12 @@ public class Pilote {
 	@JsonView({Views.Pilote.class, Views.Vol.class})
 	private int licence;
 
-	@OneToMany(mappedBy = "idAvion")
+	@ManyToMany/*(mappedBy = "idAvion")*/
+	//@JoinColumn(name = "id_avion")
+	@JoinTable(name = "habilitation_pilote_avion",
+	uniqueConstraints = @UniqueConstraint(columnNames = { "id_pilote", "id_avion"}),
+	joinColumns = @JoinColumn(name = "id_pilote", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "id_avion", referencedColumnName = "id"))
 	@JsonView(Views.Pilote.class)
 	private List<Avion> listeAvion;
 

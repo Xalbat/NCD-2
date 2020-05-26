@@ -14,7 +14,7 @@ public class Compte {
 	//Attributs
 	
 	@Id
-	@Column(name = "id_compte")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int idCompte;
 	

@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import fr.formation.projection.Views;
@@ -34,7 +35,7 @@ public class Parachutiste {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date_visite", nullable = false)
-	//@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@JsonView(Views.Parachutiste.class)
 	private LocalDate dateLicence;
 	

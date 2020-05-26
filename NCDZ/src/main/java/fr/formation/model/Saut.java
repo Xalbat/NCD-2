@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -41,8 +44,13 @@ public class Saut {
 	@JsonView(Views.Saut.class)
 	private int altitude;
 	
-	@OneToMany
-	@JoinColumn(name = "list_parachutiste")
+	/*@OneToMany
+	@JoinColumn(name = "list_parachutiste")*/
+	@ManyToMany
+	@JoinTable(name = "liste_parachutiste_saut",
+	uniqueConstraints = @UniqueConstraint(columnNames = { "id_saut", "id_parachutiste"}),
+	joinColumns = @JoinColumn(name = "id_saut", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "id_parachutiste", referencedColumnName = "numero-licence"))
 	@NotNull
 	@JsonView(Views.Saut.class)
 	private List<Parachutiste> listParachutiste = new ArrayList<Parachutiste>();
