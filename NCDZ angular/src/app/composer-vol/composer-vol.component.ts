@@ -3,6 +3,7 @@ import { Avion } from '../avion';
 import { Parachutiste } from '../parachutiste';
 import { Saut } from '../saut';
 import { Vol } from '../vol';
+import { SituationVol } from '../situation-vol.enum';
 
 @Component({
   selector: 'composer-vol,[composer-vol]',
@@ -46,13 +47,13 @@ export class ComposerVolComponent implements OnInit {
     let saut = new Saut(0,2500,true)
     saut.parachutiste.push(new Parachutiste(2000,"Dupont","Jean",new Date('2020-10-05')))
     saut.parachutiste.push(new Parachutiste(3000,"Dupont","aignan",new Date('2020-10-05')))
-    saut.vol = new Vol(1,"waiting")
+    saut.vol = new Vol(1,SituationVol.EN_ATTENTE.toString())
     let saut2 = new Saut(1,4000,false)
     saut2.parachutiste.push(new Parachutiste(4000,"Capone","al",new Date('2020-10-05')))
     saut2.parachutiste.push(new Parachutiste(5000,"D'arc","jeanne",new Date('2020-10-05')))
     saut2.parachutiste.push(new Parachutiste(6000,"Au","Secour",new Date('2020-10-05')))
     saut2.parachutiste.push(new Parachutiste(7000,"Matue","Omar",new Date('2020-10-05')))
-    saut2.vol = new Vol(2,"waiting")
+    saut2.vol = new Vol(2,SituationVol.EN_ATTENTE.toString())
     this.listeSautDemandes.push(saut)
     this.listeSautDemandes.push(saut2)
 
