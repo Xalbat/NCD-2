@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
+
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+ 
 import { AppComponent } from './app.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { AvionnageComponent } from './avionnage/avionnage.component';
@@ -27,7 +31,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,FormsModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    FontAwesomeModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,23 +12,22 @@ export class ParachutisteService {
   private apiUrl: string = "";
   public parachutistes: Array<Parachutiste> = null;
 
-  constructor(private appConfig: AppConfigService, private http: HttpClient, rooter: Router)
-   {   this.apiUrl = `${ this.appConfig.url}/parachutiste`}
+  constructor(private appConfig: AppConfigService, private http: HttpClient, rooter: Router) { }
 
 
   public reload() {
-    this.http.get<Array<Parachutiste>>(this.apiUrl,)
+    this.http.get<Array<Parachutiste>>(this.apiUrl, this.appConfig.httpOptions)
         .subscribe(parachutistes => this.parachutistes = this.parachutistes);
   }
 
 
   public add(parachutiste) {
-    this.http.post<Parachutiste>(this.apiUrl, parachutiste, )
+    this.http.post<Parachutiste>(this.apiUrl, parachutiste, this.appConfig.httpOptions)
         .subscribe(respParachutiste => this.parachutistes.push(respParachutiste));
   }
 
   public update(parachutiste) {
-    this.http.put<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, parachutiste)
+    this.http.put<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, parachutiste, this.appConfig.httpOptions)
         .subscribe(respParachutiste => {
           let index = this.parachutistes.indexOf(this.parachutistes.find(p => p.numeroLicence == parachutiste.numeroLicence));
           this.parachutistes.splice(index, 1, respParachutiste);
@@ -36,7 +35,7 @@ export class ParachutisteService {
   }
 
   public delete(parachutiste) {
-    this.http.delete<Boolean>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`)
+    this.http.delete<Boolean>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, this.appConfig.httpOptions)
         .subscribe(resp => {
           if (resp) {
             let index = this.parachutistes.indexOf(parachutiste);
