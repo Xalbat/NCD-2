@@ -13,7 +13,7 @@ import { SituationAvion } from '../situation-avion.enum';
 export class ComposerAvionComponent implements OnInit {
 
 
-  avion : Avion = new Avion();
+  public avion : Avion = null;
   avionsDisponibles : Array<Avion> = [];
   volsDisponibles : Array<Vol> = [];
   indexAvion=0;
@@ -54,8 +54,15 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   affichageAvion(id) {
+    
+
     this.choixAvion=(!this.choixAvion);
     this.choixAvion ? this.indexAvion=id : this.indexAvion=0;
+    if(this.choixAvion){
+      this.avion = this.avionsDisponibles.find(a => a.id == id)
+    }else{
+      this.avion = null
+    }
   }
 
   affichageVol(id) {
