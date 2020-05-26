@@ -1,0 +1,52 @@
+Coucou, coucou
+
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Altitude</th>
+                    <th>Capacité</th>
+                    <th>Rotation Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let a of avionsDisponibles, let i=index">
+                    <tr *ngIf="!choix || ligne==a.id" (click)="affichage(a.id)">
+                        <th>{{a.id}}</th>
+                        <th>{{a.altitude}}</th>
+                        <th>{{a.capacite}}</th>
+                        <th>ligne={{ligne}}</th>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+<!-- 
+    <div class="row">
+        <form>
+            <select class="form-control form-control-sm" [(ngModel)]="avion" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let a of avionsDisponibles;let i = index" [value]="a">avion {{i}}</option>
+            </select>
+        </form>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 18rem;" *ngIf="avion">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        Avion selectionné
+                    </div>
+                    <div class="col-3">
+                        AltMax : {{avion.altitude}}
+                    </div>
+                </div>
+            </div>
+                <div class="card-body">
+                
+                </div>
+          </div>        
+    </div> -->
+
+</div>
