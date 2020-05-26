@@ -33,4 +33,13 @@
 	</div>
 
 	
+
+	<div class="card-footer text-right">
+		<button *ngIf="!isEditing" (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter</button>
+		<button *ngIf="isEditing" (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
+	</div>
+
+
+
+
 </div>
