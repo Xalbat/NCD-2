@@ -46,13 +46,13 @@ public class PiloteApiController {
 
 
 	/** Sélectione un pilote avec son id
-	 * @param id
+	 * @param licence
 	 * @return
 	 */
-	@GetMapping("/{id}")
+	@GetMapping("/{licence}")
 	@JsonView(Views.Pilote.class)
-	public Pilote findById(@PathVariable int id) {
-		return daoPilote.findById(id).orElse(new Pilote());
+	public Pilote findById(@PathVariable int licence) {
+		return daoPilote.findById(licence).orElse(new Pilote());
 	}
 
 
@@ -73,28 +73,28 @@ public class PiloteApiController {
 
 
 	/** Modification d'un pilote existant
-	 * @param id
+	 * @param licence
 	 * @param pilote
 	 * @return
 	 */
-	@PutMapping("/{id}")
+	@PutMapping("/{licence}")
 	@JsonView(Views.Pilote.class)
-	public Pilote update(@PathVariable int id, @RequestBody Pilote pilote) {
-		pilote.setIdPilote(id);
+	public Pilote update(@PathVariable int licence, @RequestBody Pilote pilote) {
+		pilote.setLicence(licence);
 		this.daoPilote.save(pilote);
 		return pilote;
 	}
 
 
 	/** Supression d'un pilote existant
-	 * @param id
+	 * @param licence
 	 * @return
 	 */
-	@DeleteMapping("/{id}/supp") 
+	@DeleteMapping("/{licence}/supp") 
 	@JsonView(Views.Pilote.class)
-	public boolean delete(@PathVariable int id) {
+	public boolean delete(@PathVariable int licence) {
 		try {
-			this.daoPilote.deleteById(id);
+			this.daoPilote.deleteById(licence);
 			return true;
 		} catch (Exception e) {
 			return false;

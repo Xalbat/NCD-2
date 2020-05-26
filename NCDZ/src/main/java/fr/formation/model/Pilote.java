@@ -4,13 +4,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,11 +21,10 @@ public class Pilote {
 	
 	//Attributs
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "licence", nullable = false)
 	@JsonView(Views.Common.class)
-	private int idPilote;	//	Attention !! c'est probablement pas utilie car la licence de pilotage peux probablement servir de clef unique !
-	
+	private int licence;
+
 	@Column(name = "nom", nullable = false)
 	@JsonView({Views.Pilote.class, Views.Vol.class})
 	private String nom;
@@ -36,16 +32,12 @@ public class Pilote {
 	@Column(name = "prenom", nullable = false)
 	@JsonView(Views.Pilote.class)
 	private String prenom;
-	
-	@Column(name = "licence", nullable = false)
-	@JsonView({Views.Pilote.class, Views.Vol.class})
-	private int licence;
 
 	@ManyToMany/*(mappedBy = "idAvion")*/
 	//@JoinColumn(name = "id_avion")
 	@JoinTable(name = "habilitation_pilote_avion",
-	uniqueConstraints = @UniqueConstraint(columnNames = { "id_pilote", "id_avion"}),
-	joinColumns = @JoinColumn(name = "id_pilote", referencedColumnName = "id"),
+	uniqueConstraints = @UniqueConstraint(columnNames = { "licence_pilote", "id_avion"}),
+	joinColumns = @JoinColumn(name = "licence_pilote", referencedColumnName = "licence"),
 	inverseJoinColumns = @JoinColumn(name = "id_avion", referencedColumnName = "id"))
 	@JsonView(Views.Pilote.class)
 	private List<Avion> listeAvion;
@@ -53,42 +45,27 @@ public class Pilote {
 	
 	
 	//Getters & Setters
-	public int getIdPilote() {
-		return idPilote;
-	}
-
-	public void setIdPilote(int idPilote) {
-		this.idPilote = idPilote;
-	}
-
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
 	public String getPrenom() {
 		return prenom;
 	}
-
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
 	public int getLicence() {
 		return licence;
 	}
-
 	public void setLicence(int licence) {
 		this.licence = licence;
 	}
-
 	public List<Avion> getListeAvion() {
 		return listeAvion;
 	}
-
 	public void setListeAvion(List<Avion> listeAvion) {
 		this.listeAvion = listeAvion;
 	}
@@ -96,14 +73,12 @@ public class Pilote {
 	//toString
 	@Override
 	public String toString() {
-		return "Pilote [idPilote=" + idPilote + ", nom=" + nom + ", prenom=" + prenom + ", licence=" + licence
+		return "Pilote [nom=" + nom + ", prenom=" + prenom + ", licence=" + licence
 				+ ", listeAvion=" + listeAvion + "]";
 	}
 	
 	//Constructeurs
-	public Pilote(int idPilote, String nom, String prenom, int licence, List<Avion> listeAvion) {
-		super();
-		this.idPilote = idPilote;
+	public Pilote(int licence, String nom, String prenom, List<Avion> listeAvion) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.licence = licence;
