@@ -1,52 +1,59 @@
-Coucou, coucou
+<br>
 
 <div class="container">
     <div class="row">
-        <table class="table">
+        <label><strong>Listes des avions disponibles</strong></label>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Altitude</th>
-                    <th>Capacité</th>
-                    <th>Rotation Max</th>
+                    <th>Altitude max</th>
+                    <th>Capacité max</th>
+                    <th>Rotation(s)</th>
+                    <th>Temps de montée</th>
                 </tr>
             </thead>
             <tbody>
                 <ng-container *ngFor="let a of avionsDisponibles, let i=index">
-                    <tr *ngIf="!choix || ligne==a.id" (click)="affichage(a.id)">
-                        <th>{{a.id}}</th>
-                        <th>{{a.altitude}}</th>
-                        <th>{{a.capacite}}</th>
-                        <th>ligne={{ligne}}</th>
+                    <tr *ngIf="!choix || ligne==a.id" (click)="affichageAvion(a.id)" class="choixTableau">
+                        <td>{{a.id}}</td>
+                        <td>{{a.altitude}}m</td>
+                        <td>{{a.capacite}}</td>
+                        <td>{{a.rotation}}/{{a.rotationMax}}</td>
+                        <td>{{a.tempsMontee}} min</td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
     </div>
-<!-- 
-    <div class="row">
-        <form>
-            <select class="form-control form-control-sm" [(ngModel)]="avion" [ngModelOptions]="{standalone: true}">
-                <option *ngFor="let a of avionsDisponibles;let i = index" [value]="a">avion {{i}}</option>
-            </select>
-        </form>
-    </div>
-    <div class="row">
-        <div class="card" style="width: 18rem;" *ngIf="avion">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-6">
-                        Avion selectionné
-                    </div>
-                    <div class="col-3">
-                        AltMax : {{avion.altitude}}
-                    </div>
-                </div>
-            </div>
-                <div class="card-body">
-                
-                </div>
-          </div>        
-    </div> -->
 
+    <div class="row">
+        <label><strong>Listes des sauts en attente</strong></label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Altitude</td>
+                    <td>Tandem</td>
+                    <td>Vol</td>
+                    <td>nb sauteur</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of listeSautDemandes" class="choixTableau">
+                    <td>{{s.idSaut}}</td>
+                    <td>{{s.altitude}}</td>
+                    <td>{{s.tandem}}</td>
+                    <td>
+                        <form>
+                            <select (change)="test($event.target.value)">
+                                <option *ngFor="let v of listeDesVolsEnAttente" value="v">{{v.id}} - {{v.getNbParachutistes()}}</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>{{s.parachutiste.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
