@@ -2,6 +2,28 @@ html {
     background-image: url(https://veloce.fr/wp-content/uploads/2019/03/pourquoi-sauter-en-parachute-13.jpg);
     background-repeat: no-repeat;
     background-position: center center;
-    opacity: 0.5;
+    
 }
 
+
+.card-header {
+    text-align: center;
+    background-color: transparent;
+}
+
+.card-title {
+    font-size: 2em;
+    font-weight: 900;
+    color:blue;
+    margin-bottom: 5%;
+   background-color: transparent;
+}
+
+
+.card-body {
+    font-weight: 700;
+    color:black;
+    overflow: auto;
+    padding: 5%;
+    background-color: transparent;
+}

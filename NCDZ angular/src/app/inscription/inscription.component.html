@@ -1,17 +1,9 @@
-<script src="https://kit.fontawesome.com/0b05006757.js" crossorigin="anonymous"></script>
-
-
-
-
-
-
-
 
 <div class="card-header">
 	<h5 class="card-title">Inscription d'un parachutiste</h5>
 </div>
-	
-<div class="card-body">
+
+<div class="card-body" >
 	<div class="form-group row">
 		<label for="dateVisite" class="col-sm-2 col-form-label">Nom : </label>
 		<div class="col-sm-10">
@@ -43,8 +35,9 @@
 	
 
 	<div class="card-footer text-right">
-		<button  (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter <i class="fas fa-parachute-box"></i> </button>
-		<script src="https://kit.fontawesome.com/0b05006757.js" crossorigin="anonymous"></script>
+		<button  (click)="ajouterParachutiste()" class="btn btn-success m-1">Ajouter <fa-icon [icon]="faParachuteBox"></fa-icon> </button>
+
+		
 		<button  (click)="modifierParachutiste()" class="btn btn-warning m-1">Modifier</button>
 		<!-- <button  (click)="supprimerParachutiste()" class="btn btn-warning m-1">Supprimer</button> -->
 	</div>
