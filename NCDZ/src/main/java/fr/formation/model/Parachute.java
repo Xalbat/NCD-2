@@ -29,22 +29,22 @@ public class Parachute {
 	@JsonView(Views.Common.class)
 	private int idParachute;
 	
-	@Column(name = "nom_harnais", nullable = false)
+	@Column(name = "nom_harnais", nullable = false, length = 25)
 	@JsonView(Views.Parachute.class)
 	private String nomHarnais;
 	
-	@Column(name = "type_securite", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "type_securite", nullable = false, length = 15)
+	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Parachute.class)
 	private TypeSecurite typeSecurite;
 	
-	@Column(name = "nom_voile_principale", nullable = false)
+	@Column(name = "nom_voile_principale", nullable = false, length = 25)
 	@JsonView(Views.Parachute.class)
 	private String nomVoilePricipale;
 	
 	@Column(name = "taille_voile_principale", nullable = false)
 	@JsonView(Views.Parachute.class)
-	private String tailleVoilePricipale;
+	private int tailleVoilePricipale;
 	
 	@Column(name = "nom_voile_secours", nullable = false)
 	@JsonView(Views.Parachute.class)
@@ -52,24 +52,31 @@ public class Parachute {
 	
 	@Column(name = "taille_voile_secours", nullable = false)
 	@JsonView(Views.Parachute.class)
-	private String tailleVoileSecours;
+	private int tailleVoileSecours;
 	
 	@OneToOne
-	@JoinColumn(name = "revision")
+	@JoinColumn(name = "id_revision")
 	@NotNull
 	@JsonView({Views.Parachute.class, Views.Vol.class})
 	private Revision revision;
 	
-	@Column(name = "proprietaire", nullable = false)
+	@Column(name = "proprietaire", nullable = false, length = 15)
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Parachute.class)
 	private Proprietaire proprietaire;
 	
-	@Column(name = "etat_parachute", nullable = false)
+	@Column(name = "etat_parachute")
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Parachutiste.class)
 	private EtatParachute etatParachute;
 
+	@Column(name = "Declanch_secours_auto")
+	@JsonView(Views.Parachute.class)
+	private int secoursAuto;
+	
+	@Column(name = "Declanch_secours_manuel")
+	@JsonView(Views.Parachute.class)
+	private int secoursManuel;
 	
 	
 	public Parachute() {}
@@ -82,93 +89,57 @@ public class Parachute {
 	public void setIdParachute(int id) {
 		this.idParachute = id;
 	}
-
-
 	public String getNomHarnais() {
 		return nomHarnais;
 	}
-
-
 	public void setNomHarnais(String nomHarnais) {
 		this.nomHarnais = nomHarnais;
 	}
-
-
 	public TypeSecurite getNomSecurite() {
 		return typeSecurite;
 	}
-
-
 	public void setNomSecurite(TypeSecurite nomSecurite) {
 		this.typeSecurite = nomSecurite;
 	}
-
-
 	public String getNomVoilePricipale() {
 		return nomVoilePricipale;
 	}
-
-
 	public void setNomVoilePricipale(String nomVoilePricipale) {
 		this.nomVoilePricipale = nomVoilePricipale;
 	}
-
-
-	public String getTailleVoilePricipale() {
+	public int getTailleVoilePricipale() {
 		return tailleVoilePricipale;
 	}
-
-
-	public void setTailleVoilePricipale(String tailleVoilePricipale) {
+	public void setTailleVoilePricipale(int tailleVoilePricipale) {
 		this.tailleVoilePricipale = tailleVoilePricipale;
 	}
-
-
 	public String getNomVoileSecours() {
 		return nomVoileSecours;
 	}
-
-
 	public void setNomVoileSecours(String nomVoileSecours) {
 		this.nomVoileSecours = nomVoileSecours;
 	}
-
-
-	public String getTailleVoileSecours() {
+	public int getTailleVoileSecours() {
 		return tailleVoileSecours;
 	}
-
-
-	public void setTailleVoileSecours(String tailleVoileSecours) {
+	public void setTailleVoileSecours(int tailleVoileSecours) {
 		this.tailleVoileSecours = tailleVoileSecours;
 	}
-
-
 	public Revision getRevision() {
 		return revision;
 	}
-
-
 	public void setRevision(Revision revision) {
 		this.revision = revision;
 	}
-
-
 	public Proprietaire getProprietaire() {
 		return proprietaire;
 	}
-
-
 	public void setProprietaire(Proprietaire proprietaire) {
 		this.proprietaire = proprietaire;
 	}
-
-
 	public EtatParachute getEtatParachute() {
 		return etatParachute;
 	}
-
-
 	public void setEtatParachute(EtatParachute etatParachute) {
 		this.etatParachute = etatParachute;
 	}

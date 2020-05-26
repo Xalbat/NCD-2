@@ -33,7 +33,7 @@ public class Revision {
 	private LocalDate datePliagePrimaire;
 	
 	@ManyToOne
-	@JoinColumn(name = "plieur_voile_primaire", nullable = false)
+	@JoinColumn(name = "plieur_voile_primaire")
 	@JsonView(Views.Common.class)
 	private Parachutiste plieurVoilePrimaire;
 	
@@ -43,7 +43,7 @@ public class Revision {
 	private LocalDate datePliageSecours;
 	
 	@ManyToOne
-	@JoinColumn(name = "plieur_voile_secours", nullable = false)
+	@JoinColumn(name = "plieur_voile_secours")
 	@JsonView(Views.Common.class)
 	private Parachutiste plieurVoileSecours;
 	

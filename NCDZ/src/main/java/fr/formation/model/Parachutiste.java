@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.formation.enumerator.Niveau;
 import fr.formation.projection.Views;
 
 @Entity
@@ -25,22 +28,27 @@ public class Parachutiste {
 	@JsonView({Views.Common.class, Views.Vol.class})
 	private int numeroLicence;
 	
-	@Column(name = "nom", nullable = false)
+	@Column(name = "nom", nullable = false, length = 25)
 	@JsonView(Views.Common.class)
 	private String nom;
 	
-	@Column(name = "prenom", nullable = false)
+	@Column(name = "prenom", nullable = false, length = 25)
 	@JsonView(Views.Parachutiste.class)
 	private String prenom;
 	
+	@Column(name = "niveau", nullable = false, length = 25)
+	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Parachutiste.class)
+	private Niveau niveau;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "date_visite", nullable = false)
+	@Column(name = "date_visite")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@JsonView(Views.Parachutiste.class)
 	private LocalDate dateLicence;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_parachute", nullable = false)
+	@JoinColumn(name = "id_parachute")
 	@JsonView({Views.Parachutiste.class, Views.Vol.class})
 	private Parachute parachute;
 

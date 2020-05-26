@@ -34,7 +34,6 @@ public class Saut {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_vol")
-	@NotNull
 	@JsonView(Views.Saut.class)
 	private Vol vol;
 	

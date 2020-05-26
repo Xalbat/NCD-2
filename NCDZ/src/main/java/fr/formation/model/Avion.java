@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -21,29 +21,39 @@ public class Avion {
 	
 	//Attributs
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", length = 10)
 	@JsonView(Views.Common.class)
-	private int idAvion;
+	private String idAvion;
 	
-	@Column(name = "altitude", nullable = false)
+	@Column(name = "modele", length = 25)
+	@JsonView(Views.Common.class)
+	private String modele;
+	
+	@Column(name = "altitude")
+	@Positive
 	@JsonView(Views.Avion.class)
 	private int altitudeMax;
 	
 	@Column(name = "capacite", nullable = false)
+	@Positive
+	@NotNull
 	@JsonView(Views.Avion.class)
 	private int capacite;
 	
 	@Column(name = "rotation_max", nullable = false)
+	@Positive
+	@NotNull
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
 	
-	@Column(name = "rotation", nullable = false)
+	@Column(name = "rotation")
 	@JsonView(Views.Avion.class)
+	@Positive
 	private int rotation;
 	
-	@Column(name = "temps_montee", nullable = false)
+	@Column(name = "temps_montee")
 	@JsonView(Views.Avion.class)
+	@Positive
 	private int tempsMontee;
 	
 	@Column(name = "etat")
@@ -73,11 +83,11 @@ public class Avion {
 	}*/
 	
 	//Getters Setters
-	public int getIdAvion() {
+	public String getIdAvion() {
 		return idAvion;
 	}
-	public void setIdAvion(int id) {
-		this.idAvion = id;
+	public void setIdAvion(String idAvion) {
+		this.idAvion = idAvion;
 	}
 	public int getAltitudeMax() {
 		return altitudeMax;

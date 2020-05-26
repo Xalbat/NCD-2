@@ -21,15 +21,15 @@ public class Pilote {
 	
 	//Attributs
 	@Id
-	@Column(name = "licence", nullable = false)
+	@Column(name = "licence")
 	@JsonView(Views.Common.class)
 	private int licence;
 
-	@Column(name = "nom", nullable = false)
+	@Column(name = "nom", nullable = false, length = 25)
 	@JsonView({Views.Pilote.class, Views.Vol.class})
 	private String nom;
 	
-	@Column(name = "prenom", nullable = false)
+	@Column(name = "prenom", nullable = false, length = 25)
 	@JsonView(Views.Pilote.class)
 	private String prenom;
 
