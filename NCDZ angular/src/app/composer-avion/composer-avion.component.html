@@ -1,1 +1,77 @@
-<p>composer-avion works!</p>
+Coucou Avion
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <label><strong>Listes des avions disponibles</strong></label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Altitude max</th>
+                    <th>Capacité max</th>
+                    <th>Rotation(s)</th>
+                    <th>Temps de montée</th>
+                    <th>Situation de l'avion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let a of avionsDisponibles, let i=index">
+                    <tr *ngIf="!choixAvion || ligneAvion==a.id" (click)="affichageAvion(a.id)" class="choixTableau">
+                        <td>{{a.id}}</td>
+                        <td>{{a.altitude}}m</td>
+                        <td>{{a.capacite}}</td>
+                        <td>{{a.rotation}}/{{a.rotationMax}}</td>
+                        <td>{{a.tempsMontee}}min</td>
+                        <td>//En attente</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <label><strong>Listes des vols en attente</strong></label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Situation Vol</th>
+                    <th>Responsable Sol</th>
+                    <th>Responsable Vol</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let v of volsDisponibles, let i=index">
+                    <tr *ngIf="!choixVol || ligneVol==v.id || v.situationVol!='En cours'" (click)="affichageVol(v.id)" class="choixTableau">
+                        <td>{{v.id}}</td>
+                        <td>{{v.situationVol}}</td>
+                        <td>
+                            <ng-container *ngIf="v.respoSol!=null">
+                                {{v.respoSol.nom}} {{v.respoSol.prenom}}
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="v.respoVol!=null">
+                                {{v.respoVol.nom}} {{v.respoVol.prenom}}
+                            </ng-container>
+                        </td>
+                        <td>date</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group row">
+        <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Sol : </label>
+        <div class="col-sm-10">
+            <select>
+                <option *ngFor="let p of listeAttente">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
+            </select>
+        </div>
+    </div>
+
+</div>

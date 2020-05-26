@@ -37,7 +37,7 @@ export class ComposerVolComponent implements OnInit {
   }
 
   loadListesPara(){
-    this.listeAttente.push(new Parachutiste(2000,"Dupont","Jean",new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(2000,"Dupont","Jean","",new Date('2020-10-05')))
     this.listeSautDemandés.push(new Saut(0,2500,true))
   }
 
