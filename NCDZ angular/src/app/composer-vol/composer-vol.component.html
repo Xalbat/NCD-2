@@ -40,15 +40,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let s of listeSautDemandes">
+                <tr *ngFor="let s of listeSautDemandes" class="choixTableau">
                     <td>{{s.idSaut}}</td>
                     <td>{{s.altitude}}</td>
                     <td>{{s.tandem}}</td>
-                    <td>{{s.vol.id}}</td>
+                    <td>
+                        <form>
+                            <select (change)="test($event.target.value)">
+                                <option *ngFor="let v of listeDesVolsEnAttente" value="v">{{v.id}} - {{v.getNbParachutistes()}}</option>
+                            </select>
+                        </form>
+                    </td>
                     <td>{{s.parachutiste.length}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
 </div>
