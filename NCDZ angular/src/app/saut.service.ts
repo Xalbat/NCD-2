@@ -10,14 +10,16 @@ import { Saut } from './saut';
 export class SautService {
   private apiUrl: string="";
   public sauts: Array<Saut>=[];
-  
+
   constructor(private appConfig: AppConfigService, private http: HttpClient, private router: Router) { 
-    this.apiUrl = `${ this.appConfig.url}/sauts`
+    this.apiUrl = `${ this.appConfig.url}/saut`
   }
 
   public loadCurrentSauts() {
     this.http.get<Array<Saut>>(this.apiUrl)
     .subscribe(sauts => this.sauts = sauts);
   }
+
+  
 
 }
