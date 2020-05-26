@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Avion } from '../avion';
 import { Parachutiste } from '../parachutiste';
-import { Saut } from '../saut';
 import { Vol } from '../vol';
+import { EtatAvion } from '../etat-avion.enum';
+import { SituationAvion } from '../situation-avion.enum';
 
 @Component({
   selector: 'composer-avion',
@@ -12,7 +13,7 @@ import { Vol } from '../vol';
 export class ComposerAvionComponent implements OnInit {
 
 
-  avion : Avion = new Avion();
+  public avion : Avion = null;
   avionsDisponibles : Array<Avion> = [];
   volsDisponibles : Array<Vol> = [];
   indexAvion=0;
@@ -21,36 +22,47 @@ export class ComposerAvionComponent implements OnInit {
   choixVol = false;
   listeAttente: Array<Parachutiste> = [];
   listeSautDemandés: Array<Parachutiste> = [];
-  indexRepoSol=0;
-  indexRepoVol=0;
+  numeroRepoSol=0;
+  numeroRepoVol=0;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log("init")
-    this.loadListeAvionsDispo()
-    this.loadListesVols()
-    this.loadListesPara()
+    this.ListeAvionsDispo()
+    this.ListesVols()
+    this.ListesPara()
   }
 
-  test(){
-    console.log(this.avion)
+  ListeAvionsDispo(){
+    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
+    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
   }
 
-  loadListeAvionsDispo(){
-    this.avionsDisponibles.push(new Avion(15,2500,4,3,0,60))
-    this.avionsDisponibles.push(new Avion(19,4000,3,3,0,60))
-  }
-
-  loadListesVols(){
+  ListesVols(){
     this.volsDisponibles.push(new Vol(1, "En cours"))
     this.volsDisponibles.push(new Vol(2, "En attente"))
     this.volsDisponibles[0].respoVol = new Parachutiste(1,"Robert","Dupont");
   }
 
+  ListesPara(){
+    this.listeAttente.push(new Parachutiste(1,"Instructeur 1","Jean","Instructeur", new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(3,"Dupont","Jean","Débutant", new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(4,"Dupont","Jean","Débutant", new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(5,"Instructeur 2","Jean","Instructeur", new Date('2020-10-05')))
+    this.listeAttente.push(new Parachutiste(6,"Instructeur 3","Jean","Instructeur", new Date('2020-10-05')))
+  }
+
   affichageAvion(id) {
+    
+
     this.choixAvion=(!this.choixAvion);
     this.choixAvion ? this.indexAvion=id : this.indexAvion=0;
+    if(this.choixAvion){
+      this.avion = this.avionsDisponibles.find(a => a.id == id)
+    }else{
+      this.avion = null
+    }
   }
 
   affichageVol(id) {
@@ -58,23 +70,20 @@ export class ComposerAvionComponent implements OnInit {
     this.choixVol ? this.indexVol=id : this.indexVol=0;
   }
 
-  loadListesPara(){
-    this.listeAttente.push(new Parachutiste(1,"Instructeur 1","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(1,"Instructeur 2","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(1,"Instructeur 3","Jean","Instructeur", new Date('2020-10-05')))
-  }
+
 
   attributionRespoSol() {
     if (this.choixVol)
     {
-      if (this.indexRepoSol<0)  
+      if (this.numeroRepoSol>0)  
       {
-        alert(JSON.stringify(this.volsDisponibles[this.indexRepoSol].respoSol))
-        this.volsDisponibles[this.indexRepoSol].respoSol=this.listeAttente[this.indexRepoSol];
-        alert(JSON.stringify(this.volsDisponibles[this.indexRepoSol].respoSol))
+        for (let p of this.listeAttente) 
+        {
+          if (p.numeroLicence==this.numeroRepoSol)  
+          {
+            //Update
+          }
+        }
       }
       else {alert('Choissisez un responsable sol')}
     }
@@ -84,11 +93,15 @@ export class ComposerAvionComponent implements OnInit {
   attributionRespoVol() {
     if (this.choixVol)
     {
-      if (this.indexRepoVol<0)  
+      if (this.numeroRepoVol>0)  
       {
-        alert(JSON.stringify(this.volsDisponibles[this.indexRepoVol].respoSol))
-        this.volsDisponibles[this.indexRepoVol].respoSol=this.listeAttente[this.indexRepoVol];
-        alert(JSON.stringify(this.volsDisponibles[this.indexRepoVol].respoSol))
+        for (let p of this.listeAttente) 
+        {
+          if (p.numeroLicence==this.numeroRepoVol)  
+          {
+            //Update
+          }
+        }
       }
       else {alert('Choissisez un responsable vol')}
     }
