@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChange } from '@angular/core';
 import { Avion } from '../avion';
 import { Parachutiste } from '../parachutiste';
 import { Saut } from '../saut';
+import { Vol } from '../vol';
 
 @Component({
   selector: 'composer-vol,[composer-vol]',
@@ -14,14 +15,19 @@ export class ComposerVolComponent implements OnInit {
   avionsDisponibles : Array<Avion> = [];
   listeAttente : Array<Parachutiste> = [];
   listeAttenteGroupe : Array<Array<Parachutiste>> = [];
-  listeParaConfirmés : Array<Parachutiste> = [];
-  listeSautDemandés : Array<Saut> = [];
+  listeParaConfirmes : Array<Parachutiste> = [];
+  listeSautDemandes : Array<Saut> = [];
   ligne=0;
   choix = false;
 
-  constructor() { }
+  constructor(
+    //private sautSvc : SautService
+    //private avionSVC : AvionService
+    ) { }
 
   ngOnInit(): void {
+
+    //ici load des liste via les futurs services
     console.log("init")
     this.loadListeAvionsDispo()
     this.loadListesPara()
@@ -37,8 +43,19 @@ export class ComposerVolComponent implements OnInit {
   }
 
   loadListesPara(){
-    this.listeAttente.push(new Parachutiste(2000,"Dupont","Jean","",new Date('2020-10-05')))
-    this.listeSautDemandés.push(new Saut(0,2500,true))
+    let saut = new Saut(0,2500,true)
+    saut.parachutiste.push(new Parachutiste(2000,"Dupont","Jean",new Date('2020-10-05')))
+    saut.parachutiste.push(new Parachutiste(3000,"Dupont","aignan",new Date('2020-10-05')))
+    saut.vol = new Vol(1,"waiting")
+    let saut2 = new Saut(1,4000,false)
+    saut2.parachutiste.push(new Parachutiste(4000,"Capone","al",new Date('2020-10-05')))
+    saut2.parachutiste.push(new Parachutiste(5000,"D'arc","jeanne",new Date('2020-10-05')))
+    saut2.parachutiste.push(new Parachutiste(6000,"Au","Secour",new Date('2020-10-05')))
+    saut2.parachutiste.push(new Parachutiste(7000,"Matue","Omar",new Date('2020-10-05')))
+    saut2.vol = new Vol(2,"waiting")
+    this.listeSautDemandes.push(saut)
+    this.listeSautDemandes.push(saut2)
+
   }
 
   affichageAvion(id) {

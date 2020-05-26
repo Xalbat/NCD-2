@@ -36,10 +36,16 @@
                     <td>Altitude</td>
                     <td>Tandem</td>
                     <td>Vol</td>
+                    <td>nb sauteur</td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let s of listeSautDemandes">
+                    <td>{{s.idSaut}}</td>
+                    <td>{{s.altitude}}</td>
+                    <td>{{s.tandem}}</td>
+                    <td>{{s.vol.id}}</td>
+                    <td>{{s.parachutiste.length}}</td>
                 </tr>
             </tbody>
         </table>
