@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
  
 import { AppComponent } from './app.component';
@@ -16,6 +15,9 @@ import { ComposerAvionComponent } from './composer-avion/composer-avion.componen
 
 const routes: Routes = [
   { path: 'avionnage', component: AvionnageComponent },
+  { path: 'inscription', component: InscriptionComponent },
+  { path: 'composer-vol', component: ComposerVolComponent },
+  { path: 'composer-avion', component: ComposerAvionComponent },
   { path: '', redirectTo: 'avionnage', pathMatch: 'full' },
   { path: '**', component: AvionnageComponent }
 ];
@@ -24,15 +26,15 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     InscriptionComponent,
-    ComposerAvionComponent
-    AvionnageComponent
+    ComposerAvionComponent,
+    AvionnageComponent,
     ComposerVolComponent
   ],
   imports: [
     BrowserModule,FormsModule,
     RouterModule.forRoot(routes),
-    FontAwesomeModule
-    HttpClientModule,
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
