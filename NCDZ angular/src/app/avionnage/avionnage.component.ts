@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SautService } from '../saut.service';
 import { Saut } from '../saut';
 import { ParachutisteService } from '../parachutiste.service';
+import { Parachutiste } from '../parachutiste';
 
 @Component({
   selector: 'app-avionnage',
@@ -10,6 +11,7 @@ import { ParachutisteService } from '../parachutiste.service';
 })
 export class AvionnageComponent implements OnInit {
   public saut: Saut = new Saut();
+  public parachutiste: Parachutiste = new Parachutiste();
 
   constructor( public srvSaut: SautService, public srvParachutiste: ParachutisteService) { }
 
@@ -21,7 +23,8 @@ export class AvionnageComponent implements OnInit {
 
   public ajouterSaut() 
   {
-    this.srvSaut.createMatch(this.saut);
+    this.saut.parachutiste = this.parachutiste;
+    this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
   }
 }
