@@ -34,7 +34,7 @@ public class Avion {
 	@JsonView(Views.Avion.class)
 	private int capacite;
 	
-	@Column(name = "rotation_ max", nullable = false)
+	@Column(name = "rotation_max", nullable = false)
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
 	
