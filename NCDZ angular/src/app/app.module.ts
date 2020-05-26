@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ComposerVolComponent } from './composer-vol/composer-vol.component';
+import { ComposerAvionComponent } from './composer-avion/composer-avion.component';
 
 
 
@@ -12,7 +13,8 @@ import { ComposerVolComponent } from './composer-vol/composer-vol.component';
   declarations: [
     AppComponent,
     InscriptionComponent,
-    ComposerVolComponent
+    ComposerVolComponent,
+    ComposerAvionComponent
   ],
   imports: [
     FormsModule,BrowserModule

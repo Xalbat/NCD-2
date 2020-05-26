@@ -41,7 +41,7 @@ export class ComposerVolComponent implements OnInit {
     this.listeSautDemandés.push(new Saut(0,2500,true))
   }
 
-  affichage(id) {
+  affichageAvion(id) {
     this.choix=(!this.choix);
     this.choix ? this.ligne=id : this.ligne=0;
   }

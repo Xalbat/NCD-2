@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <ng-container *ngFor="let a of avionsDisponibles, let i=index">
-                    <tr *ngIf="!choix || ligne==a.id" (click)="affichage(a.id)" class="choixAvions">
+                    <tr *ngIf="!choix || ligne==a.id" (click)="affichageAvion(a.id)" class="choixTableau">
                         <td>{{a.id}}</td>
                         <td>{{a.altitude}}m</td>
                         <td>{{a.capacite}}</td>
@@ -33,12 +33,9 @@
             <thead>
                 <tr>
                     <td>Id</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>Altitude</td>
+                    <td>Tandem</td>
+                    <td>Vol</td>
                 </tr>
             </thead>
             <tbody>
