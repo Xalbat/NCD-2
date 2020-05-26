@@ -11,9 +11,12 @@ Coucou Avions
                     <th>Id</th>
                     <th>Altitude max</th>
                     <th>Capacité max</th>
+                    <th>Etat</th>
+                    <th>Modèle</th>
                     <th>Rotation(s)</th>
                     <th>Temps de montée</th>
                     <th>Situation de l'avion</th>
+                    <th>Vol prévu</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,9 +25,12 @@ Coucou Avions
                         <td>{{a.id}}</td>
                         <td>{{a.altitude}}m</td>
                         <td>{{a.capacite}}</td>
+                        <td>{{a.etatAvion}}</td>
+                        <td>{{a.model}}</td>
                         <td>{{a.rotation}}/{{a.rotationMax}}</td>
                         <td>{{a.tempsMontee}}min</td>
-                        <td>//En attente</td>
+                        <td>{{a.situation}}</td>
+                        <td><ng-container *ngIf="a.vol!==null">{{a.vol.id}}</ng-container></td>
                     </tr>
                 </ng-container>
             </tbody>
@@ -42,6 +48,7 @@ Coucou Avions
                     <th>Situation Vol</th>
                     <th>Responsable Sol</th>
                     <th>Responsable Vol</th>
+                    <th>Sauts</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -60,6 +67,7 @@ Coucou Avions
                                 {{v.respoVol.nom}} {{v.respoVol.prenom}}
                             </ng-container>
                         </td>
+                        <td></td>
                         <td>date</td>
                     </tr>
                 </ng-container>
@@ -73,7 +81,7 @@ Coucou Avions
     <div class="form-group row">
         <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Sol : </label>
         <div class="col-sm-10">
-            <select style="align-items: center;" [(ngModel)]="indexRepoSol">
+            <select style="align-items: center;" [(ngModel)]="numeroRepoSol">
                 <option *ngFor="let p of instructeur()" [ngValue]="p.numeroLicence">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
             </select>
         </div>
@@ -83,11 +91,11 @@ Coucou Avions
     <div class="form-group row">
         <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Vol : </label>
         <div class="col-sm-10">
-            <select style="align-items: center;" [(ngModel)]="indexRepoSol">
+            <select style="align-items: center;" [(ngModel)]="numeroRepoVol">
                 <option *ngFor="let p of instructeur()" [ngValue]="p.numeroLicence">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
             </select>
         </div>
-        <button class="btn btn-primary" (click)="attributionRespoSol()">Attribuer le Respo</button>
+        <button class="btn btn-primary" (click)="attributionRespoVol()">Attribuer le Respo</button>
     </div>
 </div>
 

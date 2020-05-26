@@ -1,5 +1,5 @@
 export enum SituationAvion {
-    PROPRIETAIRE,
-    PRET,
-    LOCATION
+    PROPRIETAIRE = "Au centre",
+    PRET = "Prété",
+    LOCATION = "Loué"
 }

@@ -1,4 +1,4 @@
 export enum EtatAvion {
-    DISPONIBLE,
-    INDISPONIBLE
+    DISPONIBLE = "Disponible",
+    INDISPONIBLE = "Indisponible"
 }
