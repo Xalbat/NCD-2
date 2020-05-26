@@ -19,4 +19,9 @@ export class AvionService {
     this.http.get<Array<Avion>>(this.apiUrl)
     .subscribe(avions => this.avions = avions);
   }
+
+  public createMatch(saut) {
+    this.http.post<Saut>(this.apiUrl, saut)
+    .subscribe();
+  }
 }

@@ -20,4 +20,8 @@ export class SautService {
     .subscribe(sauts => this.sauts = sauts);
   }
 
+  public createMatch(saut) {
+    this.http.post<Saut>(this.apiUrl, saut)
+    .subscribe();
+  }
 }
