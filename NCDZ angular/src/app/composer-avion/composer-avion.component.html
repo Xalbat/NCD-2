@@ -102,8 +102,11 @@
                     <td>{{s.altitude}}</td>
                     <td><p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p></td>
                     <td>{{s.vol?.idVol}}</td>
-                    <td><button class="btn btn-outline-primary" (click)="ajouterSaut(s)">Ajouter saut</button></td>
-                    <td><button class="btn btn-outline-danger" (click)="supprimerSaut(s)">Supprimer saut</button></td>
+                    <td>
+                        <button *ngIf="s.vol==null" class="btn btn-primary" (click)="ajouterSaut(s)">Ajouter le saut à ce vol</button>
+                        <button *ngIf="s.vol!=null && s.vol?.idVol!=vol.idVol" class="btn btn-warning" (click)="ajouterSaut(s)">Déplacer le saut à ce vol</button>
+                        <button *ngIf="s.vol?.idVol==vol.idVol" class="btn btn-danger" (click)="supprimerSaut(s)">Supprimer le saut de ce vol</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

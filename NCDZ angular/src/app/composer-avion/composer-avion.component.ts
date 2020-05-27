@@ -73,7 +73,8 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   supprimerSaut(saut) {
-    
+    saut.vol=null;
+    this.srvSaut.updateSaut(saut);
   }
 
   retirerSaut(s){
