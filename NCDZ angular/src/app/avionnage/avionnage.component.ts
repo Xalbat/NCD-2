@@ -22,6 +22,7 @@ export class AvionnageComponent implements OnInit {
   public isGroup: Boolean = false;
   public isTandem: Boolean = false;
   public sauts: Array<Saut>;
+  public instructeur: Parachutiste = new Parachutiste();
 
   public avion : Avion = null;
   public vol: Vol=null;
@@ -40,7 +41,8 @@ export class AvionnageComponent implements OnInit {
     this.saut.tandem = false;
     this.srvSaut.loadCurrentSauts(); 
     this.srvParachutiste.reload();
-    this.listesVols();
+    this.srvVol.getVol();
+    console.log(this.srvSaut.sauts)
   }
 
 
@@ -92,14 +94,13 @@ affichageVol(id) {
   public changeIsGroup(boolean) 
   {
     this.isGroup = boolean;
-    if (this.isGroup)
-    {
+    this.isTandem = false;
     this.saut.tandem = false;
-    }
   }
 
   public changeIsTandem(boolean) 
   {
+    this.isGroup = false;
     this.isTandem = boolean;
     this.saut.tandem = boolean;
   }
