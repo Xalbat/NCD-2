@@ -18,7 +18,7 @@ export class ComposerAvionComponent implements OnInit {
   public avion : Avion = null;
   public vol: Vol=null;
   avions : Array<Avion> = [];
-  volsDisponibles : Array<Vol> = [];
+  vols : Array<Vol> = [];
   choixAvion = false;
   choixVol = false;
   indexAvion=0;
@@ -38,7 +38,7 @@ export class ComposerAvionComponent implements OnInit {
 
   listeAvions() {this.srvAvion.getAvions();setTimeout(() => this.avions=this.srvAvion.avions,500)}
 
-  listesVols() {this.srvVol.getVol()}
+  listesVols() {this.srvVol.getVol();setTimeout(() => this.vols=this.srvVol.vols,500)}
 
   listesPara() {this.srvParachutiste.reload()}
 
@@ -51,11 +51,14 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   affichageVol(id) {
-    this.choixVol=(!this.choixVol);
-    this.choixVol 
-        ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
-        : this.vol = null;
-    console.log(this.srvAvion.avions)
+    if (this.choixVol && this.vols.find(v => v.idVol == id).idVol==this.vol?.idVol) {
+      this.choixVol=false;
+      this.vol=null;
+    }
+    else {
+      this.choixVol=true;
+      this.vol = this.srvVol.vols.find(v => v.idVol == id);
+    }
   }
 
     
@@ -78,20 +81,43 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   attributionRespoSol() {
-    if (this.vol==null || this.respoSol==null) {alert('Choisissez un vol et un respo Sol')} 
+    if (this.vol==null || this.respoSol==null) {alert('Choisissez un vol et un respo Sol')}
     else {
-      this.vol.respoSol=this.respoSol;
-      this.srvVol.updateVol(this.vol);
-      this.listesVols();
+      let test= false;
+      for (let v of this.vols)
+      {
+        if (this.respoSol.numeroLicence==v.respoVol?.numeroLicence) {test=true}
+      }
+      if (test) {alert('Ce respo Sol est déjà respoVol')}
+      else
+      {
+        this.vol.respoSol=this.respoSol;
+        for (let i=0; i<this.vols.length; i++)
+        {
+          if (this.vols[i].idVol==this.vol.idVol) {this.vol[i]=this.vol;break}
+        }
+        this.srvVol.updateVol(this.vol);
+      }
     }
   }
 
   attributionRespoVol() {
     if (this.vol==null || this.respoVol==null) {alert('Choisissez un vol et un respo Vol')} 
     else {
-      this.vol.respoVol=this.respoVol;
-      this.srvVol.updateVol(this.vol);
-      this.listesVols();
+      let test=false;
+      for (let v of this.vols)
+      {
+        if (this.respoVol.numeroLicence==v.respoVol?.numeroLicence || this.respoVol.numeroLicence==v.respoSol?.numeroLicence) {test=true}
+      }
+      if (test) {alert('Ce respo Vol est déjà respo')}
+      else {
+        this.vol.respoVol=this.respoVol;
+        for (let i=0; i<this.vols.length; i++)
+        {
+          if (this.vols[i].idVol==this.vol.idVol) {this.vol[i]=this.vol;break}
+        }
+        this.srvVol.updateVol(this.vol);
+      }
     }
   }
 
