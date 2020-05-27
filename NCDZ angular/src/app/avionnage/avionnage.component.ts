@@ -30,7 +30,7 @@ export class AvionnageComponent implements OnInit {
 
   public ajouterSautGroup() 
   {
-    this.saut.listeParachutiste = this.parachutistes;
+    this.saut.listParachutiste = this.parachutistes;
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
     this.parachutiste = new Parachutiste();
@@ -40,7 +40,7 @@ export class AvionnageComponent implements OnInit {
   public ajouterSautSolo() 
   {
     this.parachutistes.push(this.parachutiste)
-    this.saut.listeParachutiste = this.parachutistes;
+    this.saut.listParachutiste = this.parachutistes;
     console.log(this.saut)
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
