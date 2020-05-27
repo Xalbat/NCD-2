@@ -61,6 +61,9 @@ export class ComposerAvionComponent implements OnInit {
     }
   }
 
+  retirerSaut(s){
+    this.vol.sauts.splice(s,1)
+  }
     
   attributionVolAvion() {
     if (this.avion==null) {alert('Choissiez un avion !')}
@@ -72,6 +75,7 @@ export class ComposerAvionComponent implements OnInit {
       {
         if (this.avions[i].idAvion==this.avion.idAvion) {this.avions[i]=this.avion;break}
       }
+      
       this.srvAvion.updateAvion(this.avion);
       this.choixAvion=false;
       this.avion=null;
@@ -94,7 +98,7 @@ export class ComposerAvionComponent implements OnInit {
         this.vol.respoSol=this.respoSol;
         for (let i=0; i<this.vols.length; i++)
         {
-          if (this.vols[i].idVol==this.vol.idVol) {this.vol[i]=this.vol;break}
+          if (this.vols[i].idVol==this.vol.idVol) {this.vols[i]=this.vol;break}
         }
         this.srvVol.updateVol(this.vol);
       }
@@ -114,7 +118,7 @@ export class ComposerAvionComponent implements OnInit {
         this.vol.respoVol=this.respoVol;
         for (let i=0; i<this.vols.length; i++)
         {
-          if (this.vols[i].idVol==this.vol.idVol) {this.vol[i]=this.vol;break}
+          if (this.vols[i].idVol==this.vol.idVol) {this.vols[i]=this.vol;break}
         }
         this.srvVol.updateVol(this.vol);
       }

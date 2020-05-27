@@ -11,67 +11,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let s of sautsBonneAlitutde()">
+                <tr *ngFor="let s of sautsBonneAltitude()">
                     <td>{{s.idSaut}}</td>
                     <td>{{s.altitude}}</td>
                     <td>
-                        <div class="list-group w-50">
-                            <div class="list-group-item py-2">Nombre : {{s.parachutiste.length}}</div>
-                            <div class="list-group-item py-1" *ngFor="let p of s.parachutiste">{{p.nom}} {{p.prenom}} : {{p.niveau}}</div>
+                        <div class="list-group w-100">
+                            <div class="list-group-item py-2">Nombre : {{s.listParachutiste.length}}</div>
+                            <div class="list-group-item py-1" *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} : {{p.niveau}}</div>
                         </div>
                     </td>
-                    <td><button class="btn btn-success" (click)="vol.sauts.push(s)">Ajouter ce saut</button></td>
+                    <td><button class="btn btn-success" (click)="ajouterSaut(s)">Ajouter ce saut</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="row">
-        <label><strong>Résumé de ce vol</strong></label>
-        <table class="table table-striped" *ngIf="vol.sauts.length > 0">
-            <thead>
-                <tr>
-                    <td>id</td>
-                    <td>responsable vol</td>
-                    <td>responsable sol</td>
-                    <td>nb parachutistes</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="choixTableau">
-                    <td>{{vol.idVol}}</td>
-
-                    <td>
-                        <form>
-                            <select [(ngModel)]="responsableVol" [ngModelOptions]="{standalone: true}">
-                                <option *ngFor="let p of listeResponsablesVol()" [ngValue]="p">{{p.nom}}</option>
-                            </select>
-                        
-                        </form>
-                    </td>
-                    <td>
-                        <select [(ngModel)]="responsableSol">
-                            <option *ngFor="let p of listeResponsablesSol()">{{p.nom}}</option>
-                        </select>
-                    </td>
-                    <td>{{vol.getNbParachutistes()}}</td>
-                    <td>
-                        <div class="list-group">
-                            <div class="list-group-item  py-1" *ngFor="let s of vol.sauts">
-                                <div class="row">
-                                    <div class="col">
-                                        {{s.parachutiste.length}}
-                                    </div>
-                                    <div class="col-6 bg-warning"  (click)="retirerSaut(s)">
-                                        <span>retirer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
 </div>

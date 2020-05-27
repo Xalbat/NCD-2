@@ -8,6 +8,7 @@ export class Vol {
     ;
     public parachutiste : Parachutiste;
 
+    
     constructor(
         public idVol?: number,
         public pilote?: Pilote,
