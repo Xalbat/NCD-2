@@ -63,7 +63,7 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   retirerSaut(s){
-    this.vol.sauts.splice(s,1)
+    this.vol.listSaut.splice(s,1)
   }
     
   attributionVolAvion() {

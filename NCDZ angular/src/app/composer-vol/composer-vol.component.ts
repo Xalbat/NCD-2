@@ -44,22 +44,22 @@ export class ComposerVolComponent implements OnInit {
   }
 
   ajouterSaut(s){
-    if(this.compoAvion.vol.sauts){
-      this.compoAvion.vol.sauts.push(s)
+    if(this.compoAvion.vol.listSaut){
+      this.compoAvion.vol.listSaut.push(s)
     }else{
-      this.compoAvion.vol.sauts = []
+      this.compoAvion.vol.listSaut = []
       this.ajouterSaut(s)
     }
   }
 
   sautsBonneAltitude(){
     let idsSelectionnes = []
-    this.compoAvion.vol.sauts ?  idsSelectionnes = this.compoAvion.vol.sauts.map(s => s.idSaut) : idsSelectionnes = []
+    this.compoAvion.vol.listSaut ?  idsSelectionnes = this.compoAvion.vol.listSaut.map(s => s.idSaut) : idsSelectionnes = []
     return this.listeSautDemandes.filter(s =>{return s.altitude <= this.compoAvion.avion.altitudeMax}).filter(s=> !idsSelectionnes.includes(s.idSaut))
   }
 
   retirerSaut(s){
-    this.vol.sauts.splice(this.vol.sauts.indexOf(s),1)
+    this.vol.listSaut.splice(this.vol.listSaut.indexOf(s),1)
   }
 
   loadListeSauts(){
