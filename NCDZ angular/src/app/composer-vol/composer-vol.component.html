@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid" *ngIf="listeSautDemandes.length > 0">
     <div class="row w-100">
         <label><strong>Sauts disponibles</strong></label>
@@ -18,11 +16,11 @@
                     <td>{{s.altitude}}</td>
                     <td>
                         <div class="list-group w-50">
-                            <div class="list-group-item py-2">Nombre : {{s.parachutiste.length}}</div>
-                            <div class="list-group-item py-1" *ngFor="let p of s.parachutiste">{{p.nom}} {{p.prenom}} : {{p.niveau}}</div>
+                            <div class="list-group-item py-2">Nombre : {{s.listParachutiste.length}}</div>
+                            <div class="list-group-item py-1" *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} : {{p.niveau}}</div>
                         </div>
                     </td>
-                    <td><button class="btn btn-success" (click)="vol.sauts.push(s)">Ajouter ce saut</button></td>
+                    <td><button class="btn btn-success" (click)="ajouterSaut(s)">Ajouter ce saut</button></td>
                 </tr>
             </tbody>
         </table>

@@ -6,6 +6,7 @@ import { Vol } from '../classes/vol';
 import { AvionService } from '../services/avion.service';
 import { VolService } from '../services/vol.service';
 import { ParachutisteService } from '../services/parachutiste.service';
+import { Niveau } from '../enums/niveau.enum';
 
 @Component({
   selector: 'composer-avion',
@@ -122,7 +123,7 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   instructeur() {
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau == 'INSTRUCTEUR')
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau == Niveau.INSTRUCTEUR)
   }
 
   
