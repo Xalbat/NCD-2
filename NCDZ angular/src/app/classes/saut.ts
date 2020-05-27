@@ -5,7 +5,6 @@ import { Vol } from './vol';
 export class Saut {
     constructor(public idSaut?: number,
          public altitude?: number,
-          public tandem?: boolean, 
-          public parachutiste?: Array<Parachutiste>, 
-          public listeParachutiste?: Array<Parachutiste> ){}
+          public tandem?: boolean,
+          public listParachutiste?: Array<Parachutiste> ){}
 }
