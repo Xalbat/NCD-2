@@ -8,7 +8,6 @@ export class Parachutiste {
                 public prenom?: string, 
                 public niveau?: string, 
                 public dateVisite?: Date,
-                parachute?: Parachute) {
-        this.parachute = parachute;
+                public id_parachute?: number) {
     }
 }

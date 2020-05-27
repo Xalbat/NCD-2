@@ -20,6 +20,7 @@ export class InscriptionComponent implements OnInit {
     //this.srvParachutiste.reload();
   }
   public ajouterParachutiste() {
+    console.log(this.formParachutiste)
     this.srvParachutiste.add(this.formParachutiste);
     this.formParachutiste = new Parachutiste();
   }
