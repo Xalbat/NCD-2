@@ -8,6 +8,7 @@ import { Vol } from '../classes/vol';
 import { SituationVol } from '../enums/situation-vol.enum';
 import { SituationAvion } from '../enums/situation-avion.enum';
 import { EtatAvion } from '../enums/etat-avion.enum';
+import { SautService } from '../services/saut.service';
 
 @Component({
   selector: 'composer-vol,[composer-vol]',
@@ -30,16 +31,15 @@ export class ComposerVolComponent implements OnInit {
   responsableSol : Parachutiste = new Parachutiste()
 
   constructor(
-    //private sautSvc : SautService
-    //private avionSVC : AvionService
-    private compoAvion : ComposerAvionComponent
+    public sautSvc : SautService,
+    public compoAvion : ComposerAvionComponent
     ) { }
 
   ngOnInit(): void {
-
-    //ici load des liste via les futurs services
-    this.loadListeAvionsDispo()
-    this.loadListesPara()
+    console.log("init")
+    console.log(this.compoAvion.avion)
+    console.log(this.compoAvion.vol)
+    this.loadListeSauts()
   }
 
   sautsBonneAlitutde(){
@@ -49,14 +49,11 @@ export class ComposerVolComponent implements OnInit {
 
   retirerSaut(s){
     this.vol.sauts.splice(this.vol.sauts.indexOf(s),1)
-    console.log(this.vol.sauts)
   }
 
-  loadListeAvionsDispo(){
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
-
-    console.log(this.listeDesVolsEnAttente)
+  loadListeSauts(){
+    this.sautSvc.loadCurrentSauts()
+    setTimeout(()=>this.listeSautDemandes = this.sautSvc.sauts,250)
   }
 
   listeResponsablesVol(){
@@ -68,23 +65,7 @@ export class ComposerVolComponent implements OnInit {
   }
 
   loadListesPara(){
-    this.listeAttente.push(new Parachutiste(1,"Instructeur 1","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(3,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(4,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(5,"Instructeur 2","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(6,"Instructeur 3","Jean","Instructeur", new Date('2020-10-05')))
-    let saut = new Saut(0,2500,true)
-    saut.parachutiste.push(new Parachutiste(2000,"Dupont","Jean","Debutant",new Date('2020-10-05')))
-    saut.parachutiste.push(new Parachutiste(3000,"Dupont","aignan","Instructeur",new Date('2020-10-05')))
-    let saut2 = new Saut(1,4000,false)
-    saut2.parachutiste.push(new Parachutiste(4000,"Capone","al","Confirme",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(5000,"D'arc","jeanne","Confirme",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(6000,"Au","Secour","Cameraman",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(7000,"Matue","Omar","Confirme",new Date('2020-10-05')))
 
-    this.listeSautDemandes.push(saut)
-    this.listeSautDemandes.push(saut2)
 
   }
 
