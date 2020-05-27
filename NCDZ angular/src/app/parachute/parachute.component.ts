@@ -38,7 +38,7 @@ export class ParachuteComponent implements OnInit {
      this.isEditing = true;
    }
  
-   public supprimerParachute(Parachute) {
-     this.srvParachute.delete(Parachute);
+   public supprimerParachute(parachute) {
+     this.srvParachute.delete(parachute);
    }
 }
