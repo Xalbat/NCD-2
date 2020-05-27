@@ -38,7 +38,7 @@ export class ComposerVolComponent implements OnInit {
   ngOnInit(): void {
 
     //ici load des liste via les futurs services
-    this.loadListeAvionsDispo()
+    //this.loadListeAvionsDispo()
     this.loadListesPara()
   }
 
@@ -52,7 +52,7 @@ export class ComposerVolComponent implements OnInit {
     console.log(this.vol.sauts)
   }
 
-  loadListeAvionsDispo(){
+  /*loadListeAvionsDispo(){
     this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
     this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
 
@@ -63,7 +63,7 @@ export class ComposerVolComponent implements OnInit {
     this.listeDesVolsEnAttente.push(vol2)
 
     console.log(this.listeDesVolsEnAttente)
-  }
+  }*/
 
   listeResponsablesVol(){
     return this.listeAttente.filter(para => para.numeroLicence != this.responsableSol.numeroLicence && para.niveau != "Debutant")

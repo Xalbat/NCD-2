@@ -52,7 +52,7 @@
 
 <h3>Liste des parachutistes inscrits</h3>
 
-<!--
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -65,7 +65,7 @@
 	</thead>
 
 	<tbody>
-		<tr *ngFor="let parachutiste of parachutistes" >
+		<tr *ngFor="let parachutiste of srvParachutiste.parachutistes">
 			<td>{{ parachutiste.nom }}</td>
 			<td>{{ parachutiste.prenom }}</td>
 			<td>{{ parachutiste.numeroLicence }}</td>
@@ -74,11 +74,10 @@
 
 			<td>
 				<button (click)="editerParachutiste(parachutiste)" class="btn btn-warning m-1">Editer</button>
-				<button  (click)="supprimerParachutiste(parachutiste)" class="btn btn-warning m-1">Supprimer</button>
+				<button  (click)="supprimerParachutiste(parachutiste)" class="btn btn-danger m-1">Supprimer</button>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
 
--->

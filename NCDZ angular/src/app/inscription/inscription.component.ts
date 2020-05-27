@@ -14,7 +14,7 @@ export class InscriptionComponent implements OnInit {
   isEditing = false;
   faParachuteBox = faParachuteBox
 
-  constructor(private srvParachutiste: ParachutisteService) { }
+  constructor(public srvParachutiste: ParachutisteService) { }
 
   ngOnInit(){
     //this.srvParachutiste.reload();
