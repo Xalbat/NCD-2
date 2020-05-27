@@ -17,7 +17,7 @@ export class InscriptionComponent implements OnInit {
   constructor(public srvParachutiste: ParachutisteService) { }
 
   ngOnInit(){
-    //this.srvParachutiste.reload();
+    this.srvParachutiste.reload();
   }
   public ajouterParachutiste() {
     console.log(this.formParachutiste)
