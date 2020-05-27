@@ -20,17 +20,17 @@ Coucou Avions
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let a of srvAvion.avions">
+                <ng-container *ngFor="let a of avions">
                     <tr *ngIf="!choixAvion || a.idAvion==avion.idAvion" (click)="affichageAvion(a.idAvion)" class="choixTableau">
                         <td>{{a.idAvion}}</td>
                         <td>{{a.altitudeMax}}m</td>
                         <td>{{a.capacite}}</td>
-                        <td>{{a.etatAvion}}</td>
+                        <td>{{a.etat}}</td>
                         <td>{{a.model}}</td>
                         <td>{{a.rotation}}/{{a.rotationMax}}</td>
                         <td>{{a.tempsMontee}}min</td>
                         <td>{{a.situation}}</td>
-                        <td><ng-container *ngIf="a.vol">{{a.vol.id}}</ng-container></td>
+                        <td><ng-container *ngIf="a.vol!==null">{{a.vol.idVol}}</ng-container></td>
                     </tr>
                 </ng-container>
             </tbody>
@@ -73,7 +73,7 @@ Coucou Avions
                 </ng-container>
             </tbody>
         </table>
-        <!-- <composer-vol *ngIf="vol && choixVol" class="w-100"></composer-vol> -->
+        <composer-vol *ngIf="vol && choixVol" class="w-100"></composer-vol>
     </div>
 </div>
 

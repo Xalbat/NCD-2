@@ -17,7 +17,7 @@ export class ComposerAvionComponent implements OnInit {
 
   public avion : Avion = null;
   public vol: Vol=null;
-  avionsDisponibles : Array<Avion> = [];
+  avions : Array<Avion> = [];
   volsDisponibles : Array<Vol> = [];
   choixAvion = false;
   choixVol = false;
@@ -31,16 +31,16 @@ export class ComposerAvionComponent implements OnInit {
   constructor(public srvAvion:AvionService, public srvVol: VolService, public srvParachutiste: ParachutisteService) { }
 
   ngOnInit(): void {
-    this.ListeAvions()
-    this.ListesVols()
-    this.ListesPara()
+    this.listeAvions();
+    this.listesVols();
+    this.listesPara();
   }
 
-  ListeAvions() {this.srvAvion.getAvions()}
+  listeAvions() {this.srvAvion.getAvions();setTimeout(() => this.avions=this.srvAvion.avions,500)}
 
-  ListesVols() {this.srvVol.getVol()}
+  listesVols() {this.srvVol.getVol()}
 
-  ListesPara() {this.srvParachutiste.reload()}
+  listesPara() {this.srvParachutiste.reload()}
 
   affichageAvion(id) {
     this.choixAvion=(!this.choixAvion);
@@ -65,8 +65,15 @@ export class ComposerAvionComponent implements OnInit {
     else 
     {
       this.avion.vol=this.vol;
+      for (let i=0; i<this.avions.length; i++)
+      {
+        if (this.avions[i].idAvion==this.avion.idAvion) {this.avions[i]=this.avion;break}
+      }
       this.srvAvion.updateAvion(this.avion);
-      this.ListeAvions();
+      this.choixAvion=false;
+      this.avion=null;
+      this.choixVol=false;
+      this.vol=null;
     }
   }
 
@@ -75,7 +82,7 @@ export class ComposerAvionComponent implements OnInit {
     else {
       this.vol.respoSol=this.respoSol;
       this.srvVol.updateVol(this.vol);
-      this.ListesVols();
+      this.listesVols();
     }
   }
 
@@ -84,7 +91,7 @@ export class ComposerAvionComponent implements OnInit {
     else {
       this.vol.respoVol=this.respoVol;
       this.srvVol.updateVol(this.vol);
-      this.ListesVols();
+      this.listesVols();
     }
   }
 
