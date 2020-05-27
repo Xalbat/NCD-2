@@ -4,6 +4,11 @@ import { SautService } from '../services/saut.service';
 import { ParachutisteService } from '../services/parachutiste.service';
 import { Saut } from '../classes/saut';
 import { Parachutiste } from '../classes/parachutiste';
+import { Avion } from '../classes/avion';
+import { Vol } from '../classes/vol';
+import { AvionService } from '../services/avion.service';
+import { VolService } from '../services/vol.service';
+
 
 @Component({
   selector: 'app-avionnage',
@@ -18,7 +23,16 @@ export class AvionnageComponent implements OnInit {
   public isTandem: Boolean = false;
   public sauts: Array<Saut>;
 
-  constructor( public srvSaut: SautService, public srvParachutiste: ParachutisteService) { }
+  public avion : Avion = null;
+  public vol: Vol=null;
+  avions : Array<Avion> = [];
+  volsDisponibles : Array<Vol> = [];
+  choixVol = false;
+  indexVol=0;
+
+
+  constructor( public srvSaut: SautService, public srvParachutiste: ParachutisteService,
+              public srvAvion:AvionService, public srvVol: VolService) { }
 
   ngOnInit(): void 
   {
@@ -26,7 +40,19 @@ export class AvionnageComponent implements OnInit {
     this.saut.tandem = false;
     this.srvSaut.loadCurrentSauts(); 
     this.srvParachutiste.reload();
+    this.listesVols();
   }
+
+
+listesVols() {this.srvVol.getVol()}
+
+affichageVol(id) {
+  this.choixVol=(!this.choixVol);
+  this.choixVol 
+      ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
+      : this.vol = null;
+  console.log(this.srvAvion.avions)
+}
 
   public ajouterSautGroup() 
   {
@@ -78,3 +104,4 @@ export class AvionnageComponent implements OnInit {
     this.saut.tandem = boolean;
   }
 }
+

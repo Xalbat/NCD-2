@@ -97,3 +97,60 @@
             <button (click)="ajouterSautSolo()" class="btn btn-success m-1">Lets jump now</button>
         </div>
 </div>
+
+<div class="card m-3">
+	<div class="card-header">
+        <h5 class="card-title">Espace Avionnage</h5>
+            <div class="container">
+                <div class="row">
+                    <label><strong>Liste des parachutistes enregistrés pour les sauts</strong></label>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Prenom</th>
+                                    <th>Altitude</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <tr *ngFor="let saut of sauts">
+                                <div *ngIf="!saut.vol">
+                                    <div *ngFor="let parachutiste of saut.parachutistes">
+                                        <td>{{ parachutiste.prenom }}</td>
+                                        <td>{{ parachutiste.altitude }}</td>
+                                    </div>
+                                </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <label><strong>Listes des vols en attente</strong></label>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Situation Vol</th>
+                                <th>Sauts</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let v of srvVol.vols">
+                                <tr *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
+                                    <td>{{v.idVol}}</td>
+                                    <td>{{v.situationVol}}</td>
+                                    <td></td>
+                                    <td>date</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+    </div>
+</div>
