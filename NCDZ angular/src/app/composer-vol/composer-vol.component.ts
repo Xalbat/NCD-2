@@ -56,11 +56,11 @@ export class ComposerVolComponent implements OnInit {
     this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
     this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
 
-    let vol1 = new Vol(1,SituationVol.EN_ATTENTE.toString())
-    let vol2 = new Vol(2,SituationVol.EN_ATTENTE.toString())
+    // let vol1 = new Vol(1,SituationVol.EN_ATTENTE.toString())
+    // let vol2 = new Vol(2,SituationVol.EN_ATTENTE.toString())
 
-    this.listeDesVolsEnAttente.push(vol1)
-    this.listeDesVolsEnAttente.push(vol2)
+    // this.listeDesVolsEnAttente.push(vol1)
+    // this.listeDesVolsEnAttente.push(vol2)
 
     console.log(this.listeDesVolsEnAttente)
   }
