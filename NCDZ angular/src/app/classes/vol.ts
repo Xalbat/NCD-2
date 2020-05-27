@@ -16,8 +16,8 @@ export class Vol {
         public situationVol?: SituationVol, 
         public respoVol?:Parachutiste, 
         public respoSol?:Parachutiste, 
-        public dateVisite?: Date,
-        public listSaut : Array<Saut> = [])
+        public date?: Date,
+        public listSaut?: Array<Saut>)
         {}
 
     getNbParachutistes(){
