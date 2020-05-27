@@ -32,8 +32,7 @@ export class InscriptionComponent implements OnInit {
   }
 
   public annulerModification() {
-    this.isEditing = false;
-    this.formParachutiste = new Parachutiste();
+   this.modifierParachutiste();
   }
 
   public editerParachutiste(parachutiste) {

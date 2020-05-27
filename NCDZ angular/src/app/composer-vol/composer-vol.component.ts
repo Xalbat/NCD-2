@@ -66,11 +66,11 @@ export class ComposerVolComponent implements OnInit {
   }*/
 
   listeResponsablesVol(){
-    return this.listeAttente.filter(para => para.numeroLicence != this.responsableSol.numeroLicence && para.niveau != "Debutant")
+    return this.listeAttente.filter(para => para.numeroLicence != this.responsableSol.numeroLicence && para.niveau != "ELEVE")
   }
 
   listeResponsablesSol(){
-    return this.listeAttente.filter(para => para.numeroLicence != this.responsableVol.numeroLicence && para.niveau != "Debutant")
+    return this.listeAttente.filter(para => para.numeroLicence != this.responsableVol.numeroLicence && para.niveau != "ELEVE")
   }
 
   loadListesPara(){
@@ -81,13 +81,13 @@ export class ComposerVolComponent implements OnInit {
     this.listeAttente.push(new Parachutiste(5,"Instructeur 2","Jean","Instructeur", new Date('2020-10-05')))
     this.listeAttente.push(new Parachutiste(6,"Instructeur 3","Jean","Instructeur", new Date('2020-10-05')))
     let saut = new Saut(0,2500,true)
-    saut.parachutiste.push(new Parachutiste(2000,"Dupont","Jean","Debutant",new Date('2020-10-05')))
-    saut.parachutiste.push(new Parachutiste(3000,"Dupont","aignan","Instructeur",new Date('2020-10-05')))
+    //saut.parachutiste.push(new Parachutiste(2000,"Dupont","Jean","Debutant",new Date('2020-10-05')))
+    //saut.parachutiste.push(new Parachutiste(3000,"Dupont","aignan","Instructeur",new Date('2020-10-05')))
     let saut2 = new Saut(1,4000,false)
-    saut2.parachutiste.push(new Parachutiste(4000,"Capone","al","Confirme",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(5000,"D'arc","jeanne","Confirme",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(6000,"Au","Secour","Cameraman",new Date('2020-10-05')))
-    saut2.parachutiste.push(new Parachutiste(7000,"Matue","Omar","Confirme",new Date('2020-10-05')))
+    //saut2.parachutiste.push(new Parachutiste(4000,"Capone","al","Confirme",new Date('2020-10-05')))
+   // saut2.parachutiste.push(new Parachutiste(5000,"D'arc","jeanne","Confirme",new Date('2020-10-05')))
+    //saut2.parachutiste.push(new Parachutiste(6000,"Au","Secour","Cameraman",new Date('2020-10-05')))
+    //saut2.parachutiste.push(new Parachutiste(7000,"Matue","Omar","Confirme",new Date('2020-10-05')))
 
     this.listeSautDemandes.push(saut)
     this.listeSautDemandes.push(saut2)
