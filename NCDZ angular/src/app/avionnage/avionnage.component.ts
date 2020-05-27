@@ -24,6 +24,8 @@ export class AvionnageComponent implements OnInit {
   public isTandem: Boolean = false;
   public sauts: Array<Saut>;
   public instructeur: Parachutiste = new Parachutiste();
+  public videaste: Parachutiste = new Parachutiste();
+  public listeParachutistes: Array<Parachutiste> = new Array<Parachutiste>();
 
   public avion : Avion = null;
   public vol: Vol=null;
@@ -42,6 +44,7 @@ export class AvionnageComponent implements OnInit {
     this.saut.tandem = false;
     this.srvSaut.loadCurrentSauts(); 
     this.srvParachutiste.reload();
+    this.listeParachutistes = this.srvParachutiste.parachutistes;
     this.srvVol.getVol();
     console.log(this.srvSaut.sauts)
   }
@@ -64,6 +67,7 @@ affichageVol(id) {
     this.saut = new Saut();
     this.parachutiste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
+    this.listeParachutistes = new Array<Parachutiste>();
   }
 
   public ajouterSautSolo() 
@@ -79,13 +83,17 @@ affichageVol(id) {
 
   public ajouterSautTandem() 
   {
+    this.saut.tandem = true;
     this.parachutistes.push(this.parachutiste);
     this.parachutistes.push(this.instructeur);
+    if (this.videaste.numeroLicence >= 0) {this.parachutistes.push(this.videaste);}
     this.saut.listParachutiste = this.parachutistes;
     console.log(this.saut)
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
     this.parachutiste = new Parachutiste();
+    this.instructeur = new Parachutiste();
+    this.videaste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
   }
 
@@ -93,6 +101,9 @@ affichageVol(id) {
   {
     if (this.parachutiste.numeroLicence>=0)
     {
+      const index = this.listeParachutistes.indexOf(this.parachutiste);
+      this.listeParachutistes.splice(index, 1);
+
       this.parachutistes.push(this.parachutiste)
       this.parachutiste = new Parachutiste();
     } 
@@ -100,6 +111,7 @@ affichageVol(id) {
 
   public supprimerParachutiste(parachutiste) 
   {
+    this.listeParachutistes.push(parachutiste);
     const index = this.parachutistes.indexOf(parachutiste);
     this.parachutistes.splice(index, 1);
   }
@@ -109,19 +121,39 @@ affichageVol(id) {
     this.isGroup = boolean;
     this.isTandem = false;
     this.saut.tandem = false;
+    this.parachutiste = new Parachutiste();
+    this.instructeur = new Parachutiste();
+    this.parachutistes = new Array<Parachutiste>();
+    this.listeParachutistes = this.srvParachutiste.parachutistes;
   }
 
   public changeIsTandem(boolean) 
   {
     this.isGroup = false;
     this.isTandem = boolean;
-    this.saut.tandem = boolean;
+    this.parachutiste = new Parachutiste();
+    this.instructeur = new Parachutiste();
+    this.parachutistes = new Array<Parachutiste>();
+    this.listeParachutistes = this.srvParachutiste.parachutistes;
   }
 
   public instructeurs()
   {
-    console.log(this.srvParachutiste.parachutistes);
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
+    //console.log(this.listeParachutistes);
+    //return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
+    return this.listeParachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
+  }
+
+  public videastes()
+  {
+    return this.listeParachutistes.filter(p => p.niveau.toString() == 'VIDEASTE' || p.niveau.toString() == 'INSTRUCTEUR')
+  }
+
+  public confirmes()
+  {
+    console.log(this.listeParachutistes);
+    //console.log(this.listeParachutistes.filter(p => p.niveau.toString() != 'ELEVE'));
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != 'ELEVE')
   }
 
   public parachutistesAttente(saut)
