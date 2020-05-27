@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Compte } from '../classes/compte';
-import { AppConfigService } from '../app-config.service';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
