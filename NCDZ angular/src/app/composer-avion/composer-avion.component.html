@@ -3,7 +3,7 @@ Coucou Avions
 <br>
 
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="!(!choixAvion && choixVol)">
         <label><strong>Listes des avions disponibles</strong></label>
         <table class="table table-striped">
             <thead>
@@ -20,22 +20,21 @@ Coucou Avions
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let a of avionsDisponibles, let i=index">
-                    <tr *ngIf="!choixAvion || indexAvion==a.id" (click)="affichageAvion(a.id)" class="choixTableau">
-                        <td>{{a.id}}</td>
-                        <td>{{a.altitude}}m</td>
+                <ng-container *ngFor="let a of avions">
+                    <tr *ngIf="!choixAvion || a.idAvion==avion.idAvion" (click)="affichageAvion(a.idAvion)" class="choixTableau">
+                        <td>{{a.idAvion}}</td>
+                        <td>{{a.altitudeMax}}m</td>
                         <td>{{a.capacite}}</td>
-                        <td>{{a.etatAvion}}</td>
+                        <td>{{a.etat}}</td>
                         <td>{{a.model}}</td>
                         <td>{{a.rotation}}/{{a.rotationMax}}</td>
                         <td>{{a.tempsMontee}}min</td>
                         <td>{{a.situation}}</td>
-                        <td><ng-container *ngIf="a.vol!==null">{{a.vol.id}}</ng-container></td>
+                        <td><ng-container *ngIf="a.vol!==null">{{a.vol.idVol}}</ng-container></td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
-        <composer-vol *ngIf="avion" class="w-100"></composer-vol>
     </div>
 
     <br>
@@ -54,9 +53,9 @@ Coucou Avions
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let v of volsDisponibles, let i=index">
-                    <tr *ngIf="!choixVol || indexVol==v.id " (click)="affichageVol(v.id)" class="choixTableau">
-                        <td>{{v.id}}</td>
+                <ng-container *ngFor="let v of srvVol.vols">
+                    <tr *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
+                        <td>{{v.idVol}}</td>
                         <td>{{v.situationVol}}</td>
                         <td>
                             <ng-container *ngIf="v.respoSol!=null">
@@ -74,6 +73,7 @@ Coucou Avions
                 </ng-container>
             </tbody>
         </table>
+        <composer-vol *ngIf="vol && choixVol" class="w-100"></composer-vol>
     </div>
 </div>
 
@@ -82,8 +82,8 @@ Coucou Avions
     <div class="form-group row">
         <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Sol : </label>
         <div class="col-sm-10">
-            <select style="align-items: center;" [(ngModel)]="numeroRepoSol">
-                <option *ngFor="let p of instructeur()" [ngValue]="p.numeroLicence">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
+            <select style="align-items: center;" [(ngModel)]="respoSol">
+                <option *ngFor="let p of instructeur()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
             </select>
         </div>
         <button class="btn btn-primary" (click)="attributionRespoSol()">Attribuer le Respo</button>
@@ -92,8 +92,8 @@ Coucou Avions
     <div class="form-group row">
         <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Vol : </label>
         <div class="col-sm-10">
-            <select style="align-items: center;" [(ngModel)]="numeroRepoVol">
-                <option *ngFor="let p of instructeur()" [ngValue]="p.numeroLicence">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
+            <select style="align-items: center;" [(ngModel)]="respoVol">
+                <option *ngFor="let p of instructeur()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
             </select>
         </div>
         <button class="btn btn-primary" (click)="attributionRespoVol()">Attribuer le Respo</button>
@@ -102,5 +102,7 @@ Coucou Avions
 
 <div class="container" *ngIf="choixAvion && choixVol">
     <br>
-    <button class="btn btn-primary" (click)="attributionRespoSol()">Attribuer le vol à l'avion</button>
+    <button class="btn btn-primary" (click)="attributionVolAvion()">Attribuer le vol à l'avion</button>
 </div>
+
+<br><br><br>

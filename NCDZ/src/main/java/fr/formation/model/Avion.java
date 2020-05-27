@@ -4,60 +4,117 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.formation.enumerator.EtatAvion;
+import fr.formation.enumerator.SituationAvion;
 import fr.formation.projection.Views;
 
 @Entity
 @Table(name = "avion")
 public class Avion {
-	
+
 	//Attributs
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "AVION_ID")
+	@Column(name = "id")
 	@JsonView(Views.Common.class)
 	private int idAvion;
-	@Column(name = "AVION_HAUTEUR", nullable = false)
+	
+	@Column(name = "matricule", length = 10)
+	@JsonView(Views.Common.class)
+	@NotNull
+	private String matricule;
+
+	@Column(name = "modele", length = 25)
+	@JsonView(Views.Common.class)
+	private String modele;
+
+	@Column(name = "altitude")
+	@Positive
 	@JsonView(Views.Avion.class)
-	private int hauteurMax;
-	@Column(name = "AVION_CAPACITE", nullable = false)
+	private int altitudeMax;
+
+	@Column(name = "capacite", nullable = false)
+	@Positive
+	@NotNull
 	@JsonView(Views.Avion.class)
 	private int capacite;
-	@Column(name = "AVION_ROTATIONMAX", nullable = false)
+
+	@Column(name = "rotation_max", nullable = false)
+	@Positive
+	@NotNull
 	@JsonView(Views.Avion.class)
 	private int rotationMax;
-	@Column(name = "AVION_ROTATION", nullable = false)
+
+	@Column(name = "rotation")
 	@JsonView(Views.Avion.class)
+	@Positive
 	private int rotation;
-	@Column(name = "AVION_TEMPSMONTEE", nullable = false)
+
+	@Column(name = "temps_montee")
 	@JsonView(Views.Avion.class)
+	@Positive
 	private int tempsMontee;
-	@Column(name = "AVION_ETAT")
-	@JsonView(Views.Avion.class)
-	private boolean etat;
-	@Column(name = "CARD_SITUATION", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+
+	@Column(name = "etat", length = 15)
+	@Enumerated(EnumType.STRING)
+	@JsonView({Views.Avion.class, Views.Pilote.class})
+	private EtatAvion etat;
+
+	@Column(name = "situation", length = 15)
+	@Enumerated(EnumType.STRING)
 	@JsonView(Views.Avion.class)
 	private SituationAvion situation;
-	
+
+	//Relation n°3 inverse
+	@OneToOne
+	@JoinColumn
+	@JsonView(Views.Avion.class)
+	private Vol vol;
+
+	//Constructeurs
+	public Avion() {}
+
+	public Avion(int idAvion, String matricule, int altitudeMax, int capacite, int rotationMax, int rotation, int tempsMontee,
+			EtatAvion etat, SituationAvion situation) {
+		super();
+		this.idAvion = idAvion;
+		this.matricule = matricule;
+		this.altitudeMax = altitudeMax;
+		this.capacite = capacite;
+		this.rotationMax = rotationMax;
+		this.rotation = rotation;
+		this.tempsMontee = tempsMontee;
+		this.etat = etat;
+		this.situation = situation;
+	}
+
 	//Getters Setters
 	public int getIdAvion() {
 		return idAvion;
 	}
-	public void setIdAvion(int id) {
-		this.idAvion = id;
+	public void setIdAvion(int idAvion) {
+		this.idAvion = idAvion;
 	}
-	public int getHauteurMax() {
-		return hauteurMax;
+	public String getMatricule() {
+		return matricule;
 	}
-	public void setHauteurMax(int hauteurMax) {
-		this.hauteurMax = hauteurMax;
+	public void setMatricul(String matricule) {
+		this.matricule = matricule;
+	}
+
+	public int getAltitudeMax() {
+		return altitudeMax;
+	}
+	public void setAltitudeMax(int altitudeMax) {
+		this.altitudeMax = altitudeMax;
 	}
 	public int getCapacite() {
 		return capacite;
@@ -77,14 +134,33 @@ public class Avion {
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
 	}
-	
+	public int getTempsMontee() {
+		return tempsMontee;
+	}
+	public void setTempsMontee(int tempsMontee) {
+		this.tempsMontee = tempsMontee;
+	}
+	public EtatAvion getEtat() {
+		return etat;
+	}
+	public void setEtat(EtatAvion etat) {
+		this.etat = etat;
+	}
+	public SituationAvion getSituation() {
+		return situation;
+	}
+	public void setSituation(SituationAvion situation) {
+		this.situation = situation;
+	}
+
+
 	//toString
 	@Override
 	public String toString() {
-		return "Avion [id=" + idAvion + ", hauteurMax=" + hauteurMax + ", capacite=" + capacite + ", rotationMax="
+		return "Avion [id=" + idAvion + ", altitudeMax=" + altitudeMax + ", capacite=" + capacite + ", rotationMax="
 				+ rotationMax + ", rotation=" + rotation + "]";
 	}
-	
-	
-	
+
+
+
 }

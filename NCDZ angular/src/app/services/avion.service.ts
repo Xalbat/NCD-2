@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Avion } from './avion';
+import { AppConfigService } from './app-config.service';
+import { Avion } from '../classes/avion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AvionService {
+  private apiUrl: string="";
+  public avions: Array<Avion>;
 
-  apiUrl="http://localhost:8181/api/avion"
-  avions: Array<Avion>;
-
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private appConfig: AppConfigService, 
+              private http: HttpClient, 
+              private router: Router) { 
+    this.apiUrl = `${ this.appConfig.url}/avion`
   }
 
   public getAvions() {
@@ -25,7 +28,7 @@ export class AvionService {
   }
 
   public updateAvion(avion: Avion) {
-    this.http.put<Avion>(this.apiUrl + "/" + avion.id, avion)
+    this.http.put<Avion>(this.apiUrl + "/" + avion.idAvion, avion)
     .subscribe();
   }
 

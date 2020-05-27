@@ -1,4 +1,3 @@
-import { Vol } from './vol';
 import { Parachutiste } from './parachutiste';
 
 export class Saut {
