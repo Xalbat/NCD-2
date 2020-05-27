@@ -1,6 +1,11 @@
 import { Parachutiste } from './parachutiste';
+import { VolService } from '../services/vol.service';
+import { Vol } from './vol';
 
 export class Saut {
-    public parachutiste: Array<Parachutiste> = [];
-    constructor(public idSaut?: number, public altitude?: number, public tandem?: boolean ){}
+    constructor(public idSaut?: number,
+         public altitude?: number,
+          public tandem?: boolean, 
+          public parachutiste?: Array<Parachutiste>, 
+          public listeParachutiste?: Array<Parachutiste> ){}
 }

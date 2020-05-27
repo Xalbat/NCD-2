@@ -22,6 +22,6 @@ export class SautService {
 
   public createSaut(saut) {
     this.http.post<Saut>(this.apiUrl, saut)
-    .subscribe();
+    .subscribe(respSaut => this.sauts.push(respSaut));
   }
 }

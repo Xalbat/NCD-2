@@ -10,37 +10,67 @@
                 <label class="btn btn-outline-warning">
                     <input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value ="Group"> Group
                 </label>
-            </div>
-                
+            </div>               
     </div>
     
 	<div class="card-body"> 
        
         <h3 *ngIf = isGroup >Ajouter un parachutiste</h3>
-            <div class="form-group row">
+            <div *ngIf = "!isGroup" class="form-group row">
                 <label for="nom" class="col-sm-2 col-form-label">Ton nom: </label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="prenom" [(ngModel)]="parachutiste.nom">
-                        <option *ngFor="let parachutiste of srvParachutiste.parachutistes" [(ngValue)] = parachutiste.nom>
-                            {{ parachutiste.prenom }} {{ parachutiste.nom }} n° de licence :{{ parachutiste.numeroLicence }}
+                    <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
+                        <option *ngFor="let p of srvParachutiste.parachutistes" [ngValue] = "p">
+                            [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}
                         </option>
                     </select>
                 </div>  
             </div>
 
+            <div *ngIf = "isGroup" class="form-group row">
+                <label for="nom" class="col-sm-2 col-form-label">Ton nom: </label>
+                <div class="col-sm-8">
+                    <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
+                        <option *ngFor="let p of srvParachutiste.parachutistes" [ngValue] = "p">
+                            [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}
+                        </option>
+                    </select>
+                </div>  
+                <div class="col-sm-2">
+                    <button (click)="ajouterParachutiste()" class="btn btn-primary m-1">Ajouter</button>
+                </div>
+            </div>
+
+            <table *ngIf = "isGroup" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Licence</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <tr *ngFor="let parachutiste of parachutistes">
+                        <td>{{ parachutiste.numeroLicence }}</td>
+                        <td>{{ parachutiste.nom }}</td>
+                        <td>{{ parachutiste.prenom }}</td>
+                        <td><button (click)="supprimerParachutiste(parachutiste)" class="btn btn-danger m-1">Supprimer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+    
+
             <div *ngIf = !isGroup class="form-group row">
                 <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
                     <label class="btn btn-outline-primary">
-                        <input (click)="changeIsTandem(false)" [(ngModel)]="saut.tandem" name="tandem" type="radio" value ="false"> Seul
+                        <input (click)="changeIsTandem(false)" [(ngModel)]="saut.tandem" name="tandem" type="radio" (ngValue) ="saut.tandem"> Seul
                     </label>
                     <label class="btn btn-outline-primary">
-                        <input (click)="changeIsTandem(true)" [(ngModel)]="saut.tandem" name="tandem" type="radio" value ="true"> Tandem
+                        <input (click)="changeIsTandem(true)" [(ngModel)]="saut.tandem" name="tandem" type="radio" (ngValue) ="saut.tandem"> Tandem
                     </label>
                 </div>
-            </div>
-        
-            <div *ngIf = isGroup>
-                <button (click)="ajouterParachutiste()" class="btn btn-primary m-1">Ajouter</button>
             </div>
         
     
@@ -58,9 +88,12 @@
             </div>
         </div>
 
-
     </div>
-        <div class="card-footer text-right">
-            <button (click)="ajouterSaut()" class="btn btn-success m-1">Lets jump now</button>
+        <div *ngIf = "isGroup" class="card-footer text-right">
+            <button (click)="ajouterSautGroup()" class="btn btn-success m-1">Lets jump now</button>
+        </div>
+
+        <div *ngIf = "!isGroup" class="card-footer text-right">
+            <button (click)="ajouterSautSolo()" class="btn btn-success m-1">Lets jump now</button>
         </div>
 </div>

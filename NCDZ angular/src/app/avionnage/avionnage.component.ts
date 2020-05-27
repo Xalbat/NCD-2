@@ -13,7 +13,7 @@ import { Parachutiste } from '../classes/parachutiste';
 export class AvionnageComponent implements OnInit {
   public saut: Saut = new Saut();
   public parachutiste: Parachutiste = new Parachutiste();
-  public parachutistes: Array<Parachutiste> = null;
+  public parachutistes: Array<Parachutiste> = new Array<Parachutiste>();
   public isGroup: Boolean = false;
   public isTandem: Boolean = false;
   public sauts: Array<Saut>;
@@ -28,29 +28,53 @@ export class AvionnageComponent implements OnInit {
     this.srvParachutiste.reload();
   }
 
-  public ajouterSaut() 
+  public ajouterSautGroup() 
   {
-    this.saut.parachutiste = this.parachutistes;
+    this.saut.listeParachutiste = this.parachutistes;
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
+    this.parachutiste = new Parachutiste();
+    this.parachutistes = new Array<Parachutiste>();
+  }
+
+  public ajouterSautSolo() 
+  {
+    this.parachutistes.push(this.parachutiste)
+    this.saut.listeParachutiste = this.parachutistes;
+    console.log(this.saut)
+    this.srvSaut.createSaut(this.saut);
+    this.saut = new Saut();
+    this.parachutiste = new Parachutiste();
+    this.parachutistes = new Array<Parachutiste>();
   }
 
   public ajouterParachutiste() 
   {
-    this.saut.parachutiste.push(this.parachutiste)
-    this.parachutiste = new Parachutiste();
+    if (this.parachutiste.numeroLicence>=0)
+    {
+      this.parachutistes.push(this.parachutiste)
+      this.parachutiste = new Parachutiste();
+    } 
   }
 
-  public supprimerParachutiste() 
-  { }
+  public supprimerParachutiste(parachutiste) 
+  {
+    const index = this.parachutistes.indexOf(parachutiste);
+    this.parachutistes.splice(index, 1);
+  }
 
   public changeIsGroup(boolean) 
   {
     this.isGroup = boolean;
+    if (this.isGroup)
+    {
+    this.saut.tandem = false;
+    }
   }
 
   public changeIsTandem(boolean) 
   {
     this.isTandem = boolean;
+    this.saut.tandem = boolean;
   }
 }

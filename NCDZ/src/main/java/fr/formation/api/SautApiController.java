@@ -72,6 +72,7 @@ public class SautApiController {
 		if (result.hasErrors()) {
 			throw new Exception();
 		}
+		System.out.println("Saut marche");
 		return daoSaut.save(saut);
 	}
 
