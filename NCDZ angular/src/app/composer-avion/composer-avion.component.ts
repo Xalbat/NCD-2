@@ -55,6 +55,7 @@ export class ComposerAvionComponent implements OnInit {
     this.choixVol 
         ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
         : this.vol = null;
+    console.log(this.srvAvion.avions)
   }
 
     

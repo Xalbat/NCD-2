@@ -30,12 +30,11 @@ Coucou Avions
                         <td>{{a.rotation}}/{{a.rotationMax}}</td>
                         <td>{{a.tempsMontee}}min</td>
                         <td>{{a.situation}}</td>
-                        <td><ng-container *ngIf="a.vol!==null">{{a.vol.id}}</ng-container></td>
+                        <td><ng-container *ngIf="a.vol">{{a.vol.id}}</ng-container></td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
-        <composer-vol *ngIf="avion && !choixVol" class="w-100"></composer-vol>
     </div>
 
     <br>
@@ -74,6 +73,7 @@ Coucou Avions
                 </ng-container>
             </tbody>
         </table>
+        <!-- <composer-vol *ngIf="vol && choixVol" class="w-100"></composer-vol> -->
     </div>
 </div>
 
