@@ -37,7 +37,7 @@ export class ParachutisteService {
   }
 
   public delete(parachutiste) {
-    this.http.delete<Boolean>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`)
+    this.http.delete<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`)
         .subscribe(resp => {
           if (resp) {
             let index = this.parachutistes.indexOf(parachutiste);
