@@ -6,5 +6,6 @@ export class Saut {
     constructor(public idSaut?: number,
          public altitude?: number,
           public tandem?: boolean,
+          public vol?: Vol,
           public listParachutiste?: Array<Parachutiste> ){}
 }

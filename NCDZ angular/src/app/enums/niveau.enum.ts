@@ -1,6 +1,6 @@
 export enum Niveau {
-    ELEVE,
-    CONFIRME,
-    VIDEASTE,
-    INSTRUCTEUR
+    ELEVE = 'ELEVE',
+    CONFIRME = 'CONFIRME',
+    VIDEASTE = 'VIDEASTE',
+    INSTRUCTEUR = 'INSTRUCTEUR'
 }

@@ -1,3 +1,4 @@
+<!-- MODULE AVIONNAGE -->
 <div class="card m-3">
 	<div class="card-header">
         <h5 class="card-title">Demande de saut</h5>
@@ -66,8 +67,8 @@
             <div *ngIf = "isTandem" class="form-group row">
                 <label for="nom" class="col-sm-2 col-form-label">Instructeur: </label>
                 <div class="col-sm-10">
-                    <select class="form-control" id = "parachutiste" [(ngModel)]="instructeur">
-                        <option *ngFor="let p of srvParachutiste.parachutistes" [ngValue] = "p">
+                    <select class="form-control" id = "instructeur" [(ngModel)]="instructeur">
+                        <option *ngFor="let p of instructeurs()" [ngValue] = "p">
                             [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}
                         </option>
                     </select>
@@ -96,8 +97,13 @@
         <div *ngIf = "!isGroup" class="card-footer text-right">
             <button (click)="ajouterSautSolo()" class="btn btn-success m-1">Lets jump now</button>
         </div>
+
+        <div *ngIf = "isTandem" class="card-footer text-right">
+            <button (click)="ajouterSautTandem()" class="btn btn-success m-1">Lets jump now</button>
+        </div>
 </div>
 
+<!-- ESPACE AVIONNAGE -->
 <div class="card m-3">
 	<div class="card-header">
         <h5 class="card-title">Espace Avionnage</h5>
@@ -112,12 +118,12 @@
                             </thead>
                         
                             <tbody>
-                                <div *ngFor="let saut of srvSaut.sauts">
-                                        <tr *ngFor = "let parachutiste of saut.listParachutiste">
+                                <ng-container *ngFor="let saut of srvSaut.sauts">
+                                        <tr *ngFor = "let parachutiste of parachutistesAttente(saut)">
                                             <td>{{ parachutiste.prenom }}</td>
                                             <td>{{ saut.altitude }}</td>
                                         </tr> 
-                                </div>
+                                </ng-container>
                             </tbody>
                         </table>
                 

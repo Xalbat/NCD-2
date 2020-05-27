@@ -8,6 +8,7 @@ import { Avion } from '../classes/avion';
 import { Vol } from '../classes/vol';
 import { AvionService } from '../services/avion.service';
 import { VolService } from '../services/vol.service';
+import { Niveau } from '../enums/niveau.enum';
 
 
 @Component({
@@ -76,6 +77,18 @@ affichageVol(id) {
     this.parachutistes = new Array<Parachutiste>();
   }
 
+  public ajouterSautTandem() 
+  {
+    this.parachutistes.push(this.parachutiste);
+    this.parachutistes.push(this.instructeur);
+    this.saut.listParachutiste = this.parachutistes;
+    console.log(this.saut)
+    this.srvSaut.createSaut(this.saut);
+    this.saut = new Saut();
+    this.parachutiste = new Parachutiste();
+    this.parachutistes = new Array<Parachutiste>();
+  }
+
   public ajouterParachutiste() 
   {
     if (this.parachutiste.numeroLicence>=0)
@@ -104,5 +117,21 @@ affichageVol(id) {
     this.isTandem = boolean;
     this.saut.tandem = boolean;
   }
+
+  public instructeurs()
+  {
+    console.log(this.srvParachutiste.parachutistes);
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
+  }
+
+  public parachutistesAttente(saut)
+  {
+    if (saut.vol == null)
+    {
+      return saut.listParachutiste;
+    }
+  }
+
 }
+
 
