@@ -14,10 +14,10 @@ export class Vol {
         public pilote?: Pilote,
         public avion?: Avion,
         public situationVol?: SituationVol, 
-        public respoVol?:Parachutiste, 
-        public respoSol?:Parachutiste, 
-        public dateVisite?: Date,
-        public sauts : Array<Saut> = [])
+        public respoVol?: Parachutiste, 
+        public respoSol?: Parachutiste, 
+        public date?: Date,
+        public listSaut?: Array<Saut>)
         {}
 
    /* getNbParachutistes(){

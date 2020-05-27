@@ -1,14 +1,15 @@
 import { Parachute } from './parachute';
+import { Saut } from './saut';
 import { Niveau } from '../enums/niveau.enum';
 
 export class Parachutiste {
-    public parachute: Parachute;
 
     constructor(public numeroLicence?: number,
                 public nom?: string, 
                 public prenom?: string,  
-                public dateVisite?: Date,
-                public id_parachute?: number,
-                public niveau?: Niveau) {
+                public dateLicence?: Date,
+                public parachute?: Parachute,
+                public niveau?: Niveau,
+                public listSaut?: Array<Saut>) {
     }
 }

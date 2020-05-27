@@ -6,7 +6,7 @@ import { TypeSecurite } from '../enums/type-securite.enum';
 export class Parachute {
 
 
-    constructor(public id? : number, 
+    constructor(public idParachute? : number, 
                 public nomHarnais? : String, 
                 public nomVoilePrincipale? : String,
                 public tailleVoilePrincipale? : number,
@@ -15,7 +15,9 @@ export class Parachute {
                 public etatParachute?: EtatParachute,
                 public proprietaire?: Proprietaire,
                 public revision?: RevisionParachute,
-                public typeSecurite?: TypeSecurite) {
+                public typeSecurite?: TypeSecurite,
+                public secoursAuto? : number,
+                public secoursManuel? : number) {
         
     }
 

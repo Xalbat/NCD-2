@@ -3,9 +3,10 @@ import { VolService } from '../services/vol.service';
 import { Vol } from './vol';
 
 export class Saut {
-    constructor(public idSaut?: number,
-         public altitude?: number,
-          public tandem?: boolean,
-          public vol?: Vol,
-          public listParachutiste?: Array<Parachutiste> ){}
+    constructor(
+        public idSaut?: number,
+        public altitude?: number,
+        public tandem?: boolean,
+        public vol?: Vol,
+        public listParachutiste?: Array<Parachutiste> ){}
 }
