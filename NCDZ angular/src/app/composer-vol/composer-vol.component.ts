@@ -39,14 +39,23 @@ export class ComposerVolComponent implements OnInit {
   ngOnInit(): void {
     this.loadListeSauts()
     console.log("init")
+
+    this.loadListeSauts()
   }
 
-  sautsBonneAlitutde(){
-    if(!this.compoAvion.vol.sauts){
+  ajouterSaut(s){
+    if(this.compoAvion.vol.sauts){
+      this.compoAvion.vol.sauts.push(s)
+    }else{
       this.compoAvion.vol.sauts = []
+      this.ajouterSaut(s)
     }
-    let idsSelectionnes = this.compoAvion.vol.sauts.map(s => s.idSaut)
-    return this.listeSautDemandes.filter(s => s.altitude <= this.compoAvion.avion.altitudeMax).filter(s=> !idsSelectionnes.includes(s.idSaut))
+  }
+
+  sautsBonneAltitude(){
+    let idsSelectionnes = []
+    this.compoAvion.vol.sauts ?  idsSelectionnes = this.compoAvion.vol.sauts.map(s => s.idSaut) : idsSelectionnes = []
+    return this.listeSautDemandes.filter(s =>{return s.altitude <= this.compoAvion.avion.altitudeMax}).filter(s=> !idsSelectionnes.includes(s.idSaut))
   }
 
   retirerSaut(s){
@@ -64,15 +73,6 @@ export class ComposerVolComponent implements OnInit {
 
   listeResponsablesSol(){
     return this.listeAttente.filter(para => para.numeroLicence != this.responsableVol.numeroLicence && para.niveau != Niveau.ELEVE)
-  }
-
-  ajouterSaut(s){
-    if(this.compoAvion.vol.sauts){
-      this.compoAvion.vol.sauts.push(s)
-    }else{
-      this.compoAvion.vol.sauts = []
-      this.ajouterSaut(s)
-    }
   }
 
   affichageAvion(id) {

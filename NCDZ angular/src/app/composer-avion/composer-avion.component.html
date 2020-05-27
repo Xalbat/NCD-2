@@ -67,8 +67,16 @@
                             </ng-container>
                         </td>
                         <td>
+                            
                             <div class="list-group">
-                                <div class="list-group-item" *ngFor="let s of v.sauts">{{s.listParachutiste.length}} parachutistes</div>
+                                <div class="list-group-item py-1" *ngFor="let s of v.sauts">
+                                   <div class="row">
+                                       <div class="col-10">
+                                           {{s.listParachutiste.length}} parachutistes
+                                        </div>
+                                        <div class="col-2"><span (click)="retirerSaut(s)">[ x ]</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                         <td>date</td>
