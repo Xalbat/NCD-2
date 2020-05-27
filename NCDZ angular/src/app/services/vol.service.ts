@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vol } from '../classes/vol';
-import { AppConfigService } from '../app-config.service';
+import { AppConfigService } from './app-config.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 

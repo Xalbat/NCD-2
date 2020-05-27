@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AppConfigService } from '../app-config.service';
+import { AppConfigService } from './app-config.service';
 import { Avion } from '../classes/avion';
 
 @Injectable({
