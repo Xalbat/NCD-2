@@ -4,5 +4,5 @@ import { Vol } from './vol';
 
 export class Avion {
 
-    constructor(public id?: number, public altitude?: number, public capacite?: number, public etatAvion?: EtatAvion, public model?: string, public rotation?: number, public rotationMax?: number, public tempsMontee?: number, public situation?: SituationAvion, public vol?:Vol){}
+    constructor(public idAvion?: number, public altitudeMax?: number, public capacite?: number, public etatAvion?: EtatAvion, public matricule?: string, public model?: string, public rotation?: number, public rotationMax?: number, public tempsMontee?: number, public situation?: SituationAvion, public vol?:Vol){}
 }

@@ -44,7 +44,7 @@ export class ComposerVolComponent implements OnInit {
 
   sautsBonneAlitutde(){
     let idsSelectionnes = this.vol.sauts.map(s => s.idSaut)
-    return this.listeSautDemandes.filter(s => s.altitude <= this.compoAvion.avion.altitude).filter(s=> !idsSelectionnes.includes(s.idSaut))
+    return this.listeSautDemandes.filter(s => s.altitude <= this.compoAvion.avion.altitudeMax).filter(s=> !idsSelectionnes.includes(s.idSaut))
   }
 
   retirerSaut(s){
@@ -53,8 +53,8 @@ export class ComposerVolComponent implements OnInit {
   }
 
   loadListeAvionsDispo(){
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
+    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
+    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1","Plus Ultra",0,3,60,SituationAvion.PROPRIETAIRE,null));
 
     let vol1 = new Vol(1,SituationVol.EN_ATTENTE.toString())
     let vol2 = new Vol(2,SituationVol.EN_ATTENTE.toString())

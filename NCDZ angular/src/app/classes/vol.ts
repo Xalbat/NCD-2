@@ -8,7 +8,7 @@ export class Vol {
     public avion: Avion;
     public parachutiste : Parachutiste; 
     public sauts : Array<Saut> = []
-    constructor(public id?: number,public situationVol?: string, public respoVol?:Parachutiste, public respoSol?:Parachutiste, public dateVisite?: Date){}
+    constructor(public idVol?: number,public situationVol?: string, public respoVol?:Parachutiste, public respoSol?:Parachutiste, public dateVisite?: Date){}
 
     getNbParachutistes(){
         let nbPara = 0;

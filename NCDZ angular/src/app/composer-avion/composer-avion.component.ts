@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Avion } from '../classes/avion';
 import { Parachutiste } from '../classes/parachutiste';
 import { Vol } from '../classes/vol';
-import { EtatAvion } from '../enums/etat-avion.enum';
-import { SituationAvion } from '../enums/situation-avion.enum';
+import { AvionService } from '../services/avion.service';
+import { VolService } from '../services/vol.service';
+import { ParachutisteService } from '../services/parachutiste.service';
 
 @Component({
   selector: 'composer-avion',
@@ -15,102 +16,80 @@ export class ComposerAvionComponent implements OnInit {
 
 
   public avion : Avion = null;
+  public vol: Vol=null;
   avionsDisponibles : Array<Avion> = [];
   volsDisponibles : Array<Vol> = [];
-  indexAvion=0;
   choixAvion = false;
-  indexVol=0;
   choixVol = false;
+  indexAvion=0;
+  indexVol=0;
   listeAttente: Array<Parachutiste> = [];
   listeSautDemandés: Array<Parachutiste> = [];
-  numeroRepoSol=0;
-  numeroRepoVol=0;
+  respoSol: Parachutiste=null;
+  respoVol: Parachutiste=null;
 
-  constructor() { }
+  constructor(public srvAvion:AvionService, public srvVol: VolService, public srvParachutiste: ParachutisteService) { }
 
   ngOnInit(): void {
-    this.ListeAvionsDispo()
+    this.ListeAvions()
     this.ListesVols()
     this.ListesPara()
   }
 
-  ListeAvionsDispo(){
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
-    this.avionsDisponibles.push(new Avion(15,2400,16,EtatAvion.DISPONIBLE,"G-Force-1",0,3,60,SituationAvion.PROPRIETAIRE,null));
-  }
+  ListeAvions() {this.srvAvion.getAvions()}
 
-  ListesVols(){
-    this.volsDisponibles.push(new Vol(1, "En cours"))
-    this.volsDisponibles.push(new Vol(2, "En attente"))
-    this.volsDisponibles[0].respoVol = new Parachutiste(1,"Robert","Dupont");
-  }
+  ListesVols() {this.srvVol.getVol()}
 
-  ListesPara(){
-    this.listeAttente.push(new Parachutiste(1,"Instructeur 1","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(2,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(3,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(4,"Dupont","Jean","Débutant", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(5,"Instructeur 2","Jean","Instructeur", new Date('2020-10-05')))
-    this.listeAttente.push(new Parachutiste(6,"Instructeur 3","Jean","Instructeur", new Date('2020-10-05')))
-  }
+  ListesPara() {this.srvParachutiste.reload()}
 
   affichageAvion(id) {
-    
-
     this.choixAvion=(!this.choixAvion);
-    this.choixAvion ? this.indexAvion=id : this.indexAvion=0;
-    if(this.choixAvion){
-      this.avion = this.avionsDisponibles.find(a => a.id == id)
-    }else{
-      this.avion = null
-    }
+    this.choixAvion 
+        ? this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
+        : this.avion = null;
+
   }
 
   affichageVol(id) {
     this.choixVol=(!this.choixVol);
-    this.choixVol ? this.indexVol=id : this.indexVol=0;
+    this.choixVol 
+        ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
+        : this.vol = null;
   }
 
-
+    
+  attributionVolAvion() {
+    if (this.avion==null) {alert('Choissiez un avion !')}
+    else if (this.vol==null) {alert('Choissiez un vol !')}
+    else 
+    {
+      this.avion.vol=this.vol;
+      this.srvAvion.updateAvion(this.avion);
+      this.ListeAvions();
+    }
+  }
 
   attributionRespoSol() {
-    if (this.choixVol)
-    {
-      if (this.numeroRepoSol>0)  
-      {
-        for (let p of this.listeAttente) 
-        {
-          if (p.numeroLicence==this.numeroRepoSol)  
-          {
-            //Update
-          }
-        }
-      }
-      else {alert('Choissisez un responsable sol')}
+    if (this.vol==null || this.respoSol==null) {alert('Choisissez un vol et un respo Sol')} 
+    else {
+      this.vol.respoSol=this.respoSol;
+      this.srvVol.updateVol(this.vol);
+      this.ListesVols();
     }
-    else {alert('Choissisez un vol')}
   }
 
   attributionRespoVol() {
-    if (this.choixVol)
-    {
-      if (this.numeroRepoVol>0)  
-      {
-        for (let p of this.listeAttente) 
-        {
-          if (p.numeroLicence==this.numeroRepoVol)  
-          {
-            //Update
-          }
-        }
-      }
-      else {alert('Choissisez un responsable vol')}
+    if (this.vol==null || this.respoVol==null) {alert('Choisissez un vol et un respo Vol')} 
+    else {
+      this.vol.respoVol=this.respoVol;
+      this.srvVol.updateVol(this.vol);
+      this.ListesVols();
     }
-    else {alert('Choissisez un vol')}
   }
 
   instructeur() {
-    return this.listeAttente.filter(p => p.niveau == 'Instructeur')
-    }
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau == 'INSTRUCTEUR')
+  }
+
   
 }
