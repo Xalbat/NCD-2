@@ -8,11 +8,29 @@ import { AppConfigService } from './app-config.service';
   providedIn: 'root'
 })
 export class CompteService {
-  private apiUrl: string ="";
-  public comptes: Array<Compte> = null;
-  constructor(private appConfig: AppConfigService, private http: HttpClient, private router: Router) {}
+  private apiUrl: string;
+  public compte: Compte;
+
+  constructor(
+    private appConfig: AppConfigService, 
+    private http: HttpClient, 
+    private router: Router) {
+      this.apiUrl = `${ this.appConfig.url }/compte`;
+    }
 
 
+  public getCompteByUsername(compte: Compte) {
+    this.http.get<Compte>(this.apiUrl)
+    .subscribe(resp => this.compte = resp);
+    if (this.compte) {
+      return true;
+    }
+    return false;
+  }
+
+
+
+/*
   public reload() {
     this.http.get<Array<Compte>>(this.apiUrl)
         .subscribe(comptes => this.comptes = this.comptes);
@@ -28,5 +46,5 @@ export class CompteService {
         this.router.navigate([`/home`]);
       }
     })
-  }
+  }*/
 }
