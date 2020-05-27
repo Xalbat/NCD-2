@@ -30,14 +30,14 @@ export class AvionnageComponent implements OnInit {
 
   public ajouterSaut() 
   {
-    this.saut.parachutiste = this.parachutistes;
+    this.saut.listParachutiste = this.parachutistes;
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
   }
 
   public ajouterParachutiste() 
   {
-    this.saut.parachutiste.push(this.parachutiste)
+    this.saut.listParachutiste.push(this.parachutiste)
     this.parachutiste = new Parachutiste();
   }
 
