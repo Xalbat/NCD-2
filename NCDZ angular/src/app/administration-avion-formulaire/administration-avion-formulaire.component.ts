@@ -20,8 +20,9 @@ export class AdministrationAvionFormulaireComponent implements OnInit {
   }
 
   addAvion(){
+    console.log(this.avion)
     this.avionSvc.addAvion(this.avion);
-    this.avion = new Avion()
+    setTimeout(() =>this.avion = new Avion(),150)
   }
 
   etatsPossibles(){

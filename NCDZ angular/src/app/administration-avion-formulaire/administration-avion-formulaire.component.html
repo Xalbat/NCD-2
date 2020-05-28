@@ -1,23 +1,23 @@
 <td></td>
 <td>
     <label for="avionMatricule">Matricule</label>
-    <input type="text" class="form-control" id="avionMatricule" placeholder="X-XXXX">
+    <input type="text" class="form-control" id="avionMatricule" [(ngModel)] = "avion.matricule" placeholder="X-XXXX">
 </td>
 <td>
     <label for="avionModele">Modele</label>
-    <input type="text" class="form-control" id="avionModele" placeholder="Cessna 172">
+    <input type="text" class="form-control" id="avionModele" [(ngModel)] = "avion.modele" placeholder="Cessna 172">
 </td>
 <td>
     <label for="avionAltitude">Alt. max</label>
-    <input type="number" class="form-control" id="avionAltitude" value="4000">
+    <input type="number" class="form-control" id="avionAltitude" [(ngModel)] = "avion.altitudeMax" value="4000">
 </td>
 <td>
     <label for="avionCapa">Capacite max</label>
-    <input type="number" class="form-control" id="avionCapa" value="4">
+    <input type="number" class="form-control" id="avionCapa" [(ngModel)] = "avion.capacite" value="4">
 </td>
 <td>
     <label for="avionRotationsMax">Rotations Max</label>
-    <input type="number" class="form-control" id="avionRotationsMax" value="4">
+    <input type="number" class="form-control" id="avionRotationsMax" [(ngModel)] = "avion.rotationMax" value="4">
 </td>
 <td>
     <label for="avionRotationsMax">Etat</label>
