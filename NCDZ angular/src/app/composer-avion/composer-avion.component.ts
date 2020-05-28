@@ -22,6 +22,8 @@ export class ComposerAvionComponent implements OnInit {
   public sauts: Array<Saut> = []
   public avions : Array<Avion> = [];
   public vols : Array<Vol> = [];
+
+  passagerVol: number;
   
   choixAvion = false;
   choixVol = false;
@@ -53,6 +55,7 @@ export class ComposerAvionComponent implements OnInit {
 
   listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,200)}
 
+
   affichageAvion(id) {
     this.choixAvion=(!this.choixAvion);
     this.choixAvion 
@@ -65,20 +68,36 @@ export class ComposerAvionComponent implements OnInit {
     this.choixVol
         ? this.vol = this.srvVol.vols.find(v => v.idVol == id)
         : this.vol = null;
+    this.nombrePassager();
   }
   
   ajouterSaut(saut) {
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
+    this.nombrePassager();
+    alert(this.passagerVol)
   }
 
   supprimerSaut(saut) {
     saut.vol=null;
     this.srvSaut.updateSaut(saut);
+    this.nombrePassager();
+    alert(this.passagerVol)
   }
 
   retirerSaut(s){
     this.vol.listSaut.splice(s,1)
+  }
+
+  nombrePassager() {
+    this.passagerVol=0;
+    for (let s of this.sauts)
+    {
+      if (s.vol.idVol==this.vol.idVol)
+      {
+        this.passagerVol=this.passagerVol+s.listParachutiste.length;
+      }
+    }
   }
     
   attributionVolAvion() {

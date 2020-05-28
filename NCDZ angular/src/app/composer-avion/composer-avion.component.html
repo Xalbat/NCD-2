@@ -50,6 +50,7 @@
                     <th>Responsable Vol</th>
                     <th>Date</th>
                     <th>Listes des sauts</th>
+                    <th>Nombre de passager(s)</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,6 +74,7 @@
                                 <ng-container *ngIf="s.vol?.idVol==v.idVol">{{s.idSaut}} </ng-container>
                             </ng-container>
                         </td>
+                        <td>{{passagerVol}}</td>
                     </tr>
                 </ng-container>
             </tbody>
