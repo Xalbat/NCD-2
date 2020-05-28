@@ -12,7 +12,7 @@ import { SituationAvion } from '../enums/situation-avion.enum';
 })
 export class AdministrationAvionFormulaireComponent implements OnInit {
 
-  constructor(private avionSvc : AvionService) { }
+  constructor(private avionCompoParent : AdministrationAvionComponent,private avionSvc : AvionService) { }
 
   avion : Avion = new Avion()
 
@@ -22,7 +22,11 @@ export class AdministrationAvionFormulaireComponent implements OnInit {
   addAvion(){
     console.log(this.avion)
     this.avionSvc.addAvion(this.avion);
-    setTimeout(() =>this.avion = new Avion(),150)
+    
+    setTimeout(() =>{
+      this.avionCompoParent.reload();
+      this.avion = new Avion()
+    },150)
   }
 
   etatsPossibles(){

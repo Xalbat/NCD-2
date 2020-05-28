@@ -18,4 +18,9 @@ export class AdministrationAvionComponent implements OnInit {
     setTimeout(()=> this.avions = this.avionSvc.avions,150)
   }
 
+  public reload(){
+    this.avionSvc.getAvions()
+    setTimeout(()=> this.avions = this.avionSvc.avions,150)
+  }
+
 }
