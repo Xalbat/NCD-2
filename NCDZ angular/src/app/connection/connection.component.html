@@ -1,6 +1,7 @@
-<p>connection works!</p>
+
 <form>
-    <input type="texte" name="login" placeholder="Identifiant"/>
-    <input type="password" name="password" placeholder="mot de passe" required/>
-    <input type="submit" value="Se connecter" (click)="seConnecter(compte)"/>
+    <input type="texte" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" (enterkeypressed)="seConnecter()"/>
+    <input type="password" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required (enterkeypressed)="seConnecter()"/>
+    <input type="submit" value="Se connecter" (click)="seConnecter()"/>
+
 </form>

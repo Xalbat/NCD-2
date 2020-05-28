@@ -1,16 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 
+import { Compte } from '../classes/compte'
+
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigService {
   public url: string = "http://localhost:8181/api";
-  public myOptions: Object = null;
+  public httpOptions: Object = null;
+
 
   constructor() {
-    let myHeaders: HttpHeaders = new HttpHeaders();
-    myHeaders = myHeaders.append('Authorization', 'Basic ' + btoa('admin:ad'));
-    this.myOptions = { headers: myHeaders };
-   }
+  }
+
+  public setCredentials(compte: Compte) {
+    
+    alert("dans set credential")
+    console.log(compte);
+
+    let headers: HttpHeaders = new HttpHeaders();
+    let basicAuth = 'Basic ' + btoa(compte.login +":"+ compte.password);
+
+    headers = headers.append('Authorization', basicAuth);
+
+    this.httpOptions = { headers: headers };
+
+  }
 }

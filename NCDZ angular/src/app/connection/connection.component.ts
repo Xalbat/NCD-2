@@ -10,7 +10,7 @@ import { Compte } from '../classes/compte';
 })
 export class ConnectionComponent implements OnInit {
   
-  public compte: Compte;
+  public compte: Compte = new Compte("", 0, "", "");
 
   constructor(public CpmtSrv: CompteService) { }
 
@@ -18,12 +18,8 @@ export class ConnectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public seConnecter(compte: Compte) {
-    this.compte = compte;
-    let b: boolean = this.CpmtSrv.getCompteByUsername(compte);
-    if (b == false) {
-      this.compte = null;
-    }
+  public seConnecter() {
+      this.CpmtSrv.seConnecter(this.compte);
   }
 
 
