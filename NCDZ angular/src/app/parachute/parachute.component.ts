@@ -12,12 +12,13 @@ import { RevisionService } from '../services/revision.service';
 export class ParachuteComponent implements OnInit {
   public formParachute: Parachute = new Parachute();
   isEditing = false;
-  public formRevision : RevisionService = new RevisionService();
+  public formRevision : RevisionParachute = new RevisionParachute();
 
   constructor(public srvParachute:ParachuteService, public srvRevision:RevisionService) { }
 
   ngOnInit(){
     this.srvParachute.reload();
+    this.srvRevision.reload();
     this.formParachute.revision = new RevisionParachute();
   }
 
