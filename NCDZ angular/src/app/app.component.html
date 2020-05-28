@@ -13,10 +13,10 @@
           </li>
 
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/transaction">Payement</a>
+            <a class="nav-link" routerLink="/payement">Payement</a>
         </li>
 
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf= "appConfigSrv.compte.typeCompte == 'ADMIN' " class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
         </li>
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">

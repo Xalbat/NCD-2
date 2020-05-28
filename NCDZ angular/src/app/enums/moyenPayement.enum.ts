@@ -1,0 +1,3 @@
+export enum MoyenPayement {
+    CHEQUE, VIREMENT, CARTE_BLEUE, ESPECE, TICKET_RESTAURANT
+}

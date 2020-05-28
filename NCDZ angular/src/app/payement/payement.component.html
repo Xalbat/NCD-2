@@ -1,7 +1,50 @@
 <div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Valeur</th>
+            <th>Moyen de payement</th>
+            <th>Parachutiste</th>
+            <th></th>
+          </tr>
+        </thead>
+        
+        <tbody>
+      
+          <tr *ngFor="let p of payementSrv.payements">
+            <td>{{ p.date }}</td>
+            <td>{{ p.valeur }}</td>
+            <td>{{ p.moyenPayement }}</td>
+            <td>
+              <!--button class="btn btn-warning m-2" (click)="editerPatient(patient)">Modifier</button>
+              <button class="btn btn-danger" (click)="supprimerPatient(patient)">Supprimer</button-->
+            </td>
+           
+          </tr>
+        </tbody>
+      </table>
+      <br>
+
+</div>
+
+
+
+<!--div>
     
     <input type="texte" class = "form-control m-2" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" />
     <input type="password" class = "form-control m-2" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required />
     <input type="submit" class = "btn-success m-2" value="Se connecter" (click)="seConnecter()"/>
 
-</div>
+</div-->
+
+
+<!--h2>Ajouter un patient</h2>
+<input type = "number" *ngIf="disable" [(ngModel)] = "patient.secu" placeholder="secu" >
+<input type = "number" *ngIf="!disable" [(ngModel)] = "patient.secu" placeholder="secu" disabled>
+<input type = "string" [(ngModel)] = "patient.prenom" placeholder="prenom" >
+<input type = "string" [(ngModel)] = "patient.nom" placeholder="nom">
+
+<button class="btn btn-success m-1" *ngIf="disable" (click)="ajouterPatient()" >Ajouter</button>
+<button class="btn btn-warning m-1" *ngIf="!disable" (click)="modifierPatient()" >Modifier le patient</button>
+<button class="btn btn-danger m-1" *ngIf="!disable" (click)="annulerModif()" >Annuler</button-->

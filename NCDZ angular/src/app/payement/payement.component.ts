@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Payement } from '../classes/payement';
+import { PayementService } from '../services/payement.service';
 
 @Component({
   selector: 'app-payement',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayementComponent implements OnInit {
 
-  constructor() { }
+  payement: Payement;
+
+  constructor(public payementSrv: PayementService) {
+
+   }
 
   ngOnInit(): void {
+    this.payementSrv.reload();
   }
 
 }
