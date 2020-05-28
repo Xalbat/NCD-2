@@ -112,7 +112,7 @@
     <div class="card m-3">
         <div class="card-header">
             <h5 class="card-title">Espace Avionnage</h5>
-
+        </div>
             <div class="card-body"> 
                         <label><strong>Liste des parachutistes en attente</strong></label>
                             <table class="table table-striped">
@@ -161,7 +161,7 @@
                                                     <td>{{ vol.situationVol }}</td>
                                                     <td>Vol n°{{ vol.idVol }}</td>
                                                     <td>
-                                                        <ng-container *ngFor = "let saut of vol.listSaut">Saut n°{{ saut.idSaut }}</ng-container>          
+                                                        <ng-container *ngFor = "let saut of vol.listSaut">Saut n°{{ saut.idSaut }} <br> </ng-container>          
                                                     </td>
                                                     <td>
                                                         <ng-container *ngFor = "let saut of vol.listSaut">
@@ -170,12 +170,13 @@
                                                             </ng-container >
                                                         </ng-container>
                                                     </td>
-                                                    <td>{{ saut.altitude }}m</td>
+                                                    <td>
+                                                        <ng-container *ngFor = "let saut of vol.listSaut">{{ saut.altitude }}m <br> </ng-container>
+                                                    </td>
                                                 </tr> 
                                     </ng-container>
                                 </tbody>
                             </table>
-                    </div>
-        </div>
+            </div>
     </div>
 </div>

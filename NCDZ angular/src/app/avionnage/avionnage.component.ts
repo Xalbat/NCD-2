@@ -41,7 +41,7 @@ export class AvionnageComponent implements OnInit {
   {
     this.saut.altitude = 1200;
     this.saut.tandem = false;
-    //this.saut.isVideo = false;
+    this.saut.isVideo = false;
 
     this.srvSaut.loadCurrentSauts(); 
 
@@ -118,13 +118,11 @@ affichageVol(id) {
 
   public changeIsVideo(boolean) 
   {
-    //this.saut.isVideo = boolean;
+    this.saut.isVideo = boolean;
   }
 
   public instructeurs()
   {
-    //console.log(this.listeParachutistes);
-    //return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
     return this.listeParachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
   }
 
@@ -136,7 +134,6 @@ affichageVol(id) {
   public confirmes()
   {
     console.log(this.listeParachutistes);
-    //console.log(this.listeParachutistes.filter(p => p.niveau.toString() != 'ELEVE'));
     return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != 'ELEVE')
   }
 
