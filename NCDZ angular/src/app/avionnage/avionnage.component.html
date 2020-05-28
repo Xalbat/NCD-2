@@ -140,8 +140,8 @@
                             </thead>
                         
                             <tbody>
-                                <ng-container>
-                                        <tr *ngFor="let saut of srvSaut.sauts">
+                                <ng-container *ngFor="let saut of srvSaut.sauts">
+                                        <tr *ngIf = "saut.vol == null" >
                                             <td>{{ saut.idSaut }}</td>
                                             <td>
                                                 <ng-container *ngFor = "let parachutiste of parachutistesAttente(saut)">
