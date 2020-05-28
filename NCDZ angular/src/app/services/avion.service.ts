@@ -23,12 +23,12 @@ export class AvionService {
   }
 
   public addAvion(avion: Avion) {
-    this.http.post<Avion>(this.apiUrl, avion)
+    this.http.post<Avion>(this.apiUrl, avion,this.appConfig.httpOptions)
     .subscribe();
   }
 
   public updateAvion(avion: Avion) {
-    this.http.put<Avion>(this.apiUrl + "/" + avion.idAvion, avion)
+    this.http.put<Avion>(this.apiUrl + "/" + avion.idAvion, avion,this.appConfig.httpOptions)
     .subscribe();
   }
 

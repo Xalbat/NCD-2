@@ -27,12 +27,12 @@ export class ParachutisteService {
 
 
   public add(parachutiste) {
-    this.http.post<Parachutiste>(this.apiUrl, parachutiste)
+    this.http.post<Parachutiste>(this.apiUrl, parachutiste, this.appConfig.httpOptions)
         .subscribe(respParachutiste => this.parachutistes.push(respParachutiste));
   }
 
   public update(parachutiste) {
-    this.http.put<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, parachutiste)
+    this.http.put<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, parachutiste, this.appConfig.httpOptions)
         .subscribe(respParachutiste => {
           let index = this.parachutistes.indexOf(this.parachutistes.find(p => p.numeroLicence == parachutiste.numeroLicence));
           this.parachutistes.splice(index, 1, respParachutiste);
@@ -40,7 +40,7 @@ export class ParachutisteService {
   }
 
   public delete(parachutiste) {
-    this.http.delete<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`)
+    this.http.delete<Parachutiste>(`${ this.apiUrl }/${ parachutiste.numeroLicence }`, this.appConfig.httpOptions)
         .subscribe(resp => {
           if (resp) {
             let index = this.parachutistes.indexOf(parachutiste);

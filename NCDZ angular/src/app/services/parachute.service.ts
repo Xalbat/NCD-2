@@ -22,20 +22,20 @@ export class ParachuteService {
   }
 
   public add(parachute) {
-    this.http.post<Parachute>(this.apiUrl, parachute)
+    this.http.post<Parachute>(this.apiUrl, parachute, this.appConfig.httpOptions)
         .subscribe(respParachute => this.parachutes.push(respParachute));
   }
 
   public update(parachute) {
-    this.http.put<Parachute>(`${ this.apiUrl }/${ parachute.id }`, parachute)
+    this.http.put<Parachute>(`${ this.apiUrl }/${ parachute.idParachute  }`, parachute, this.appConfig.httpOptions)
         .subscribe(respParachute => {
-          let index = this.parachutes.indexOf(this.parachutes.find(p => p.idParachute == parachute.id));
+          let index = this.parachutes.indexOf(this.parachutes.find(p => p.idParachute == parachute.idParachute));
           this.parachutes.splice(index, 1, respParachute);
         });
   }
 
   public delete(parachute) {
-    this.http.delete<Parachute>(`${ this.apiUrl }/${ parachute.id }`)
+    this.http.delete<Parachute>(`${ this.apiUrl }/${ parachute.idParachute }`, this.appConfig.httpOptions)
         .subscribe(resp => {
           if (resp) {
             let index = this.parachutes.indexOf(parachute);

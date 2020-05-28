@@ -75,13 +75,11 @@
 
     
     <div class="form-group row" *ngIf = "formParachute.revision">
-		<label for="dateVisite" class="col-sm-2 col-form-label">ID du la derniere revision : </label>
-		<div>
-		<input type="number" class="form-control" [id]="formParachute?.revision.idRevision"  [(ngModel)]="formParachute?.revision.idRevision"/>
-		</div>
+		<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Primaire : </label>
 		<div class="col-sm-10">
-			<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrincipale"/>
+			<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrimaire"/>
 		</div>
+		<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Secours : </label>
 		<div class="col-sm-10">
 			<input type="date" class="form-control" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
 		</div>
