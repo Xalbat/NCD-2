@@ -15,6 +15,7 @@ import { ComposerAvionComponent } from './composer-avion/composer-avion.componen
 import { ParachuteComponent } from './parachute/parachute.component';
 import { AdministrationAvionComponent } from './administration-avion/administration-avion.component';
 import { AdministrationAvionRowComponent } from './administration-avion-row/administration-avion-row.component';
+import { AdministrationAvionFormulaireComponent } from './administration-avion-formulaire/administration-avion-formulaire.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { PayementComponent } from './payement/payement.component';
 
@@ -41,6 +42,8 @@ const routes: Routes = [
     AdministrationAvionRowComponent,
     ConnectionComponent,
     PayementComponent
+    AdministrationAvionFormulaireComponent,
+    ConnectionComponent
   ],
   imports: [
     BrowserModule,FormsModule,

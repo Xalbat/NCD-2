@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container w-75">
+    <div class="row">
     <table class="table">
         <thead>
             <th>
@@ -31,6 +32,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let a of avions" administration-avion-row [avion]="a"></tr>
+            <tr administration-avion-formulaire></tr>
         </tbody>
     </table>
+    </div>
 </div>

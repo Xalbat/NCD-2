@@ -1,0 +1,35 @@
+<td></td>
+<td>
+    <label for="avionMatricule">Matricule</label>
+    <input type="text" class="form-control" id="avionMatricule" placeholder="X-XXXX">
+</td>
+<td>
+    <label for="avionModele">Modele</label>
+    <input type="text" class="form-control" id="avionModele" placeholder="Cessna 172">
+</td>
+<td>
+    <label for="avionAltitude">Alt. max</label>
+    <input type="number" class="form-control" id="avionAltitude" value="4000">
+</td>
+<td>
+    <label for="avionCapa">Capacite max</label>
+    <input type="number" class="form-control" id="avionCapa" value="4">
+</td>
+<td>
+    <label for="avionRotationsMax">Rotations Max</label>
+    <input type="number" class="form-control" id="avionRotationsMax" value="4">
+</td>
+<td>
+    <label for="avionRotationsMax">Etat</label>
+    <select [(ngModel)] = "avion.etat">
+        <option *ngFor="let etat of etatsPossibles()">{{etat}}</option>
+    </select>
+</td>
+<td>
+    <label for="avionRotationsMax">Situation</label>
+    <select [(ngModel)] = "avion.situation">
+        <option *ngFor="let situation of situationsPossibles()">{{situation}}</option>
+    </select>
+</td>
+<td></td>
+<td><button class="btn btn-outline-primary py-1" style="vertical-align: center" (click)="addAvion()">Ajouter</button></td>
