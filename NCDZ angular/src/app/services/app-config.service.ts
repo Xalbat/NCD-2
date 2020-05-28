@@ -9,6 +9,7 @@ import { Compte } from '../classes/compte'
 export class AppConfigService {
   public url: string = "http://localhost:8181/api";
   public httpOptions: Object = null;
+  public compte: Compte = new Compte;
 
 
   constructor() {
@@ -18,6 +19,9 @@ export class AppConfigService {
     
     alert("dans set credential")
     console.log(compte);
+    this.compte = compte
+    console.log(this.compte);
+
 
     let headers: HttpHeaders = new HttpHeaders();
     let basicAuth = 'Basic ' + btoa(compte.login +":"+ compte.password);

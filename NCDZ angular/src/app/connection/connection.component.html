@@ -1,7 +1,7 @@
 
-<form>
-    <input type="texte" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" (enterkeypressed)="seConnecter()"/>
-    <input type="password" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required (enterkeypressed)="seConnecter()"/>
-    <input type="submit" value="Se connecter" (click)="seConnecter()"/>
+<div>
+    <input type="texte" class = "form-control m-2" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" />
+    <input type="password" class = "form-control m-2" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required />
+    <input type="submit" class = "btn-success m-2" value="Se connecter" (click)="seConnecter()"/>
 
-</form>
+</div>
