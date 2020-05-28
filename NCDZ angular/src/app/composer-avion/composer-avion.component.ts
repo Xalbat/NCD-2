@@ -162,7 +162,7 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   instructeur() {
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau != "ELEVE")
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != "ELEVE")
   }
 
   
