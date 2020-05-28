@@ -3,6 +3,7 @@ import { Avion } from '../classes/avion';
 import { EtatAvion } from '../enums/etat-avion.enum';
 import { AvionService } from '../services/avion.service';
 import { SituationAvion } from '../enums/situation-avion.enum';
+import { AdministrationAvionComponent } from '../administration-avion/administration-avion.component';
 
 @Component({
   selector: 'administration-avion-row,[administration-avion-row]',
@@ -18,7 +19,7 @@ export class AdministrationAvionRowComponent implements OnInit {
   modificationBool : boolean = false;
 
 
-  constructor(private avionSvc : AvionService) { }
+  constructor(private avionCompo : AdministrationAvionComponent,private avionSvc : AvionService) { }
 
   ngOnInit(): void {
     console.log(this.avion)
@@ -42,6 +43,11 @@ export class AdministrationAvionRowComponent implements OnInit {
 
   updateAvion(){
     this.avionSvc.updateAvion(this.avion)
+  }
+
+  supprimerAvion(){
+    this.avionSvc.deleteAvion(this.avion)
+    setTimeout(() => this.avionCompo.reload(),150)
   }
 
 }

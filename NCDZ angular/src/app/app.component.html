@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand"><img src="assets/NCDZ_Logo.png" style="width: 10vh"/></a>
    
     <div class="collapse navbar-collapse">
@@ -9,7 +9,7 @@
           </li>
     
           <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" routerLink="/connect">se connecter</a>
+              <a class="nav-link" routerLink="/connect">Se connecter</a>
           </li>
 
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
@@ -25,10 +25,6 @@
 
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/parachute">Gestion des parachutes</a>
-          </li>
-    
-          <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/composer-vol">Composer un vol</a>
           </li>
 
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">

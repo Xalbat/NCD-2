@@ -32,4 +32,8 @@ export class AvionService {
     .subscribe();
   }
 
+  public deleteAvion(avion : Avion){
+    this.http.delete(this.apiUrl+'/'+avion.idAvion+'/supp',this.appConfig.httpOptions).subscribe()
+  }
+
 }
