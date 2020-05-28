@@ -133,15 +133,21 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>idSaut</th>
                                     <th>Prenom</th>
                                     <th>Altitude</th>
                                 </tr>
                             </thead>
                         
                             <tbody>
-                                <ng-container *ngFor="let saut of srvSaut.sauts">
-                                        <tr *ngFor = "let parachutiste of parachutistesAttente(saut)">
-                                            <td>{{ parachutiste.prenom }}</td>
+                                <ng-container>
+                                        <tr *ngFor="let saut of srvSaut.sauts">
+                                            <td>{{ saut.idSaut }}</td>
+                                            <td>
+                                                <ng-container *ngFor = "let parachutiste of parachutistesAttente(saut)">
+                                                {{ parachutiste.prenom }} {{ parachutiste.nom }} - {{ parachutiste.niveau }} <br>
+                                                </ng-container >
+                                            </td>
                                             <td>{{ saut.altitude }}</td>
                                         </tr> 
                                 </ng-container>
