@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Parachute } from '../classes/parachute';
 import { ParachuteService } from '../services/parachute.service';
+import { RevisionParachute } from '../classes/revision-parachute';
 
 @Component({
   selector: 'app-parachute',
@@ -15,6 +16,7 @@ export class ParachuteComponent implements OnInit {
 
   ngOnInit(){
     this.srvParachute.reload();
+    this.formParachute.revision = new RevisionParachute();
   }
 
   public ajouterParachute() {
