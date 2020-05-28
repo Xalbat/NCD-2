@@ -16,14 +16,14 @@ export class Vol {
         public situationVol?: SituationVol, 
         public respoVol?:Parachutiste, 
         public respoSol?:Parachutiste, 
-        public dateVisite?: Date,
-        public sauts : Array<Saut> = [])
+        public date?: Date,
+        public listSaut?: Array<Saut>)
         {}
 
    /* getNbParachutistes(){
         let nbPara = 0;
-        this.sauts.forEach(s =>{
-            nbPara += s.parachutiste.length
+        this.listSaut.forEach(s =>{
+            nbPara += s.listParachutiste.length
         })
         return nbPara
     }*/

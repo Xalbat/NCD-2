@@ -7,6 +7,8 @@ import { AvionService } from '../services/avion.service';
 import { VolService } from '../services/vol.service';
 import { ParachutisteService } from '../services/parachutiste.service';
 import { Niveau } from '../enums/niveau.enum';
+import { SautService } from '../services/saut.service';
+import { Saut } from '../classes/saut';
 
 @Component({
   selector: 'composer-avion',
@@ -15,11 +17,15 @@ import { Niveau } from '../enums/niveau.enum';
 })
 export class ComposerAvionComponent implements OnInit {
 
-
   public avion : Avion = null;
   public vol: Vol=null;
-  avions : Array<Avion> = [];
-  vols : Array<Vol> = [];
+
+  public sauts: Array<Saut> = []
+  public avions : Array<Avion> = [];
+  public vols : Array<Vol> = [];
+
+  passagerVol: number;
+  
   choixAvion = false;
   choixVol = false;
   indexAvion=0;
@@ -28,42 +34,71 @@ export class ComposerAvionComponent implements OnInit {
   listeSautDemandés: Array<Parachutiste> = [];
   respoSol: Parachutiste=null;
   respoVol: Parachutiste=null;
+  capacite=0;
 
-  constructor(public srvAvion:AvionService, public srvVol: VolService, public srvParachutiste: ParachutisteService) { }
+  constructor(public srvAvion:AvionService, 
+              public srvVol: VolService, 
+              public srvParachutiste: ParachutisteService,
+              public srvSaut: SautService) { }
 
   ngOnInit(): void {
     this.listeAvions();
     this.listesVols();
     this.listesPara();
+    this.listeSauts();
   }
 
-  listeAvions() {this.srvAvion.getAvions();setTimeout(() => this.avions=this.srvAvion.avions,500)}
+  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions,200)}
 
-  listesVols() {this.srvVol.getVol();setTimeout(() => this.vols=this.srvVol.vols,500)}
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,200)}
 
   listesPara() {this.srvParachutiste.reload()}
+
+  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,200)}
+
 
   affichageAvion(id) {
     this.choixAvion=(!this.choixAvion);
     this.choixAvion 
         ? this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
         : this.avion = null;
-
   }
 
   affichageVol(id) {
-    if (this.choixVol && this.vols.find(v => v.idVol == id).idVol==this.vol?.idVol) {
-      this.choixVol=false;
-      this.vol=null;
-    }
-    else {
-      this.choixVol=true;
-      this.vol = this.srvVol.vols.find(v => v.idVol == id);
-    }
+    this.choixVol=(!this.choixVol);
+    this.choixVol
+        ? this.vol = this.srvVol.vols.find(v => v.idVol == id)
+        : this.vol = null;
+    this.nombrePassager();
+  }
+  
+  ajouterSaut(saut) {
+    saut.vol=this.vol;
+    this.srvSaut.updateSaut(saut);
+    this.nombrePassager();
+    alert(this.passagerVol)
+  }
+
+  supprimerSaut(saut) {
+    saut.vol=null;
+    this.srvSaut.updateSaut(saut);
+    this.nombrePassager();
+    alert(this.passagerVol)
   }
 
   retirerSaut(s){
-    this.vol.sauts.splice(s,1)
+    this.vol.listSaut.splice(s,1)
+  }
+
+  nombrePassager() {
+    this.passagerVol=0;
+    for (let s of this.sauts)
+    {
+      if (s.vol.idVol==this.vol.idVol)
+      {
+        this.passagerVol=this.passagerVol+s.listParachutiste.length;
+      }
+    }
   }
     
   attributionVolAvion() {
@@ -127,7 +162,7 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   instructeur() {
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau == Niveau.INSTRUCTEUR)
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau != "ELEVE")
   }
 
   
