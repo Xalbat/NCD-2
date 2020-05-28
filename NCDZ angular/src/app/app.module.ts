@@ -41,7 +41,7 @@ const routes: Routes = [
     AdministrationAvionComponent,
     AdministrationAvionRowComponent,
     ConnectionComponent,
-    PayementComponent
+    PayementComponent,
     AdministrationAvionFormulaireComponent,
     ConnectionComponent
   ],
