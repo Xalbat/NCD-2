@@ -1,0 +1,72 @@
+
+<ng-container *ngIf="!modificationBool">
+    <td>{{avion.idAvion}}</td>
+    <td>{{avion.matricule}}</td>
+    <td>{{avion.modele}}</td>
+    <td>{{avion.altitudeMax}}</td>
+    <td>{{avion.capacite}}</td>
+    <td>{{avion.rotation}} / {{avion.rotationMax}}</td>
+    <td>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    {{avion.etat}}
+                </div>
+                <div class="row">
+                    <select [(ngModel)] = "avion.etat" (change)="updateAvion()">
+                        <option *ngFor="let etat of etatsPossibles()">{{etat}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>        
+    </td>
+    <td>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    {{avion.situation}}
+                </div>
+                <div class="row">
+                    <select [(ngModel)] = "avion.situation" (change)="updateAvion()">
+                        <option *ngFor="let situation of situationsPossibles()">{{situation}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>  
+    </td>
+    <td>{{avion?.vol?.situationVol}}</td>
+</ng-container>
+<ng-container *ngIf="modificationBool">
+    <td>
+        <input type="number" [placeholder] = "avion.idAvion" [(ngModel)] = "avion.idAvion" />
+    </td>
+    <td>
+        <input type="text" [placeholder] = "avion.matricule" [(ngModel)] = "avion.matricule" />
+    </td>
+    <td>{{avion.modele}}</td>
+    <td>
+        <input type="number" [placeholder]="avion.altitudeMax" [(ngModel)] = "avion.altitudeMax" />
+    </td>
+    <td>
+        <input type="number" [placeholder]="avion.capacite" [(ngModel)] = "avion.capacite" />
+    </td>
+    <td>{{avion.rotation}} / {{avion.rotationMax}}</td>
+    <td>{{avion.etat}}</td>
+    <td>{{avion.situation}}</td>
+    <td>{{avion?.vol?.situationVol}}</td>
+</ng-container>
+    <td>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <button *ngIf="!modificationBool" class="btn btn-outline-warning" (click)="modificationBool = !modificationBool; setPreviousState()">Modifier</button>
+                    <button *ngIf="modificationBool" class="btn btn-outline-success" (click)="modificationBool = !modificationBool;updateAvion">Valider</button>
+                    <button *ngIf="modificationBool" class="btn btn-outline-success" (click)="modificationBool = !modificationBool; returnFromPreviousState()">Annuler</button>
+                </div>
+                <div class="row">
+                    <button class="btn btn-outline-danger">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </td>
+
