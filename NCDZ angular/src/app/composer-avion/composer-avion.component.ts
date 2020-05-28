@@ -33,6 +33,7 @@ export class ComposerAvionComponent implements OnInit {
   public pilotes: Array<Pilote> = [];
 
   passagerVol: number;
+  date: Date = null;
   
   vueVol=false;
   choixAvion = false;
@@ -67,7 +68,7 @@ export class ComposerAvionComponent implements OnInit {
 
   listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,100)}
   
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),750)}
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,100); setTimeout(() => this.triListVol(),500)}
 
 
   affichageAvion(id) {
@@ -99,7 +100,6 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   affichageVol(id) {
-
     if (this.choixVol)
     {
       this.choixVol=false;
@@ -121,10 +121,20 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   creationVol() {
-    // this.vol= new Vol();
-    // this.srvVol.addVol(this.vol);
-    // this.vol=null;
-    // this.listesVols();
+    if (this.date==null)
+    {
+      alert("Choisissez une date valide")
+    }
+    else{
+      this.vol=new Vol();
+      this.vol.date=this.date;
+      this.vol.situationVol=SituationVol.EN_ATTENTE;
+      this.srvVol.addVol(this.vol);
+      this.vol=null;
+      this.date=null;
+      setTimeout(() => this.listesVols(),250);
+    }
+
   }
 
   ajouterSaut(saut) {

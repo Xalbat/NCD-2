@@ -57,12 +57,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="!choixVol" class="choixTableau" (click)="creationVol()">
+                <tr *ngIf="!choixVol" class="choixTableau">
+                    <td></td>
                     <td></td>
                     <td *ngIf="choixVol"></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan="4">Cliquez pour créer un nouveau vol</td>
+                    <td colspan="3">Création d'un nouveau vol</td>
+                    <td><input type="date" [(ngModel)]="date" /></td>
+                    <td><button class="btn btn-primary" (click)="creationVol()" [disabled]="date==null">Ajouter un nouveau vol</button></td>
                 </tr>
                 <ng-container *ngFor="let v of volsDispo, let i=index">
                     <tr align="center" *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
@@ -110,7 +111,7 @@
             <tbody>
                 <tr align="center" *ngFor="let s of sautDispo()">
                     <td>{{s.idSaut}}</td>
-                    <td>{{s.altitude}}</td>
+                    <td>{{s.altitude}}m</td>
                     <td><p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p></td>
                     <td>{{s.vol?.idVol}}</td>
                     <td>
