@@ -1,7 +1,18 @@
-
-<div>
-    <input type="texte" class = "form-control m-2" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" />
-    <input type="password" class = "form-control m-2" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required />
-    <input type="submit" class = "btn-success m-2" value="Se connecter" (click)="seConnecter()"/>
-
+<div class="html">
+    <br>
+    
+        <div class="card m-3" >
+            <div class="card-header">
+                <h5 class="card-title">Connection </h5>
+            </div>
+        <div class="card-body"> 
+            <div>
+                <input type="texte" class = "form-control m-2" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" />
+                <input type="password" class = "form-control m-2" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required />
+            </div>
+        </div>
+        <div class="card-footer">
+                <input type="submit" class = "btn btn-success m-2" value="Se connecter" (click)="seConnecter()"/>
+        </div>
+    
 </div>
