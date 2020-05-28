@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Parachute } from '../classes/parachute';
 import { ParachuteService } from '../services/parachute.service';
 import { RevisionParachute } from '../classes/revision-parachute';
-import { RevisionService } from '../services/revision.service';
 
 @Component({
   selector: 'app-parachute',
@@ -12,23 +11,18 @@ import { RevisionService } from '../services/revision.service';
 export class ParachuteComponent implements OnInit {
   public formParachute: Parachute = new Parachute();
   isEditing = false;
-  public formRevision : RevisionParachute = new RevisionParachute();
 
-  constructor(public srvParachute:ParachuteService, public srvRevision:RevisionService) { }
+  constructor(public srvParachute:ParachuteService) { }
 
   ngOnInit(){
     this.srvParachute.reload();
-    this.srvRevision.reload();
     this.formParachute.revision = new RevisionParachute();
   }
 
   public ajouterParachute() {
     console.log(this.formParachute)
-    this.srvRevision.add(this.formRevision);
 
-        setTimeout(() => { this.srvParachute.add(this.formParachute);
-      
-    }, 200);
+    this.srvParachute.add(this.formParachute);
     this.formParachute = new Parachute();
     this.formParachute.revision = new RevisionParachute();
   
