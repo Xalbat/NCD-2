@@ -19,6 +19,7 @@ import { ConnectionComponent } from './connection/connection.component';
 
 const routes: Routes = [
   { path: 'avionnage', component: AvionnageComponent },
+  { path: 'connect', component: ConnectionComponent },
   { path: 'parachute', component: ParachuteComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'administration-avion', component: AdministrationAvionComponent },
