@@ -16,6 +16,7 @@ import { ParachuteComponent } from './parachute/parachute.component';
 import { AdministrationAvionComponent } from './administration-avion/administration-avion.component';
 import { AdministrationAvionRowComponent } from './administration-avion-row/administration-avion-row.component';
 import { ConnectionComponent } from './connection/connection.component';
+import { PayementComponent } from './payement/payement.component';
 
 const routes: Routes = [
   { path: 'avionnage', component: AvionnageComponent },
@@ -37,7 +38,8 @@ const routes: Routes = [
     ParachuteComponent,
     AdministrationAvionComponent,
     AdministrationAvionRowComponent,
-    ConnectionComponent
+    ConnectionComponent,
+    PayementComponent
   ],
   imports: [
     BrowserModule,FormsModule,

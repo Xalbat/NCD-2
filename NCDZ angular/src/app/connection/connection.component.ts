@@ -12,14 +12,14 @@ export class ConnectionComponent implements OnInit {
   
   public compte: Compte = new Compte("", 0, "", "");
 
-  constructor(public CpmtSrv: CompteService) { }
+  constructor(public cpmtSrv: CompteService) { }
 
 
   ngOnInit(): void {
   }
 
   public seConnecter() {
-      this.CpmtSrv.seConnecter(this.compte);
+      this.cpmtSrv.seConnecter(this.compte);
   }
 
 

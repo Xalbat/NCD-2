@@ -17,12 +17,6 @@ export class AppConfigService {
 
   public setCredentials(compte: Compte) {
     
-    alert("dans set credential")
-    console.log(compte);
-    this.compte = compte
-    console.log(this.compte);
-
-
     let headers: HttpHeaders = new HttpHeaders();
     let basicAuth = 'Basic ' + btoa(compte.login +":"+ compte.password);
 

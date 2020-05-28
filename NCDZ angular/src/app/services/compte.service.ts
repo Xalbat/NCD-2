@@ -22,15 +22,12 @@ export class CompteService implements CanActivate {
 
     
     public seConnecter(compte: Compte) {
-      
-    console.log(compte);
     
       this.http.post( this.apiUrl + "/login", compte)
       .subscribe(resp => {
         this.compte = resp;
         this.compte.login = compte.login;
         this.compte.password = compte.password;
-         alert("dans compte serv")
         this.appConfig.setCredentials(this.compte);
         this.router.navigate([ '/composer-avion' ]);
       });
