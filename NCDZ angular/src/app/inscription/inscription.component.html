@@ -40,7 +40,16 @@
 				</div>
 			</div>
 			
-
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">ID du parachute : </label>
+				<select class="form-control" id = "parachute" [(ngModel)]="formParachutiste.parachute">
+					
+						<option  *ngFor="let parachute of srvParachute.parachutes" [ngValue] = "parachute">
+							 {{parachute.idParachute}}
+						</option>
+					
+				</select>
+			</div>  
 			
 
 			<div class="card-footer text-right">
@@ -67,6 +76,7 @@
 						<th>Prenom</th>
 						<th>Numero de Licence</th>
 						<th>Niveau</th>
+						<th>ID du parachute</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -77,6 +87,8 @@
 						<td>{{ parachutiste.prenom }}</td>
 						<td>{{ parachutiste.numeroLicence }}</td>
 						<td>{{ parachutiste.niveau }}</td>
+						<td>{{ parachutiste.parachute?.idParachute }}</td>
+
 						<td> </td>
 						
 

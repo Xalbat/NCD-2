@@ -11,6 +11,7 @@ export class ParachutisteService {
 
   private apiUrl: string = "";
   public parachutistes: Array<Parachutiste> = null;
+  
 
   constructor(private appConfig: AppConfigService, private http: HttpClient, rooter: Router) { 
     this.apiUrl=`${this.appConfig.url}/parachutiste`;
