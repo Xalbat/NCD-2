@@ -39,7 +39,7 @@ const routes: Routes = [
     ParachuteComponent,
     AdministrationAvionComponent,
     AdministrationAvionRowComponent,
-    AdministrationAvionFormulaireComponent
+    AdministrationAvionFormulaireComponent,
     ConnectionComponent
   ],
   imports: [
