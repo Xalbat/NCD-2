@@ -57,13 +57,14 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr class="choixTableau" (click)="creationVol()">
+                <tr *ngIf="!choixVol" class="choixTableau" (click)="creationVol()">
+                    <td></td>
+                    <td *ngIf="choixVol"></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td colspan="4">Dounle-cliquez pour créer un nouveau vol</td>
-                </tr> -->
-                <ng-container *ngFor="let v of vols, let i=index">
+                    <td colspan="4">Cliquez pour créer un nouveau vol</td>
+                </tr>
+                <ng-container *ngFor="let v of volsDispo, let i=index">
                     <tr align="center" *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
                         <td>{{v.idVol}}</td>
                         <td>{{v.situationVol}}</td>
@@ -92,7 +93,7 @@
     </div>
 </div>
 
-<div class="container" *ngIf="!vueVol && choixAvion && choixVol && choixSaut">
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && !choixSaut">
     <br>
     <div class="row">
         <label><strong>Listes des sauts en attente</strong></label>
@@ -107,7 +108,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr align="center" *ngFor="let s of sauts">
+                <tr align="center" *ngFor="let s of sautDispo()">
                     <td>{{s.idSaut}}</td>
                     <td>{{s.altitude}}</td>
                     <td><p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p></td>
@@ -123,7 +124,7 @@
     </div>
 </div>
 
-<div class="container" *ngIf="!vueVol && choixAvion && choixVol && !choixSaut && !okSaut">
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && choixSaut && !okSaut">
     <br>
     <div class="row">
         <label><strong>Choix des responsables au sol et en vol</strong></label>
@@ -168,7 +169,7 @@
     </div>
 </div>
 
-<div class="container" *ngIf="!vueVol && choixAvion && choixVol && !choixSaut && okSaut">
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && choixSaut && okSaut">
     <br>
     <button class="btn btn-primary" (click)="attributionVolAvion()">Attribuer le vol à l'avion</button>
 </div>

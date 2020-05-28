@@ -14,6 +14,7 @@ import { EtatAvion } from '../enums/etat-avion.enum';
 import { SituationVol } from '../enums/situation-vol.enum';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'composer-avion',
   templateUrl: './composer-avion.component.html',
@@ -27,6 +28,8 @@ export class ComposerAvionComponent implements OnInit {
   public sauts: Array<Saut> = []
   public avions : Array<Avion> = [];
   public vols : Array<Vol> = [];
+  public volsDispo : Array<Vol> = [];
+  public volsIndispo : Array<Vol> = [];
   public pilotes: Array<Pilote> = [];
 
   passagerVol: number;
@@ -34,7 +37,7 @@ export class ComposerAvionComponent implements OnInit {
   vueVol=false;
   choixAvion = false;
   choixVol = false;
-  choixSaut = true;
+  choixSaut = false;
   okSaut = false;
 
   respoSol: Parachutiste=null;
@@ -58,47 +61,70 @@ export class ComposerAvionComponent implements OnInit {
 
   listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),100)}
 
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,100)}
-
   listesPara() {this.srvParachutiste.reload()}
 
   listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,100)}
 
   listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,100)}
+  
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),750)}
 
 
   affichageAvion(id) {
-    this.choixAvion=(!this.choixAvion);
-    
-    this.choixAvion 
-      ? this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
-      : this.avion = null;
 
-    if (this.vueVol) {this.vueVol=false;}
-
-    if (this.avion.vol!=null)
+    if (this.choixAvion)
     {
-      this.vueVol=true;
-      this.vol=this.vols.find(v => v.idVol == this.avion.vol.idVol);
+      this.choixAvion=false;
+
+      this.avion = null
+      this.vol=null;
+
+      this.vueVol=false;
+      this.choixVol=false;
+      this.choixSaut=false;
+      this.okSaut=false;
+    }
+    else
+    {
+      this.choixAvion=true;
+      this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
+
+      if (this.avion?.vol!=null)
+      {
+        this.vueVol=true;
+        this.vol=this.vols.find(v => v.idVol == this.avion.vol.idVol);
+      }
+
     }
   }
 
   affichageVol(id) {
-    this.choixVol=(!this.choixVol);
-    this.choixSaut=true;
-    this.choixVol
-        ? this.vol = this.srvVol.vols.find(v => v.idVol == id)
-        : this.vol = null;
-    this.nombrePassager();
+
+    if (this.choixVol)
+    {
+      this.choixVol=false;
+
+      this.vol=null;
+
+      this.vueVol=false;
+      this.choixSaut=false;
+      this.okSaut=false;
+    }
+    else 
+    {
+      this.choixVol=true;
+
+      this.vol = this.srvVol.vols.find(v => v.idVol == id)
+
+      this.nombrePassager();
+    }    
   }
 
   creationVol() {
-    this.vol= new Vol();
-    this.vol.date=new Date(this.datePipe.transform(Date.now(),'yyyy-MM-dd'));
-    this.vol.avion=new Avion();
-    this.srvVol.addVol(this.vol);
-    this.vol=null;
-    this.listesVols();
+    // this.vol= new Vol();
+    // this.srvVol.addVol(this.vol);
+    // this.vol=null;
+    // this.listesVols();
   }
 
   ajouterSaut(saut) {
@@ -116,6 +142,38 @@ export class ComposerAvionComponent implements OnInit {
 
   retirerSaut(s){
     this.vol.listSaut.splice(s,1)
+  }
+
+  triListVol() {
+    this.volsDispo=[]
+    this.volsIndispo=[]
+    for (let v of this.vols)
+    {
+      let test=true;
+      for (let a of this.avions)
+      {
+        if (a.vol?.idVol==v.idVol) {test=false}
+      }
+      if (test) {this.volsDispo.push(v)}
+      else {this.volsIndispo.push(v)}
+    }
+  }
+
+  sautDispo() {
+    let tri: Array<Saut>=[];
+    tri=tri.concat(this.sauts);
+
+    for (let v of this.volsIndispo)
+    {
+      for (let s of v.listSaut)
+      {
+        for (let i=0; i<tri.length;i++)
+        {
+          if (tri[i].idSaut==s.idSaut) {tri.splice(i,1);break}
+        }
+      }
+    }
+    return tri;
   }
 
   nombrePassager() {
@@ -136,7 +194,8 @@ export class ComposerAvionComponent implements OnInit {
     }
     else 
     {
-      this.choixSaut=false;
+      this.choixSaut=true;
+
       this.respoSol=null;
       this.respoVol=null;
     }
@@ -238,6 +297,9 @@ export class ComposerAvionComponent implements OnInit {
       }
       
       this.srvAvion.updateAvion(this.avion);
+    
+      this.triListVol();
+
       this.choixAvion=false;
       this.avion=null;
       this.choixVol=false;
@@ -246,7 +308,15 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   retirerVol() {
-    this.vols.find(v => v.idVol==this.avion.vol.idVol).situationVol=SituationVol.EN_PREPARATION
+    this.vol.situationVol=SituationVol.EN_PREPARATION
+
+    this.volsDispo.push(this.vol)
+
+    for (let i=0; i<this.volsIndispo.length; i++)
+    {
+      if (this.volsIndispo[i].idVol==this.vol.idVol) {this.volsIndispo.splice(i,1);break}
+    }
+
     this.srvVol.updateVol(this.vols.find(v => v.idVol==this.avion.vol.idVol));
 
     this.avion.vol=null;
