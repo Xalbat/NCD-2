@@ -19,11 +19,8 @@ export class PayementService {
       this.apiUrl=`${this.appConfigSrv.url}/payement`;
     }
 
-
-
-
     public reload() {
-      this.http.get<Array<Payement>>(this.apiUrl)
+      this.http.get<Array<Payement>>(this.apiUrl, this.appConfigSrv.httpOptions)
           .subscribe(t => this.payements = t);
     }
   
@@ -34,7 +31,7 @@ export class PayementService {
     }
   
     public update(payement) {
-      this.http.put<Payement>(`${ this.apiUrl }/${ payement.id }`, payement)
+      this.http.put<Payement>(`${ this.apiUrl }/${ payement.id }`, payement, this.appConfigSrv.httpOptions)
           .subscribe(resp => {
             let index = this.payements.indexOf(this.payements.find(p => p.id == payement.id));
             this.payements.splice(index, 1, resp);

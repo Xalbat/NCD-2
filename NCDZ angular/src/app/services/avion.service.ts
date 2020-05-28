@@ -18,7 +18,7 @@ export class AvionService {
   }
 
   public getAvions() {
-    this.http.get<Array<Avion>>(this.apiUrl)
+    this.http.get<Array<Avion>>(this.apiUrl, this.appConfig.httpOptions)
     .subscribe(avions => this.avions = avions);
   }
 

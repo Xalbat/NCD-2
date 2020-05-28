@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'connect', component: ConnectionComponent },
   { path: 'parachute', component: ParachuteComponent },
   { path: 'inscription', component: InscriptionComponent },
+  { path: 'payement', component: PayementComponent },
   { path: 'administration-avion', component: AdministrationAvionComponent },
   { path: 'composer-avion', component: ComposerAvionComponent },
   { path: '', redirectTo: 'avionnage', pathMatch: 'full' },

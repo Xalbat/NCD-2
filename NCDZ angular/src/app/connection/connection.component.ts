@@ -20,6 +20,7 @@ export class ConnectionComponent implements OnInit {
 
   public seConnecter() {
       this.cpmtSrv.seConnecter(this.compte);
+      
   }
 
 

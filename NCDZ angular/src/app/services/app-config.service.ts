@@ -16,7 +16,7 @@ export class AppConfigService {
   }
 
   public setCredentials(compte: Compte) {
-    
+    this.compte = compte;
     let headers: HttpHeaders = new HttpHeaders();
     let basicAuth = 'Basic ' + btoa(compte.login +":"+ compte.password);
 
