@@ -53,6 +53,7 @@
                     <th>Responsable Vol</th>
                     <th>Date</th>
                     <th>Listes des sauts</th>
+                    <th *ngIf="choixVol">Altitude max</th>
                     <th *ngIf="choixVol">Nombre de passager(s)</th>
                 </tr>
             </thead>
@@ -86,6 +87,7 @@
                                 <ng-container *ngIf="s.vol?.idVol==v.idVol">{{s.idSaut}} </ng-container>
                             </ng-container>
                         </td>
+                        <td *ngIf="choixVol">{{volAltitudeMax}}m</td>
                         <td *ngIf="choixVol">{{passagerVol}}</td>
                     </tr>
                 </ng-container>
@@ -105,7 +107,7 @@
                     <th>Hauteur du saut</th>
                     <th>Listes des parachutistes</th>
                     <th>Id Vol</th>
-                    <th><button class="btn btn-success" [disabled]="passagerVol>avion.capacite || 1>passagerVol" (click)="validerSaut()">Valider les sauts</button></th>
+                    <th><button class="btn btn-success" [disabled]="passagerVol>avion.capacite || 1>passagerVol || volAltitudeMax>avion.altitudeMax" (click)="validerSaut()">Valider les sauts</button></th>
                 </tr>
             </thead>
             <tbody>

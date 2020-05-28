@@ -32,6 +32,7 @@ export class ComposerAvionComponent implements OnInit {
   public volsIndispo : Array<Vol> = [];
   public pilotes: Array<Pilote> = [];
 
+  volAltitudeMax: number;
   passagerVol: number;
   date: Date = null;
   
@@ -60,15 +61,15 @@ export class ComposerAvionComponent implements OnInit {
     this.listPilote();
   }
 
-  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),800)}
+  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),200)}
 
   listesPara() {this.srvParachutiste.reload()}
 
-  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,500)}
+  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,200)}
 
-  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,500)}
+  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,100)}
   
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),800)}
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),500)}
 
 
   affichageAvion(id) {
@@ -117,6 +118,7 @@ export class ComposerAvionComponent implements OnInit {
       this.vol = this.srvVol.vols.find(v => v.idVol == id)
 
       this.nombrePassager();
+      this.AltitudeMax();
     }    
   }
 
@@ -142,12 +144,14 @@ export class ComposerAvionComponent implements OnInit {
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
     this.nombrePassager();
+    this.AltitudeMax();
   }
 
   supprimerSaut(saut) {
     saut.vol=null;
     this.srvSaut.updateSaut(saut);
     this.nombrePassager();
+    this.AltitudeMax();
   }
 
   retirerSaut(s){
@@ -197,12 +201,28 @@ export class ComposerAvionComponent implements OnInit {
     }
   }
 
+  AltitudeMax() {
+    this.volAltitudeMax=0;
+    for (let s of this.sauts)
+    {
+      if (s.vol?.idVol==this.vol?.idVol)
+      {
+        if (s.altitude>this.volAltitudeMax) {this.volAltitudeMax=s.altitude}
+      }
+    }
+  }
+
+
   validerSaut() {
     if (this.passagerVol>this.avion.capacite)
     {
       alert("Le vol a trop de passger pour l'avion")
     }
-    else 
+    else if (this.volAltitudeMax>this.avion.altitudeMax)
+    {
+      alert("L'avion ne peux pas monter si haut")
+    }
+    else
     {
       this.choixSaut=true;
 
