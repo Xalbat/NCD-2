@@ -25,8 +25,10 @@ const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
   { path: 'administration-avion', component: AdministrationAvionComponent },
   { path: 'composer-avion', component: ComposerAvionComponent },
+  { path: 'composer-vol', component: ComposerVolComponent },
   { path: '', redirectTo: 'avionnage', pathMatch: 'full' },
   { path: '**', component: AvionnageComponent }
+  
 ];
 
 @NgModule({
