@@ -6,6 +6,7 @@ export class Saut {
         public idSaut?: number,
         public altitude?: number,
         public tandem?: boolean,
+        public isVideo?: boolean,
         public vol?: Vol,
         public listParachutiste?: Array<Parachutiste> ){}
 }
