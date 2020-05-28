@@ -13,12 +13,14 @@ import { AvionnageComponent } from './avionnage/avionnage.component';
 import { ComposerVolComponent } from './composer-vol/composer-vol.component';
 import { ComposerAvionComponent } from './composer-avion/composer-avion.component';
 import { ParachuteComponent } from './parachute/parachute.component';
+import { AdministrationAvionComponent } from './administration-avion/administration-avion.component';
+import { AdministrationAvionRowComponent } from './administration-avion-row/administration-avion-row.component';
 
 const routes: Routes = [
   { path: 'avionnage', component: AvionnageComponent },
   { path: 'parachute', component: ParachuteComponent },
   { path: 'inscription', component: InscriptionComponent },
-  { path: 'composer-vol', component: ComposerVolComponent },
+  { path: 'administration-avion', component: AdministrationAvionComponent },
   { path: 'composer-avion', component: ComposerAvionComponent },
   { path: '', redirectTo: 'avionnage', pathMatch: 'full' },
   { path: '**', component: AvionnageComponent }
@@ -31,7 +33,9 @@ const routes: Routes = [
     ComposerAvionComponent,
     AvionnageComponent,
     ComposerVolComponent,
-    ParachuteComponent
+    ParachuteComponent,
+    AdministrationAvionComponent,
+    AdministrationAvionRowComponent
   ],
   imports: [
     BrowserModule,FormsModule,
