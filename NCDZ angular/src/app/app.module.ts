@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
  
 import { AppComponent } from './app.component';
@@ -13,6 +12,7 @@ import { AvionnageComponent } from './avionnage/avionnage.component';
 import { ComposerVolComponent } from './composer-vol/composer-vol.component';
 import { ComposerAvionComponent } from './composer-avion/composer-avion.component';
 import { ParachuteComponent } from './parachute/parachute.component';
+import { DatePipe } from '@angular/common';
 import { AdministrationAvionComponent } from './administration-avion/administration-avion.component';
 import { AdministrationAvionRowComponent } from './administration-avion-row/administration-avion-row.component';
 import { AdministrationAvionFormulaireComponent } from './administration-avion-formulaire/administration-avion-formulaire.component';
@@ -48,7 +48,7 @@ const routes: Routes = [
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
