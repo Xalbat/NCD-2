@@ -21,8 +21,14 @@ export class ParachuteComponent implements OnInit {
 
   public ajouterParachute() {
     console.log(this.formParachute)
-    this.srvParachute.add(this.formParachute);
+revision
+
+        setTimeout(() => { this.srvParachute.add(this.formParachute);
+      
+    }, 200);
     this.formParachute = new Parachute();
+    this.formParachute.revision = new RevisionParachute();
+  
   }
 
   public modifierParachute() {
