@@ -21,7 +21,6 @@ export class AvionnageComponent implements OnInit {
   public parachutiste: Parachutiste = new Parachutiste();
   public parachutistes: Array<Parachutiste> = new Array<Parachutiste>();
   public isGroup: Boolean = false;
-  public isTandem: Boolean = false;
   public sauts: Array<Saut>;
   public instructeur: Parachutiste = new Parachutiste();
   public videaste: Parachutiste = new Parachutiste();
@@ -42,9 +41,14 @@ export class AvionnageComponent implements OnInit {
   {
     this.saut.altitude = 1200;
     this.saut.tandem = false;
+    //this.saut.isVideo = false;
+
     this.srvSaut.loadCurrentSauts(); 
+
     this.srvParachutiste.reload();
-    this.listeParachutistes = this.srvParachutiste.parachutistes;
+    setTimeout(() => this.listeParachutistes = this.srvParachutiste.parachutistes, 100 )
+
+
     this.srvVol.getVol();
     console.log(this.srvSaut.sauts)
   }
@@ -73,26 +77,12 @@ affichageVol(id) {
   public ajouterSautSolo() 
   {
     this.parachutistes.push(this.parachutiste)
-    this.saut.listParachutiste = this.parachutistes;
-    console.log(this.saut)
-    this.srvSaut.createSaut(this.saut);
-    this.saut = new Saut();
-    this.parachutiste = new Parachutiste();
-    this.parachutistes = new Array<Parachutiste>();
-  }
-
-  public ajouterSautTandem() 
-  {
-    this.saut.tandem = true;
-    this.parachutistes.push(this.parachutiste);
-    this.parachutistes.push(this.instructeur);
     if (this.videaste.numeroLicence >= 0) {this.parachutistes.push(this.videaste);}
     this.saut.listParachutiste = this.parachutistes;
     console.log(this.saut)
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
     this.parachutiste = new Parachutiste();
-    this.instructeur = new Parachutiste();
     this.videaste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
   }
@@ -119,7 +109,6 @@ affichageVol(id) {
   public changeIsGroup(boolean) 
   {
     this.isGroup = boolean;
-    this.isTandem = false;
     this.saut.tandem = false;
     this.parachutiste = new Parachutiste();
     this.instructeur = new Parachutiste();
@@ -127,14 +116,9 @@ affichageVol(id) {
     this.listeParachutistes = this.srvParachutiste.parachutistes;
   }
 
-  public changeIsTandem(boolean) 
+  public changeIsVideo(boolean) 
   {
-    this.isGroup = false;
-    this.isTandem = boolean;
-    this.parachutiste = new Parachutiste();
-    this.instructeur = new Parachutiste();
-    this.parachutistes = new Array<Parachutiste>();
-    this.listeParachutistes = this.srvParachutiste.parachutistes;
+    //this.saut.isVideo = boolean;
   }
 
   public instructeurs()
