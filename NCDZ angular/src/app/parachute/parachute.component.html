@@ -1,145 +1,152 @@
-
-<div class="card-header">
-	<h5 class="card-title">Gestion des parachutes</h5>
-</div>
-
-
-<h3>Ajout d'un parachute</h3>
-
-<div class="card-body" >
-	    
-    <div class="form-group row">
-		<label for="dateVisite" class="col-sm-2 col-form-label">Nom du harnais : </label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="nomHarnais"  [(ngModel)]="formParachute.nomHarnais"/>
-		</div>
-    </div>
-    
-    <div class="form-group row">
-		<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile principale : </label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="nomVoilePricipale"  [(ngModel)]="formParachute.nomVoilePricipale"/>
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label for="prix" class="col-sm-2 col-form-label">Taille de la voile principale : </label>
-		<div class="col-sm-10">
-			<input type="number" class="form-control" id="tailleVoilePricipale" [(ngModel)]="formParachute.tailleVoilePricipale"/>
-		</div>
-    </div>
-    
-    <div class="form-group row">
-		<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile de secours : </label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="nomVoileSecours"  [(ngModel)]="formParachute.nomVoileSecours"/>
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label for="prix" class="col-sm-2 col-form-label">Taille de la voile de secours : </label>
-		<div class="col-sm-10">
-			<input type="number" class="form-control" id="tailleVoileSecours" [(ngModel)]="formParachute.tailleVoileSecours"/>
-		</div>
-	</div>
+<div class="html">
+	<br>
 	
-	<div class="form-group row">
-        <label for="prix" class="col-sm-2 col-form-label">Etat du parachute : </label>
-        <div class="col-sm-10">
-            <select id="etatParachute" class="form-control"   [(ngModel)]="formParachute.etatParachute">
-                <option value="DISPONIBLE">DISPONIBLE</option>
-                <option value="MAINTENANCE">MAINTENANCE</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="prix" class="col-sm-2 col-form-label">Proprietaire : </label>
-        <div class="col-sm-10">
-            <select id="proprietaire" class="form-control"   [(ngModel)]="formParachute.proprietaire">
-                <option value="PERSONNEL">PERSONNEL</option>
-                <option value="CENTRE">CENTRE</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="prix" class="col-sm-2 col-form-label">Type de sécurité : </label>
-        <div class="col-sm-10">
-            <select id="typeSecurite" class="form-control"   [(ngModel)]="formParachute.typeSecurite">
-                <option value="CYPRESS">CYPRESS</option>
-                <option value="VIGIL">VIGIL</option>
-            </select>
-        </div>
-    </div>
-
-    
-    <div class="form-group row" *ngIf = "formParachute.revision">
-		<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Primaire : </label>
-		<div class="col-sm-10">
-			<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrimaire"/>
-		</div>
-		<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Secours : </label>
-		<div class="col-sm-10">
-			<input type="date" class="form-control" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
-		</div>
-    </div> 
-    
-    
-
+	<div class="card m-3" >
 	
-
-	<div class="card-footer text-right">
-		<button *ngIf="!isEditing" (click)="ajouterParachute()" class="btn btn-success m-1">Ajouter  </button>
-		<button *ngIf="isEditing" (click)="modifierParachute()" class="btn btn-warning m-1">Modifier</button>
-		<button *ngIf="isEditing" (click)="annulerModification()" class="btn btn-danger m-1">Annuler</button> 
-	</div>
-
-</div>
+		<div class="card-header">
+			<h3 class="card-title">Gestion des parachutes</h3>
+		</div>
 
 
+		<h5>Ajout d'un parachute</h5>
 
-<h3>Liste des parachutes</h3>
-
-
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Nom du harnais</th>
-			<th>Nom de la voile principale</th>
-            <th>Taille de la voile principale </th>
-            <th>Nom de la voile de secours</th>
-			<th>Taille de la voile de secours </th>
-			<th>Etat du parachute</th>
-            <th>Proprietaire </th>
-            <th>Type de sécurité </th>
-            <th>ID de la derniere revision </th>
-			<th></th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<tr *ngFor="let parachute of srvParachute.parachutes">
-			<td>{{ parachute.idParachute }}</td>
-			<td>{{ parachute.nomHarnais }}</td>
-			<td>{{ parachute.nomVoilePricipale }}</td>
-            <td>{{ parachute.tailleVoilePricipale }}</td>
-            <td>{{ parachute.nomVoileSecours }}</td>
-			<td>{{ parachute.tailleVoileSecours }}</td>
-			<td>{{ parachute.etatParachute }}</td>
-            <td>{{ parachute.proprietaire }}</td>
-            <td>{{ parachute.typeSecurite }}</td>
-            <td>{{ parachute.revision.idRevision }}</td> 
-			<td> </td>
+		<div class="card-body" >
+				
+			<div class="form-group row">
+				<label for="dateVisite" class="col-sm-2 col-form-label">Nom du harnais : </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nomHarnais"  [(ngModel)]="formParachute.nomHarnais"/>
+				</div>
+			</div>
 			
+			<div class="form-group row">
+				<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile principale : </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nomVoilePricipale"  [(ngModel)]="formParachute.nomVoilePricipale"/>
+				</div>
+			</div>
 
-			<td>
-				<button (click)="editerParachute(parachute)" class="btn btn-warning m-1">Editer</button>
-				<button  (click)="supprimerParachute(parachute)" class="btn btn-danger m-1">Supprimer</button>
-			</td>
-		</tr>
-	</tbody> 
-</table>
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Taille de la voile principale : </label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="tailleVoilePricipale" [(ngModel)]="formParachute.tailleVoilePricipale"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile de secours : </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nomVoileSecours"  [(ngModel)]="formParachute.nomVoileSecours"/>
+				</div>
+			</div>
 
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Taille de la voile de secours : </label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="tailleVoileSecours" [(ngModel)]="formParachute.tailleVoileSecours"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Etat du parachute : </label>
+				<div class="col-sm-10">
+					<select id="etatParachute" class="form-control"   [(ngModel)]="formParachute.etatParachute">
+						<option value="DISPONIBLE">DISPONIBLE</option>
+						<option value="MAINTENANCE">MAINTENANCE</option>
+					</select>
+				</div>
+			</div>
 
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Proprietaire : </label>
+				<div class="col-sm-10">
+					<select id="proprietaire" class="form-control"   [(ngModel)]="formParachute.proprietaire">
+						<option value="PERSONNEL">PERSONNEL</option>
+						<option value="CENTRE">CENTRE</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Type de sécurité : </label>
+				<div class="col-sm-10">
+					<select id="typeSecurite" class="form-control"   [(ngModel)]="formParachute.typeSecurite">
+						<option value="CYPRESS">CYPRESS</option>
+						<option value="VIGIL">VIGIL</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+	
+    
+		<div class="form-group row" *ngIf = "formParachute.revision">
+			<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Primaire : </label>
+				<div class="col-sm-10">
+					<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrimaire"/>
+				</div>
+			<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Secours : </label>
+				<div class="col-sm-10">
+					<input type="date" class="form-control" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
+				</div>
+		</div> 
+			
+    
+
+		<div class="card-footer text-right">
+			<button *ngIf="!isEditing" (click)="ajouterParachute()" class="btn btn-success m-1">Ajouter  </button>
+			<button *ngIf="isEditing" (click)="modifierParachute()" class="btn btn-warning m-1">Modifier</button>
+			<button *ngIf="isEditing" (click)="annulerModification()" class="btn btn-danger m-1">Annuler</button> 
+		</div>
+
+	</div>
+
+	<div class="card m-3" >
+        <div class="card-header">
+			<h5>Liste des parachutes</h5>
+		</div>
+
+		<div class="card-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nom du harnais</th>
+						<th>Nom de la voile principale</th>
+						<th>Taille de la voile principale </th>
+						<th>Nom de la voile de secours</th>
+						<th>Taille de la voile de secours </th>
+						<th>Etat du parachute</th>
+						<th>Proprietaire </th>
+						<th>Type de sécurité </th>
+						<th>ID de la derniere revision </th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let parachute of srvParachute.parachutes">
+						<td>{{ parachute.idParachute }}</td>
+						<td>{{ parachute.nomHarnais }}</td>
+						<td>{{ parachute.nomVoilePricipale }}</td>
+						<td>{{ parachute.tailleVoilePricipale }}</td>
+						<td>{{ parachute.nomVoileSecours }}</td>
+						<td>{{ parachute.tailleVoileSecours }}</td>
+						<td>{{ parachute.etatParachute }}</td>
+						<td>{{ parachute.proprietaire }}</td>
+						<td>{{ parachute.typeSecurite }}</td>
+						<td>{{ parachute.revision.idRevision }}</td> 
+						<td> </td>
+						
+				
+						<td>
+							<button (click)="editerParachute(parachute)" class="btn btn-warning m-1">Editer</button>
+							<button  (click)="supprimerParachute(parachute)" class="btn btn-danger m-1">Supprimer</button>
+						</td>
+			
+					</tr>
+				</tbody> 
+			</table>
+		</div>
+	</div>
+</div>
