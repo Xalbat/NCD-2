@@ -28,7 +28,6 @@ const routes: Routes = [
   { path: 'composer-vol', component: ComposerVolComponent },
   { path: '', redirectTo: 'avionnage', pathMatch: 'full' },
   { path: '**', component: AvionnageComponent }
-  
 ];
 
 @NgModule({
