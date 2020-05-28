@@ -10,7 +10,7 @@ export class Avion {
         public capacite?: number, 
         public etat?: EtatAvion, 
         public matricule?: string, 
-        public model?: string, 
+        public modele?: string, 
         public rotation?: number, 
         public rotationMax?: number, 
         public tempsMontee?: number, 
