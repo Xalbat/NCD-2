@@ -20,12 +20,12 @@ export class Vol {
         public listSaut?: Array<Saut>)
         {}
 
-    getNbParachutistes(){
+   /* getNbParachutistes(){
         let nbPara = 0;
         this.listSaut.forEach(s =>{
             nbPara += s.listParachutiste.length
         })
         return nbPara
-    }
+    }*/
 
 }

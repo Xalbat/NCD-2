@@ -12,9 +12,11 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { AvionnageComponent } from './avionnage/avionnage.component';
 import { ComposerVolComponent } from './composer-vol/composer-vol.component';
 import { ComposerAvionComponent } from './composer-avion/composer-avion.component';
+import { ParachuteComponent } from './parachute/parachute.component';
 
 const routes: Routes = [
   { path: 'avionnage', component: AvionnageComponent },
+  { path: 'parachute', component: ParachuteComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'composer-vol', component: ComposerVolComponent },
   { path: 'composer-avion', component: ComposerAvionComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
     InscriptionComponent,
     ComposerAvionComponent,
     AvionnageComponent,
-    ComposerVolComponent
+    ComposerVolComponent,
+    ParachuteComponent
   ],
   imports: [
     BrowserModule,FormsModule,

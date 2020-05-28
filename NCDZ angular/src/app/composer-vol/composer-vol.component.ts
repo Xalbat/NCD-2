@@ -9,6 +9,7 @@ import { SituationVol } from '../enums/situation-vol.enum';
 import { SituationAvion } from '../enums/situation-avion.enum';
 import { EtatAvion } from '../enums/etat-avion.enum';
 import { SautService } from '../services/saut.service';
+import { Niveau } from '../enums/niveau.enum';
 
 @Component({
   selector: 'composer-vol,[composer-vol]',
@@ -66,11 +67,11 @@ export class ComposerVolComponent implements OnInit {
   }
 
   listeResponsablesVol(){
-    return this.listeAttente.filter(para => para.numeroLicence != this.responsableSol.numeroLicence && para.niveau != "Debutant")
+    return this.listeAttente.filter(para => para.numeroLicence != this.responsableSol.numeroLicence && para.niveau != Niveau.ELEVE)
   }
 
   listeResponsablesSol(){
-    return this.listeAttente.filter(para => para.numeroLicence != this.responsableVol.numeroLicence && para.niveau != "Debutant")
+    return this.listeAttente.filter(para => para.numeroLicence != this.responsableVol.numeroLicence && para.niveau != Niveau.ELEVE)
   }
 
   affichageAvion(id) {

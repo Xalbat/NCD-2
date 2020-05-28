@@ -28,7 +28,6 @@ export class VolService {
   }
 
   public updateVol(vol: Vol) {
-    console.log(vol);
     this.http.put<Vol>(this.apiUrl + "/" + vol.idVol, vol)
     .subscribe();
   }

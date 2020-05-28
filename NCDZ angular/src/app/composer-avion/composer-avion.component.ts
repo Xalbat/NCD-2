@@ -6,6 +6,7 @@ import { Vol } from '../classes/vol';
 import { AvionService } from '../services/avion.service';
 import { VolService } from '../services/vol.service';
 import { ParachutisteService } from '../services/parachutiste.service';
+import { Niveau } from '../enums/niveau.enum';
 import { SautService } from '../services/saut.service';
 import { Saut } from '../classes/saut';
 
@@ -161,7 +162,7 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   instructeur() {
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau != "ELEVE")
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != "ELEVE")
   }
 
   

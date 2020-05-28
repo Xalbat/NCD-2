@@ -14,10 +14,10 @@ export class InscriptionComponent implements OnInit {
   isEditing = false;
   faParachuteBox = faParachuteBox
 
-  constructor(private srvParachutiste: ParachutisteService) { }
+  constructor(public srvParachutiste: ParachutisteService) { }
 
   ngOnInit(){
-    //this.srvParachutiste.reload();
+    this.srvParachutiste.reload();
   }
   public ajouterParachutiste() {
     console.log(this.formParachutiste)
@@ -32,8 +32,7 @@ export class InscriptionComponent implements OnInit {
   }
 
   public annulerModification() {
-    this.isEditing = false;
-    this.formParachutiste = new Parachutiste();
+   this.modifierParachutiste();
   }
 
   public editerParachutiste(parachutiste) {
