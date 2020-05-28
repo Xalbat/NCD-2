@@ -18,14 +18,14 @@
     <div class="form-group row">
 		<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile principale : </label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="nomVoilePrincipale"  [(ngModel)]="formParachute.nomVoilePrincipale"/>
+			<input type="text" class="form-control" id="nomVoilePricipale"  [(ngModel)]="formParachute.nomVoilePricipale"/>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label for="prix" class="col-sm-2 col-form-label">Taille de la voile principale : </label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" id="tailleVoilePrincipale" [(ngModel)]="formParachute.tailleVoilePrincipale"/>
+			<input type="number" class="form-control" id="tailleVoilePricipale" [(ngModel)]="formParachute.tailleVoilePricipale"/>
 		</div>
     </div>
     
@@ -73,13 +73,19 @@
         </div>
     </div>
 
-    <!--
-    <div class="form-group row">
+    
+    <div class="form-group row" *ngIf = "formParachute.revision">
 		<label for="dateVisite" class="col-sm-2 col-form-label">ID du la derniere revision : </label>
-		<div class="col-sm-10">
-			<input type="number" class="form-control" id="revision.idRevision"  [(ngModel)]="formParachute.revision.idRevision"/>
+		<div>
+		<input type="number" class="form-control" [id]="formParachute?.revision.idRevision"  [(ngModel)]="formParachute?.revision.idRevision"/>
 		</div>
-    </div> -->
+		<div class="col-sm-10">
+			<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrincipale"/>
+		</div>
+		<div class="col-sm-10">
+			<input type="date" class="form-control" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
+		</div>
+    </div> 
     
     
 
@@ -126,7 +132,7 @@
 			<td>{{ parachute.etatParachute }}</td>
             <td>{{ parachute.proprietaire }}</td>
             <td>{{ parachute.typeSecurite }}</td>
-           <!-- <td>{{ parachute.revision.idRevision }}</td> -->
+            <td>{{ parachute.revision.idRevision }}</td> 
 			<td> </td>
 			
 

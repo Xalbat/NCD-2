@@ -8,8 +8,8 @@ export class Parachute {
 
     constructor(public idParachute? : number, 
                 public nomHarnais? : String, 
-                public nomVoilePrincipale? : String,
-                public tailleVoilePrincipale? : number,
+                public nomVoilePricipale? : String,
+                public tailleVoilePricipale? : number,
                 public nomVoileSecours? : String,
                 public tailleVoileSecours? : number,
                 public etatParachute?: EtatParachute,
