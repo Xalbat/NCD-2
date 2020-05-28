@@ -28,13 +28,12 @@ export class ComposerAvionComponent implements OnInit {
   
   choixAvion = false;
   choixVol = false;
-  indexAvion=0;
-  indexVol=0;
+  choixSaut = true;
+
   listeAttente: Array<Parachutiste> = [];
   listeSautDemandés: Array<Parachutiste> = [];
   respoSol: Parachutiste=null;
   respoVol: Parachutiste=null;
-  capacite=0;
 
   constructor(public srvAvion:AvionService, 
               public srvVol: VolService, 
@@ -66,6 +65,7 @@ export class ComposerAvionComponent implements OnInit {
 
   affichageVol(id) {
     this.choixVol=(!this.choixVol);
+    this.choixSaut=true;
     this.choixVol
         ? this.vol = this.srvVol.vols.find(v => v.idVol == id)
         : this.vol = null;
@@ -76,14 +76,12 @@ export class ComposerAvionComponent implements OnInit {
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
     this.nombrePassager();
-    alert(this.passagerVol)
   }
 
   supprimerSaut(saut) {
     saut.vol=null;
     this.srvSaut.updateSaut(saut);
     this.nombrePassager();
-    alert(this.passagerVol)
   }
 
   retirerSaut(s){
@@ -94,30 +92,23 @@ export class ComposerAvionComponent implements OnInit {
     this.passagerVol=0;
     for (let s of this.sauts)
     {
-      if (s.vol.idVol==this.vol.idVol)
+      if (s.vol?.idVol==this.vol?.idVol)
       {
         this.passagerVol=this.passagerVol+s.listParachutiste.length;
       }
     }
   }
-    
-  attributionVolAvion() {
-    if (this.avion==null) {alert('Choissiez un avion !')}
-    else if (this.vol==null) {alert('Choissiez un vol !')}
-    else 
+
+  validerSaut() {
+    if (this.passagerVol>this.avion.capacite)
     {
-      this.avion.vol=this.vol;
-      for (let i=0; i<this.avions.length; i++)
-      {
-        if (this.avions[i].idAvion==this.avion.idAvion) {this.avions[i]=this.avion;break}
-      }
-      
-      this.srvAvion.updateAvion(this.avion);
-      this.choixAvion=false;
-      this.avion=null;
-      this.choixVol=false;
-      this.vol=null;
+      alert("Le vol a trop de passger pour l'avion")
     }
+    else {this.choixSaut=false;}
+  }
+
+  instructeur() {
+    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != "ELEVE")
   }
 
   attributionRespoSol() {
@@ -161,9 +152,26 @@ export class ComposerAvionComponent implements OnInit {
     }
   }
 
-  instructeur() {
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != "ELEVE")
+  validationRespo() {
+
   }
 
-  
+  attributionVolAvion() {
+    if (this.avion==null) {alert('Choissiez un avion !')}
+    else if (this.vol==null) {alert('Choissiez un vol !')}
+    else 
+    {
+      this.avion.vol=this.vol;
+      for (let i=0; i<this.avions.length; i++)
+      {
+        if (this.avions[i].idAvion==this.avion.idAvion) {this.avions[i]=this.avion;break}
+      }
+      
+      this.srvAvion.updateAvion(this.avion);
+      this.choixAvion=false;
+      this.avion=null;
+      this.choixVol=false;
+      this.vol=null;
+    }
+  }
 }

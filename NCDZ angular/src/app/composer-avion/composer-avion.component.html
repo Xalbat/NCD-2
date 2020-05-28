@@ -5,7 +5,7 @@
         <label><strong>Listes des avions disponibles</strong></label>
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr align="center">
                     <th>Id</th>
                     <th>Altitude max</th>
                     <th>Capacité</th>
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <ng-container *ngFor="let a of avions">
-                    <tr *ngIf="!choixAvion || a.idAvion==avion.idAvion" (click)="affichageAvion(a.idAvion)" class="choixTableau">
+                    <tr align="center" *ngIf="!choixAvion || a.idAvion==avion.idAvion" (click)="affichageAvion(a.idAvion)" class="choixTableau">
                         <td>{{a.idAvion}}</td>
                         <td>{{a.altitudeMax}}m</td>
                         <td>{{a.capacite}}</td>
@@ -43,7 +43,7 @@
         <label><strong>Listes des vols en attente</strong></label>
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr align="center">
                     <th>Id</th>
                     <th>Situation Vol</th>
                     <th>Responsable Sol</th>
@@ -55,7 +55,7 @@
             </thead>
             <tbody>
                 <ng-container *ngFor="let v of vols, let i=index">
-                    <tr *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
+                    <tr align="center" *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
                         <td>{{v.idVol}}</td>
                         <td>{{v.situationVol}}</td>
                         <td>
@@ -71,7 +71,7 @@
                         <td>{{v.date}}</td>
                         <td>
                             <ng-container *ngFor="let s of sauts">
-                                <ng-container *ngIf="s.vol?.idVol==v.idVol">{{s.idSaut}} </ng-container>
+                                <ng-container *ngIf="s.vol?.idVol==v.idVol">{{s.idSaut}}, </ng-container>
                             </ng-container>
                         </td>
                         <td>{{passagerVol}}</td>
@@ -84,22 +84,21 @@
 
 <br>
 
-<div class="container" *ngIf="choixAvion && choixVol">
+<div class="container" *ngIf="choixAvion && choixVol && choixSaut">
     <div class="row">
         <label><strong>Listes des sauts en attente</strong></label>
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr align="center" >
                     <th>Id Saut</th>
                     <th>Hauteur du saut</th>
                     <th>Listes des parachutistes</th>
                     <th>Id Vol</th>
-                    <th></th>
-                    <th></th>
+                    <th><button class="btn btn-success" [disabled]="passagerVol>avion.capacite" (click)="validerSaut()">Valider les sauts</button></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let s of sauts">
+                <tr align="center" *ngFor="let s of sauts">
                     <td>{{s.idSaut}}</td>
                     <td>{{s.altitude}}</td>
                     <td><p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p></td>
@@ -115,34 +114,38 @@
     </div>
 </div>
 
-<!-- <div class="container" *ngIf="choixAvion && choixVol">
+<div class="container" *ngIf="choixAvion && choixVol && !choixSaut">
     <div class="row">
-        <div class="col-6">
-            <div class="form-group row">
-                <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Sol : </label>
-                <div class="col-md-10">
-                    <select style="align-items: center;" [(ngModel)]="respoSol">
+        <label><strong>Choix des responsables au sol et en vol</strong></label>
+        <table class="table">
+            <tr>
+                <td>Choix du respo Sol : </td>
+                <td>
+                    <select class="form-control" style="align-items: center;" [(ngModel)]="respoSol">
                         <option *ngFor="let p of instructeur()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
                     </select>
-                </div>
-                <button class="btn btn-primary" (click)="attributionRespoSol()">Attribuer le Respo</button>
-            </div>
-        
-            <div class="form-group row">
-                <label for="dateVisite" class="col-sm-2 col-form-label">Choix du respo Vol : </label>
-                <div class="col-md-10">
-                    <select style="align-items: center;" [(ngModel)]="respoVol">
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="attributionRespoSol()">Attribuer le Respo</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Choix du respo Vol : </td>
+                <td>
+                    <select class="form-control" style="align-items: center;" [(ngModel)]="respoVol">
                         <option *ngFor="let p of instructeur()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
                     </select>
-                </div>
-                <button class="btn btn-primary" (click)="attributionRespoVol()">Attribuer le Respo</button>
-            </div>
-        </div>
-        <div class="col">
-            <composer-vol *ngIf="vol && avion" class="w-100"></composer-vol>
-        </div>
+                </td>
+                <td><button class="btn btn-primary" (click)="attributionRespoVol()">Attribuer le Respo</button></td>
+            </tr>
+            <tr align="center">
+                <td [colSpan]="3">
+                    <button class="btn btn-success" [disabled]="vol.respoSol==null || vol.respoVol==null" (click)="validationRespo()">Valider les responsables sol et vol</button>
+                </td>
+            </tr>
+        </table>
     </div>
-</div> -->
+</div>
 
 <!-- <div class="container" *ngIf="choixAvion && choixVol">
     <br>
