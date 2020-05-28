@@ -1,7 +1,6 @@
 import { Parachute } from './parachute';
 import { Saut } from './saut';
 import { Niveau } from '../enums/niveau.enum';
-import { Saut } from './saut';
 
 export class Parachutiste {
 
