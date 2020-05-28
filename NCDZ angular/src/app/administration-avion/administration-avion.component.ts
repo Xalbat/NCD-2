@@ -20,7 +20,7 @@ export class AdministrationAvionComponent implements OnInit {
 
   public reload(){
     this.avionSvc.getAvions()
-    setTimeout(()=> this.avions = this.avionSvc.avions,150)
+    setTimeout(()=> this.avions = this.avionSvc.avions,250)
   }
 
 }

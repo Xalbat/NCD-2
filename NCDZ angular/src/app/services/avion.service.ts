@@ -18,7 +18,7 @@ export class AvionService {
   }
 
   public getAvions() {
-    this.http.get<Array<Avion>>(this.apiUrl)
+    this.http.get<Array<Avion>>(this.apiUrl,this.appConfig.httpOptions)
     .subscribe(avions => this.avions = avions);
   }
 
@@ -30,6 +30,10 @@ export class AvionService {
   public updateAvion(avion: Avion) {
     this.http.put<Avion>(this.apiUrl + "/" + avion.idAvion, avion,this.appConfig.httpOptions)
     .subscribe();
+  }
+
+  public deleteAvion(avion : Avion){
+    this.http.delete(this.apiUrl+'/'+avion.idAvion+'/supp',this.appConfig.httpOptions).subscribe()
   }
 
 }
