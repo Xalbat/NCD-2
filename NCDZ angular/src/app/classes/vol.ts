@@ -14,8 +14,8 @@ export class Vol {
         public pilote?: Pilote,
         public avion?: Avion,
         public situationVol?: SituationVol, 
-        public respoVol?:Parachutiste, 
-        public respoSol?:Parachutiste, 
+        public respoVol?: Parachutiste, 
+        public respoSol?: Parachutiste, 
         public date?: Date,
         public listSaut?: Array<Saut>)
         {}

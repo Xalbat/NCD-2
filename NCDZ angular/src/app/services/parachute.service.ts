@@ -29,7 +29,7 @@ export class ParachuteService {
   public update(parachute) {
     this.http.put<Parachute>(`${ this.apiUrl }/${ parachute.id }`, parachute)
         .subscribe(respParachute => {
-          let index = this.parachutes.indexOf(this.parachutes.find(p => p.id == parachute.id));
+          let index = this.parachutes.indexOf(this.parachutes.find(p => p.idParachute == parachute.id));
           this.parachutes.splice(index, 1, respParachute);
         });
   }

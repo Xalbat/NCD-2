@@ -1,32 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+
 import { Compte } from '../classes/compte';
-import { AppConfigService } from '../app-config.service';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CompteService {
-  private apiUrl: string ="";
-  public comptes: Array<Compte> = null;
-  constructor(private appConfig: AppConfigService, private http: HttpClient, private router: Router) {}
+export class CompteService implements CanActivate {
+  private apiUrl: string = "";
+  public compte: Compte = new Compte();
+  
+  constructor(
+    private appConfig: AppConfigService, 
+    private http: HttpClient, 
+    private router: Router) {
+      this.apiUrl = `${ this.appConfig.url }/compte`;
+    }
+    
+
+    
+    public seConnecter(compte: Compte) {
+      
+    console.log(compte);
+    
+      this.http.post( this.apiUrl + "/login", compte)
+      .subscribe(resp => {
+        this.compte = resp;
+        this.compte.login = compte.login;
+        this.compte.password = compte.password;
+         alert("dans compte serv")
+        this.appConfig.setCredentials(this.compte);
+        this.router.navigate([ '/composer-avion' ]);
+      });
+    }
 
 
-  public reload() {
-    this.http.get<Array<Compte>>(this.apiUrl)
-        .subscribe(comptes => this.comptes = this.comptes);
-  }
-
-  public ajouterParachutiste(p){
-    this.http.post<Compte>(`${this.apiUrl}/inscription`, p)
-    .subscribe(respParachutiste => {
-      if (respParachutiste == null) {
-        alert('Champs invalides')
+    
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+      if (this.compte && this.compte.idCompte) {
+        return true;
       }
-      else if(respParachutiste !== null){
-        this.router.navigate([`/home`]);
-      }
-    })
+      this.router.navigate([ '/avionnage' ]);
+    }
+    
   }
-}
