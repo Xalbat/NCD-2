@@ -18,17 +18,17 @@ export class PiloteService {
   }
 
   public getPilote() {
-    this.http.get<Array<Pilote>>(this.apiUrl)
+    this.http.get<Array<Pilote>>(this.apiUrl,this.appConfig.httpOptions)
     .subscribe(pilotes => this.pilotes =pilotes);
   }
 
   public addPilote(pilote: Pilote) {
-    this.http.post<Pilote>(this.apiUrl, Pilote)
+    this.http.post<Pilote>(this.apiUrl, Pilote,this.appConfig.httpOptions)
     .subscribe();
   }
 
   public updatePilote(pilote: Pilote) {
-    this.http.put<Pilote>(this.apiUrl + "/" + pilote.licence, pilote)
+    this.http.put<Pilote>(this.apiUrl + "/" + pilote.licence, pilote,this.appConfig.httpOptions)
     .subscribe();
   }
 

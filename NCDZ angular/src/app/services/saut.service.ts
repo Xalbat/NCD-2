@@ -16,17 +16,17 @@ export class SautService {
   }
 
   public loadCurrentSauts() {
-    this.http.get<Array<Saut>>(this.apiUrl)
+    this.http.get<Array<Saut>>(this.apiUrl,this.appConfig.httpOptions)
     .subscribe(sauts => this.sauts = sauts);
   }
 
   public createSaut(saut) {
-    this.http.post<Saut>(this.apiUrl, saut)
+    this.http.post<Saut>(this.apiUrl, saut,this.appConfig.httpOptions)
     .subscribe(respSaut => this.sauts.push(respSaut));
   }
 
   public updateSaut(saut) {
-    this.http.put<Saut>(this.apiUrl + "/" + saut.idSaut, saut)
+    this.http.put<Saut>(this.apiUrl + "/" + saut.idSaut, saut,this.appConfig.httpOptions)
     .subscribe();
   }
 

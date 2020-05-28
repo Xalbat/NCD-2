@@ -18,17 +18,17 @@ export class VolService {
   }
 
   public getVol() {
-    this.http.get<Array<Vol>>(this.apiUrl)
+    this.http.get<Array<Vol>>(this.apiUrl,this.appConfig.httpOptions)
     .subscribe(Vol => this.vols =Vol);
   }
 
   public addVol(vol: Vol) {
-    this.http.post<Vol>(this.apiUrl, vol)
+    this.http.post<Vol>(this.apiUrl, vol,this.appConfig.httpOptions)
     .subscribe();
   }
 
   public updateVol(vol: Vol) {
-    this.http.put<Vol>(this.apiUrl + "/" + vol.idVol, vol)
+    this.http.put<Vol>(this.apiUrl + "/" + vol.idVol, vol,this.appConfig.httpOptions)
     .subscribe();
   }
 }
