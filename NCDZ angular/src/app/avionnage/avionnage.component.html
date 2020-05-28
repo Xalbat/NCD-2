@@ -1,173 +1,181 @@
 <!-- MODULE AVIONNAGE -->
-<div class="card m-3">
-	<div class="card-header">
-        <h5 class="card-title">Demande de saut</h5>
+<br>
+<div type="div1">
+    <div class="card m-3">
+        <div class="card-header">
+            <h5 class="card-title">Demande de saut</h5>
 
-            <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
-                <label class="btn btn-outline-warning active">
-                    <input (click)="changeIsGroup(false)" name="typeSaut" type="radio" value = "Solo"> Solo
-                </label>
-                <label class="btn btn-outline-warning">
-                    <input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value ="Group"> Group
-                </label>
-            </div>               
-    </div>
-    
-	<div class="card-body"> 
+                <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                    <label class="btn btn-outline-warning active">
+                        <input (click)="changeIsGroup(false)" name="typeSaut" type="radio" value = "Solo"> Solo
+                    </label>
+                    <label class="btn btn-outline-warning">
+                        <input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value ="Group"> Group
+                    </label>
+                </div>               
+        </div>
+        
+        <div class="card-body"> 
 
-            <!-- SOLO -->
-            <div *ngIf = "!isGroup" class="form-group row">
-                <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
-                <div class="col-sm-10">
-                    <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
-                        <ng-container *ngFor="let p of srvParachutiste.parachutistes">
-                            <option *ngIf = "p!= videaste && p!= instructeur" [ngValue] = "p">
-                                [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
+                <!-- SOLO -->
+                <div *ngIf = "!isGroup" class="form-group row">
+                    <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
+                            <ng-container *ngFor="let p of srvParachutiste.parachutistes">
+                                <option *ngIf = "p!= videaste && p!= instructeur" [ngValue] = "p">
+                                    [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
+                                </option>
+                            </ng-container>
+                        </select>
+                    </div>  
+                </div>
+
+                <!-- GROUPE -->
+                <div *ngIf = "isGroup" class="form-group row">
+                    <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
+                            <option *ngFor="let p of confirmes()" [ngValue] = "p">
+                                [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}  - {{ p.niveau }}
                             </option>
-                        </ng-container>
-                    </select>
-                </div>  
-            </div>
+                        </select>
+                    </div>  
+                    <div class="col-sm-2">
+                        <button (click)="ajouterParachutiste()" class="btn btn-primary m-1">Ajouter</button>
+                    </div>
+                </div>
 
-            <!-- GROUPE -->
-            <div *ngIf = "isGroup" class="form-group row">
-                <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
-                <div class="col-sm-8">
-                    <select class="form-control" id = "parachutiste" [(ngModel)]="parachutiste">
-                        <option *ngFor="let p of confirmes()" [ngValue] = "p">
-                            [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}  - {{ p.niveau }}
-                        </option>
+                <table *ngIf = "isGroup && parachutistes.length" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Licence</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        <tr *ngFor="let parachutiste of parachutistes">
+                            <td>{{ parachutiste.numeroLicence }}</td>
+                            <td>{{ parachutiste.nom }}</td>
+                            <td>{{ parachutiste.prenom }}</td>
+                            <td><button (click)="supprimerParachutiste(parachutiste)" class="btn btn-danger m-1">Supprimer</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf = "!isGroup" class="form-group row">
+                    <label for="nom" class="col-sm-4 col-form-label">Videaste: </label>
+                    <div class="col-sm-4">
+                        <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                            <label class="btn btn-outline-primary active">
+                                <input (click)="changeIsVideo(true)" name="video" type="radio" value = "true"> OUI
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input (click)="changeIsVideo(false)" name="video" type="radio" value ="false"> NON
+                            </label>
+                        </div>  
+                    </div>  
+                    <div class="col-sm-4"></div>
+                </div>
+
+            <!-- ALTITUDE -->
+            <div class="form-group row">
+                <label for="altitude" class="col-sm-2 col-form-label"> Altitude : </label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="altitude" [(ngModel)]="saut.altitude">
+                        <option value="1200">1200m</option>
+                        <option value="1600">1600m</option>
+                        <option value="2000">2000m</option>
+                        <option value="2500">2500m</option>
+                        <option value="4000">4000m</option>
+                        <option value="6000">6000m</option>
                     </select>
-                </div>  
-                <div class="col-sm-2">
-                    <button (click)="ajouterParachutiste()" class="btn btn-primary m-1">Ajouter</button>
                 </div>
             </div>
 
-            <table *ngIf = "isGroup && parachutistes.length" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Licence</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th></th>
-                    </tr>
-                </thead>
-            
-                <tbody>
-                    <tr *ngFor="let parachutiste of parachutistes">
-                        <td>{{ parachutiste.numeroLicence }}</td>
-                        <td>{{ parachutiste.nom }}</td>
-                        <td>{{ parachutiste.prenom }}</td>
-                        <td><button (click)="supprimerParachutiste(parachutiste)" class="btn btn-danger m-1">Supprimer</button></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div *ngIf = "!isGroup" class="form-group row">
-                <label for="nom" class="col-sm-4 col-form-label">Videaste: </label>
-                <div class="col-sm-4">
-                    <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
-                        <label class="btn btn-outline-primary active">
-                            <input (click)="changeIsVideo(true)" name="video" type="radio" value = "true"> OUI
-                        </label>
-                        <label class="btn btn-outline-primary">
-                            <input (click)="changeIsVideo(false)" name="video" type="radio" value ="false"> NON
-                        </label>
-                    </div>  
-                </div>  
-                <div class="col-sm-4"></div>
-            </div>
-
-        <!-- ALTITUDE -->
-        <div class="form-group row">
-            <label for="altitude" class="col-sm-2 col-form-label"> Altitude : </label>
-            <div class="col-sm-10">
-                <select class="form-control" name="altitude" [(ngModel)]="saut.altitude">
-                    <option value="1200">1200m</option>
-                    <option value="1600">1600m</option>
-                    <option value="2000">2000m</option>
-                    <option value="2500">2500m</option>
-                    <option value="4000">4000m</option>
-                    <option value="6000">6000m</option>
-                </select>
-            </div>
         </div>
+            <div *ngIf = "isGroup" class="card-footer text-right">
+                <button (click)="ajouterSautGroup()" class="btn btn-success m-1">Lets jump now</button>
+            </div>
 
+            <div *ngIf = "!isGroup" class="card-footer text-right">
+                <button (click)="ajouterSautSolo()" class="btn btn-success m-1">Lets jump now</button>
+            </div>
     </div>
-        <div *ngIf = "isGroup" class="card-footer text-right">
-            <button (click)="ajouterSautGroup()" class="btn btn-success m-1">Lets jump now</button>
-        </div>
 
-        <div *ngIf = "!isGroup" class="card-footer text-right">
-            <button (click)="ajouterSautSolo()" class="btn btn-success m-1">Lets jump now</button>
-        </div>
-</div>
+<br>
 
 <!-- ESPACE AVIONNAGE -->
-<div class="card m-3">
-	<div class="card-header">
-        <h5 class="card-title">Espace Avionnage</h5>
+    <div class="card m-3">
+        <div class="card-header">
+            <h5 class="card-title">Espace Avionnage</h5>
 
-                    <label><strong>Liste des parachutistes en attente</strong></label>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>idSaut</th>
-                                    <th>Prenom</th>
-                                    <th>Altitude</th>
-                                </tr>
-                            </thead>
-                        
-                            <tbody>
-                                <ng-container *ngFor="let saut of srvSaut.sauts">
-                                        <tr *ngIf = "saut.vol == null" >
-                                            <td>{{ saut.idSaut }}</td>
-                                            <td>
-                                                <ng-container *ngFor = "let parachutiste of parachutistesAttente(saut)">
-                                                {{ parachutiste.prenom }} {{ parachutiste.nom }} - {{ parachutiste.niveau }} <br>
-                                                </ng-container >
-                                            </td>
-                                            <td>{{ saut.altitude }}m</td>
-                                        </tr> 
-                                </ng-container>
-                            </tbody>
-                        </table>
-                
-                
-                    <label><strong>Liste des parachutistes enregistrés pour un vol</strong></label>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Avion</th>
-                                    <th>Situation</th>
-                                    <th>Vol</th>
-                                    <th>Sauts</th>
-                                    <th>Prenom</th>
-                                    <th>Altitude</th>
-                                </tr>
-                            </thead>
-                        
-                            <tbody>
-                                <ng-container *ngFor="let vol of srvVol.vols">
-                                            <tr>
-                                                <td>Avion n°{{ vol.avion.idAvion }}</td>
-                                                <td>{{ vol.situationVol }}</td>
-                                                <td>Vol n°{{ vol.idVol }}</td>
+            <div class="card-body"> 
+                        <label><strong>Liste des parachutistes en attente</strong></label>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>idSaut</th>
+                                        <th>Prenom</th>
+                                        <th>Altitude</th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+                                    <ng-container *ngFor="let saut of srvSaut.sauts">
+                                            <tr *ngIf = "saut.vol == null" >
+                                                <td>{{ saut.idSaut }}</td>
                                                 <td>
-                                                    <ng-container *ngFor = "let saut of vol.listSaut">Saut n°{{ saut.idSaut }}</ng-container>          
-                                                </td>
-                                                <td>
-                                                    <ng-container *ngFor = "let saut of vol.listSaut">
-                                                        <ng-container *ngFor = "let parachutiste of saut.listParachutiste">
-                                                        {{ parachutiste.prenom }} {{ parachutiste.nom }} - {{ parachutiste.niveau }} <br>
-                                                        </ng-container >
-                                                    </ng-container>
+                                                    <ng-container *ngFor = "let parachutiste of parachutistesAttente(saut)">
+                                                    {{ parachutiste.prenom }} {{ parachutiste.nom }} - {{ parachutiste.niveau }} <br>
+                                                    </ng-container >
                                                 </td>
                                                 <td>{{ saut.altitude }}m</td>
                                             </tr> 
-                                </ng-container>
-                            </tbody>
-                        </table>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+            <br>    
+            <br>    
+                    
+                        <label><strong>Liste des parachutistes enregistrés pour un vol</strong></label>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Avion</th>
+                                        <th>Situation</th>
+                                        <th>Vol</th>
+                                        <th>Sauts</th>
+                                        <th>Prenom</th>
+                                        <th>Altitude</th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+                                    <ng-container *ngFor="let vol of srvVol.vols">
+                                                <tr>
+                                                    <td>Avion n°{{ vol.avion.idAvion }}</td>
+                                                    <td>{{ vol.situationVol }}</td>
+                                                    <td>Vol n°{{ vol.idVol }}</td>
+                                                    <td>
+                                                        <ng-container *ngFor = "let saut of vol.listSaut">Saut n°{{ saut.idSaut }}</ng-container>          
+                                                    </td>
+                                                    <td>
+                                                        <ng-container *ngFor = "let saut of vol.listSaut">
+                                                            <ng-container *ngFor = "let parachutiste of saut.listParachutiste">
+                                                            {{ parachutiste.prenom }} {{ parachutiste.nom }} - {{ parachutiste.niveau }} <br>
+                                                            </ng-container >
+                                                        </ng-container>
+                                                    </td>
+                                                    <td>{{ saut.altitude }}m</td>
+                                                </tr> 
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                    </div>
+        </div>
     </div>
 </div>
