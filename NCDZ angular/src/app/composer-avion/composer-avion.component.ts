@@ -61,15 +61,15 @@ export class ComposerAvionComponent implements OnInit {
     this.listPilote();
   }
 
-  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),200)}
+  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),500)}
 
   listesPara() {this.srvParachutiste.reload()}
 
-  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,200)}
+  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,500)}
 
-  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,500)}
+  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,800)}
   
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),500)}
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,800); setTimeout(() => this.triListVol(),800)}
 
 
   affichageAvion(id) {
