@@ -319,20 +319,12 @@ export class ComposerAvionComponent implements OnInit {
   attributionRespoVol() {
     if (this.vol==null || this.respoVol==null) {alert('Choisissez un vol et un respo Vol')} 
     else {
-      let test=false;
-      for (let v of this.vols)
+      this.vol.respoVol=this.respoVol;
+      for (let i=0; i<this.vols.length; i++)
       {
-        if (this.respoVol.numeroLicence==v.respoVol?.numeroLicence || this.respoVol.numeroLicence==v.respoSol?.numeroLicence) {test=true}
+        if (this.vols[i].idVol==this.vol.idVol) {this.vols[i]=this.vol;break}
       }
-      if (test) {alert('Ce respo Vol est déjà respo')}
-      else {
-        this.vol.respoVol=this.respoVol;
-        for (let i=0; i<this.vols.length; i++)
-        {
-          if (this.vols[i].idVol==this.vol.idVol) {this.vols[i]=this.vol;break}
-        }
-        this.srvVol.updateVol(this.vol);
-      }
+      this.srvVol.updateVol(this.vol);
     }
   }
 
