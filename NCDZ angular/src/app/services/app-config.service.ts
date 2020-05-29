@@ -8,7 +8,7 @@ import { Compte } from '../classes/compte'
 })
 export class AppConfigService {
   public url: string = "http://localhost:8181/api";
-  public httpOptions: Object = null;
+  public httpOptions: Object = { headers: new HttpHeaders() };
   public compte: Compte = new Compte;
 
 

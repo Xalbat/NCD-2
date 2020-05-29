@@ -22,7 +22,7 @@ export class ParachutisteService {
 
 
   public reload() {
-    this.http.get<Array<Parachutiste>>(this.apiUrl)
+    this.http.get<Array<Parachutiste>>(this.apiUrl, this.appConfig.httpOptions)
         .subscribe(parachutistes => this.parachutistes = parachutistes);
   }
 
