@@ -91,6 +91,8 @@ export class ComposerAvionComponent implements OnInit {
       this.choixAvion=true;
       this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
 
+      setTimeout( () => this.vol = this.srvVol.vols.find(v => v.idVol == id),200)
+
       if (this.avion?.vol!=null)
       {
         this.vueVol=true;
@@ -115,10 +117,13 @@ export class ComposerAvionComponent implements OnInit {
     {
       this.choixVol=true;
 
-      this.vol = this.srvVol.vols.find(v => v.idVol == id)
+      this.listesVols();
 
-      this.nombrePassager();
-      this.AltitudeMax();
+      setTimeout( () => this.vol = this.srvVol.vols.find(v => v.idVol == id),200)
+
+      setTimeout(() => this.nombrePassager(),200);
+      setTimeout(() => this.AltitudeMax(),200);
+      
     }    
   }
 
@@ -140,10 +145,13 @@ export class ComposerAvionComponent implements OnInit {
   }
 
   ajouterSaut(saut) {
-    this.vol.situationVol=SituationVol.EN_PREPARATION;
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
+
+    this.vol.situationVol=SituationVol.EN_PREPARATION;
+    this.vol.listSaut.push(saut);
     setTimeout(() => this.listesVols(),300)
+
     this.nombrePassager();
     this.AltitudeMax();
   }
@@ -151,7 +159,14 @@ export class ComposerAvionComponent implements OnInit {
   supprimerSaut(saut) {
     saut.vol=null;
     this.srvSaut.updateSaut(saut);
+
+    for (let i=0 ; i<this.vol.listSaut.length ; i++) 
+    {
+      if (saut.idSaut==this.vol.listSaut[i].idSaut) {this.vol.listSaut.splice(i,1);break}
+    }
+
     setTimeout(() => this.listesVols(),300)
+
     this.nombrePassager();
     this.AltitudeMax();
   }
