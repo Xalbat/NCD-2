@@ -347,21 +347,21 @@ export class ComposerAvionComponent implements OnInit {
 
   verificationParachutiste() {
 
-    for (let saut of this.vol.listSaut)
+    for (let a of this.avions)
     {
-      for (let para of saut.listParachutiste)
+      if (a.vol!=null )
       {
-        for (let v of this.vols)
+        for (let s1 of this.vols.find(v => a.vol.idVol==v.idVol).listSaut)
         {
-          if (this.vol.idVol!=v.idVol)
+          for (let p1 of s1.listParachutiste)
           {
-            for (let s of v.listSaut)
+            for (let s2 of this.vol.listSaut)
             {
-              for (let p of s.listParachutiste)
+              for (let p2 of s2.listParachutiste)
               {
-                if (p.numeroLicence==para.numeroLicence) 
+                if (p2.numeroLicence==p1.numeroLicence) 
                 {
-                  alert ("Le parachutiste " + para.nom + " " + para.prenom + " est présent sur un autre vol. Veuillez le déprogrammer du vol d'id " + v.idVol + ".");
+                  alert ("Le parachutiste " + p1.nom + " " + p1.prenom + " est déjà dans un avion . Veuillez attendre qu'il finisse son saut.");
                   return false;
                 }
               }
@@ -369,8 +369,8 @@ export class ComposerAvionComponent implements OnInit {
           }
         }
       }
-    }
-    return true;
+    }  
+    return true;                
   }
 
   attributionVolAvion() {
