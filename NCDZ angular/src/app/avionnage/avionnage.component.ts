@@ -20,11 +20,13 @@ export class AvionnageComponent implements OnInit {
   public parachutiste: Parachutiste = new Parachutiste();
   public parachutistes: Array<Parachutiste> = new Array<Parachutiste>();
   public isGroup: Boolean = false;
-  public sauts: Array<Saut>;
   public instructeur: Parachutiste = new Parachutiste();
   public videaste: Parachutiste = new Parachutiste();
   public listeParachutistes: Array<Parachutiste> = new Array<Parachutiste>();
 
+
+  public sauts: Array<Saut>;
+  
   public avion : Avion = null;
   public vol: Vol=null;
   avions : Array<Avion> = [];
@@ -92,6 +94,7 @@ affichageVol(id) {
     this.parachutiste = new Parachutiste();
     this.videaste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
+    this.listeParachutistes = this.srvParachutiste.parachutistes;
   }
 
   public ajouterParachutiste() 
