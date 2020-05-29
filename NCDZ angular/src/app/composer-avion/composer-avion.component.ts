@@ -229,7 +229,6 @@ export class ComposerAvionComponent implements OnInit {
     }
   }
 
-
   validerSaut() {
     if (this.passagerVol>this.avion.capacite)
     {
@@ -239,13 +238,30 @@ export class ComposerAvionComponent implements OnInit {
     {
       alert("L'avion ne peux pas monter si haut")
     }
-    else
+    else if (this.checkDoublon())
     {
       this.choixSaut=true;
 
       this.respoSol=null;
       this.respoVol=null;
     }
+  }
+
+  checkDoublon() {
+    for (let i=0 ; i<this.vol.listSaut.length -1 ; i++)
+    {
+      for (let p1 of this.vol.listSaut[i].listParachutiste)
+      {
+        for (let j=i+1 ; j<this.vol.listSaut.length ; j++)
+        {
+          for (let p2 of this.vol.listSaut[j].listParachutiste)
+          {
+            if (p1.numeroLicence==p2.numeroLicence) {alert("Le parachutiste "+ p1.nom + " " + p2.prenom +" est présent sur plusieurs sauts. Veuillez n'en choisir qu'un."); return false;}
+          }
+        }
+      }
+    }
+    return true;
   }
 
   ListeInstructeurLibre() {
@@ -345,7 +361,7 @@ export class ComposerAvionComponent implements OnInit {
               {
                 if (p.numeroLicence==para.numeroLicence) 
                 {
-                  alert ("Le parachutiste " + para.nom + " " + para.prenom + ". Veuillez le déprogrammer du vol d'id " + v.idVol + ".");
+                  alert ("Le parachutiste " + para.nom + " " + para.prenom + " est présent sur un autre vol. Veuillez le déprogrammer du vol d'id " + v.idVol + ".");
                   return false;
                 }
               }
@@ -361,7 +377,6 @@ export class ComposerAvionComponent implements OnInit {
     if (this.avion==null) {alert('Choissiez un avion !')}
     else if (this.vol==null) {alert('Choissiez un vol !')}
     else if (this.verificationParachutiste())
-    //else
     {
       this.vol.situationVol=SituationVol.EMBARQUEMENT
       this.srvVol.updateVol(this.vol);
@@ -404,8 +419,5 @@ export class ComposerAvionComponent implements OnInit {
     this.choixVol=false;
     this.choixAvion=false;
   }
-
-
-
 
 }
