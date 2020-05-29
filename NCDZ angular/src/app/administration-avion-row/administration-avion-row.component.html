@@ -13,7 +13,7 @@
                     {{avion.etat}}
                 </div>
                 <div class="row">
-                    <select [(ngModel)] = "avion.etat" (change)="updateAvion()">
+                    <select class = "form-control selectBorder boxShadow" [(ngModel)] = "avion.etat" (change)="updateAvion()">
                         <option *ngFor="let etat of etatsPossibles()">{{etat}}</option>
                     </select>
                 </div>
@@ -27,7 +27,7 @@
                     {{avion.situation}}
                 </div>
                 <div class="row">
-                    <select [(ngModel)] = "avion.situation" (change)="updateAvion()">
+                    <select class = "form-control selectBorder boxShadow" [(ngModel)] = "avion.situation" (change)="updateAvion()">
                         <option *ngFor="let situation of situationsPossibles()">{{situation}}</option>
                     </select>
                 </div>
@@ -38,17 +38,17 @@
 </ng-container>
 <ng-container *ngIf="modificationBool">
     <td>
-        <input type="number" style="max-width:40px" [placeholder] = "avion.idAvion" [(ngModel)] = "avion.idAvion" />
+        <input type="number" style="max-width:40px" [placeholder] = "avion.idAvion" [(ngModel)] = "avion.idAvion" class = " selectBorder boxShadow" />
     </td>
     <td>
-        <input type="text"  [placeholder] = "avion.matricule" [(ngModel)] = "avion.matricule"  size="5"/>
+        <input type="text"  [placeholder] = "avion.matricule" [(ngModel)] = "avion.matricule"  size="5" class = " selectBorder boxShadow input-sm" />
     </td>
     <td>{{avion.modele}}</td>
     <td>
-        <input type="number" style="max-width:80px" [placeholder]="avion.altitudeMax" [(ngModel)] = "avion.altitudeMax" class="input-sm" />
+        <input type="number" style="max-width:80px" [placeholder]="avion.altitudeMax" [(ngModel)] = "avion.altitudeMax" class = " selectBorder boxShadow input-sm" />
     </td>
     <td>
-        <input type="number" style="max-width:40px" [placeholder]="avion.capacite" [(ngModel)] = "avion.capacite" class="input-sm"/>
+        <input type="number" style="max-width:40px" [placeholder]="avion.capacite" [(ngModel)] = "avion.capacite" class = " selectBorder boxShadow input-sm"/>
     </td>
     <td>{{avion.rotation}} / {{avion.rotationMax}}</td>
     <td>{{avion.etat}}</td>
@@ -59,12 +59,12 @@
         <div class="row">
             <div class="col">
                 <div class="row justify-content-center mb-1">
-                    <button *ngIf="!modificationBool" class="btn btn-outline-warning mb-1 py-1 w-100" (click)="modificationBool = !modificationBool; setPreviousState()" [disabled]="avion.vol">Modifier</button>
-                    <button *ngIf="modificationBool" class="btn btn-outline-success mb-1 py-1 w-100" (click)="modificationBool = !modificationBool;updateAvion()">Valider</button>
-                    <button *ngIf="modificationBool" class="btn btn-outline-success py-1 w-100" (click)="modificationBool = !modificationBool; returnFromPreviousState()">Annuler</button>
+                    <button *ngIf="!modificationBool" class="btn editJump" (click)="modificationBool = !modificationBool; setPreviousState()" [disabled]="avion.vol">Modifier</button>
+                    <button *ngIf="modificationBool" class="btn validateJump mb-1" (click)="modificationBool = !modificationBool;updateAvion()">Valider</button>
+                    <button *ngIf="modificationBool" class="btn cancelJump" (click)="modificationBool = !modificationBool; returnFromPreviousState()">Annuler</button>
                 </div>
                 <div class="row justify-content-center">
-                    <button class="btn btn-outline-danger py-1 w-100" (click)="supprimerAvion()" [disabled]="avion.vol">Supprimer</button>
+                    <button class="btn darkJump" (click)="supprimerAvion()" [disabled]="avion.vol">Supprimer</button>
                 </div>
             </div>
         </div>

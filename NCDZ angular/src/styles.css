@@ -83,6 +83,36 @@ h5
     background-color:  #9463ee ;
 }
 
+.validateJump
+{
+    color: white;
+    border: solid #62dff5 1px;
+    background-color:  #62dff5;
+    transition: 0.25s ease-out;
+}
+
+.validateJump:hover
+{
+    color: white;
+    border: solid #afffff 1px;
+    background-color:  #afffff ;
+}
+
+.cancelJump
+{
+    color: white;
+    border: solid #f39135 1px;
+    background-color:  #f39135;
+    transition: 0.25s ease-out;
+}
+
+.cancelJump:hover
+{
+    color: white;
+    border: solid #ffc690 1px;
+    background-color:  #ffc690 ;
+}
+
 table{
     background: white;
     border-radius: 10px;

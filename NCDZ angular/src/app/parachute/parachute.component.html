@@ -1,7 +1,9 @@
 <div class="html">
 	<br>
 	
-	<div class="card m-3" >
+	<div class = "row">
+		<div class = "col-sm-3"></div>  
+		<div class="card m-3  text-white bg-dark boxShadow col-sm-6">
 	
 		<div class="card-header">
 			<h3 class="card-title">Gestion des parachutes</h3>
@@ -15,42 +17,42 @@
 			<div class="form-group row">
 				<label for="dateVisite" class="col-sm-2 col-form-label">Nom du harnais : </label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="nomHarnais"  [(ngModel)]="formParachute.nomHarnais"/>
+					<input type="text" class="form-control selectBorder boxShadow" id="nomHarnais"  [(ngModel)]="formParachute.nomHarnais"/>
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile principale : </label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="nomVoilePricipale"  [(ngModel)]="formParachute.nomVoilePricipale"/>
+					<input type="text" class="form-control selectBorder boxShadow" id="nomVoilePricipale"  [(ngModel)]="formParachute.nomVoilePricipale"/>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="prix" class="col-sm-2 col-form-label">Taille de la voile principale : </label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="tailleVoilePricipale" [(ngModel)]="formParachute.tailleVoilePricipale"/>
+					<input type="number" class="form-control selectBorder boxShadow" id="tailleVoilePricipale" [(ngModel)]="formParachute.tailleVoilePricipale"/>
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="dateVisite" class="col-sm-2 col-form-label">Nom de la voile de secours : </label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="nomVoileSecours"  [(ngModel)]="formParachute.nomVoileSecours"/>
+					<input type="text" class="form-control selectBorder boxShadow" id="nomVoileSecours"  [(ngModel)]="formParachute.nomVoileSecours"/>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="prix" class="col-sm-2 col-form-label">Taille de la voile de secours : </label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="tailleVoileSecours" [(ngModel)]="formParachute.tailleVoileSecours"/>
+					<input type="number" class="form-control selectBorder boxShadow" id="tailleVoileSecours" [(ngModel)]="formParachute.tailleVoileSecours"/>
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="prix" class="col-sm-2 col-form-label">Etat du parachute : </label>
 				<div class="col-sm-10">
-					<select id="etatParachute" class="form-control"   [(ngModel)]="formParachute.etatParachute">
+					<select id="etatParachute" class="form-control selectBorder boxShadow"   [(ngModel)]="formParachute.etatParachute">
 						<option value="DISPONIBLE">DISPONIBLE</option>
 						<option value="MAINTENANCE">MAINTENANCE</option>
 					</select>
@@ -60,7 +62,7 @@
 			<div class="form-group row">
 				<label for="prix" class="col-sm-2 col-form-label">Proprietaire : </label>
 				<div class="col-sm-10">
-					<select id="proprietaire" class="form-control"   [(ngModel)]="formParachute.proprietaire">
+					<select id="proprietaire" class="form-control selectBorder boxShadow"   [(ngModel)]="formParachute.proprietaire">
 						<option value="PERSONNEL">PERSONNEL</option>
 						<option value="CENTRE">CENTRE</option>
 					</select>
@@ -70,7 +72,7 @@
 			<div class="form-group row">
 				<label for="prix" class="col-sm-2 col-form-label">Type de sécurité : </label>
 				<div class="col-sm-10">
-					<select id="typeSecurite" class="form-control"   [(ngModel)]="formParachute.typeSecurite">
+					<select id="typeSecurite" class="form-control selectBorder boxShadow"   [(ngModel)]="formParachute.typeSecurite">
 						<option value="CYPRESS">CYPRESS</option>
 						<option value="VIGIL">VIGIL</option>
 					</select>
@@ -82,11 +84,11 @@
 			<div class="form-group row" *ngIf = "formParachute.revision">
 				<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Primaire : </label>
 					<div class="col-sm-10">
-						<input type="date" class="form-control" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrimaire"/>
+						<input type="date" class="form-control selectBorder boxShadow" [id]="formParachute?.revision.datePliagePrimaire"  [(ngModel)]="formParachute?.revision.datePliagePrimaire"/>
 					</div>
 				<label for="dateVisite" class="col-sm-2 col-form-label">Date du dernier pliage Secours : </label>
 					<div class="col-sm-10">
-						<input type="date" class="form-control" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
+						<input type="date" class="form-control selectBorder boxShadow" [id]="formParachute?.revision.datePliageSecours"  [(ngModel)]="formParachute?.revision.datePliageSecours"/>
 					</div>
 			</div> 
 			
@@ -94,14 +96,17 @@
 
 
 		<div class="card-footer text-right">
-			<button *ngIf="!isEditing" (click)="ajouterParachute()" class="btn btn-success m-1">Ajouter  </button>
-			<button *ngIf="isEditing" (click)="modifierParachute()" class="btn btn-warning m-1">Modifier</button>
-			<button *ngIf="isEditing" (click)="annulerModification()" class="btn btn-danger m-1">Annuler</button> 
+			<button *ngIf="!isEditing" (click)="ajouterParachute()" class="btn jump m-1">Ajouter  </button>
+			<button *ngIf="isEditing" (click)="modifierParachute()" class="btn editJump m-1">Modifier</button>
+			<button *ngIf="isEditing" (click)="annulerModification()" class="btn darkJump m-1">Annuler</button> 
 		</div>
 
 	</div>
+</div>
 
-	<div class="card m-3" >
+<div class = "row">
+	<div class = "col-sm-1"></div>  
+	<div class="card m-3  text-white bg-dark boxShadow col-sm-10">
         <div class="card-header">
 			<h5>Liste des parachutes</h5>
 		</div>
@@ -140,8 +145,8 @@
 						
 				
 						<td>
-							<button (click)="editerParachute(parachute)" class="btn btn-warning m-1">Editer</button>
-							<button  (click)="supprimerParachute(parachute)" class="btn btn-danger m-1">Supprimer</button>
+							<button (click)="editerParachute(parachute)" class="btn editJump m-1">Editer</button>
+							<button  (click)="supprimerParachute(parachute)" class="btn darkJump m-1">Supprimer</button>
 						</td>
 			
 					</tr>
@@ -149,4 +154,5 @@
 			</table>
 		</div>
 	</div>
+</div>
 </div>
