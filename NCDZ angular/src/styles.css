@@ -1,15 +1,11 @@
-html 
+.html 
 {
-    background-image: url(https://kidiscience.cafe-sciences.org/wp-content/uploads/sites/13/2018/07/Image01.jpg);
+    background-image: url(assets/parachute.jpg);
     background-size: 200% ;
     background-repeat: no-repeat ;
+    height: 250vh;
 }
-.html
-{
-    background-image: url(https://kidiscience.cafe-sciences.org/wp-content/uploads/sites/13/2018/07/Image01.jpg);
-    background-size: cover ;
-    background-repeat: no-repeat ;
-}
+
 h5 
 {
     text-align: center;
@@ -17,4 +13,48 @@ h5
 h3 
 {
     text-align: center;
+}
+
+h5 
+{
+    text-align: center;
+}
+
+.boxShadow
+{
+    -webkit-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+}
+
+.selectBorder
+{
+    border: solid #ffcfc6 2px;
+    background-color:  #ffcfc6;
+    transition: 0.25s ease-out;
+}
+
+.selectBorder:hover
+{
+    border: solid white 2px;
+    background-color: white;
+}
+
+.jump
+{
+    border: solid #ffcfc6 1px;
+    background-color:  #ffcfc6 ;
+    transition: 0.25s ease-out;
+}
+
+.jump:hover
+{
+    border: solid white 1px;
+    background-color:  white ;
+}
+
+table{
+    background: white;
+    border-radius: 10px;
+    border: transparent;
 }
