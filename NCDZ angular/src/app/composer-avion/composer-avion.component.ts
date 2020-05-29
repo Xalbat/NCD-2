@@ -67,9 +67,9 @@ export class ComposerAvionComponent implements OnInit {
 
   listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,500)}
 
-  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,800)}
+  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,500)}
   
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,800); setTimeout(() => this.triListVol(),800)}
+  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),800)}
 
 
   affichageAvion(id) {
@@ -143,7 +143,6 @@ export class ComposerAvionComponent implements OnInit {
     this.vol.situationVol=SituationVol.EN_PREPARATION;
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
-    this
     setTimeout(() => this.listesVols(),300)
     this.nombrePassager();
     this.AltitudeMax();
