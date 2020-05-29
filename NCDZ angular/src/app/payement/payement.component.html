@@ -1,53 +1,65 @@
-<div>
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Valeur</th>
-            <th>Moyen de payement</th>
-            <th>Parachutiste</th>
-            <th></th>
-          </tr>
-        </thead>
-        
-        <tbody>
-      
-          <tr *ngFor="let p of payementSrv.payements">
-            <td>{{ p.date }}</td>
-            <td>{{ p.valeur }}</td>
-            <td>{{ p.moyenPayement }}</td>
-            <td>{{ p.parachutiste.nom }}</td>
-            <td>
-              <!--button class="btn btn-warning m-2" (click)="editerPatient(patient)">Modifier</button>
-              <button class="btn btn-danger" (click)="supprimerPatient(patient)">Supprimer</button-->
-            </td>
-           
-          </tr>
-        </tbody>
-      </table>
-      <br>
+<div class="html">
+  <br>
+    <div class="card m-3">
+      <div class="card-header">
+        <h5>Historique des paiements</h5>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Valeur</th>
+                <th>Moyen de paiement</th>
+                <th>Parachutiste</th>
+                <th></th>
+              </tr>
+            </thead>
+            
+            <tbody>
+          
+              <tr *ngFor="let p of payementSrv.payements">
+                <td>{{ p.date }}</td>
+                <td>{{ p.valeur }}</td>
+                <td>{{ p.moyenPayement }}</td>
+                <td>{{ p.parachutiste.nom }}</td>
+                <td>
+                  <!--button class="btn btn-warning m-2" (click)="editerPatient(patient)">Modifier</button>
+                  <button class="btn btn-danger" (click)="supprimerPatient(patient)">Supprimer</button-->
+                </td>
+              
+              </tr>
+            </tbody>
+          </table>
+          <br>
+      </div>
+    </div>
 
-</div>
+    <div class="card m-3">
+        <div class="car-header">
+          <h3>Ajouter un paiement</h3>
+        </div>
 
+        <div class="card-body">
+          <input type = "number" [(ngModel)]="payement.valeur" placeholder="valeur" >
+          <input type = "date" [(ngModel)]="payement.date">
 
-<h2>Ajouter un payement</h2>
-<input type = "number" [(ngModel)]="payement.valeur" placeholder="valeur" >
+          <label> Moyen de paiement :</label>
+            <select [(ngModel)]="payement.moyenPayement" >
+                <option *ngFor="let e of etatsPossibles()">{{e}}</option>
+            </select>
 
+          <label> Parachutiste :</label>
+            <select [(ngModel)]="payement.parachutiste" >
+                <option *ngFor="let p of parachutisteSrv.parachutistes" [ngValue]="p" >{{p.prenom}} {{p.nom}}</option>
+            </select>
+        </div>    
 
-<input type = "date" [(ngModel)]="payement.date">
-
-<label> Moyen de payement :</label>
-<select [(ngModel)]="payement.moyenPayement" >
-    <option *ngFor="let e of etatsPossibles()">{{e}}</option>
-</select>
-
-<label> Parachutiste :</label>
-<select [(ngModel)]="payement.parachutiste" >
-    <option *ngFor="let p of parachutisteSrv.parachutistes" [ngValue]="p" >{{p.prenom}} {{p.nom}}</option>
-</select>
-
-<button class="btn btn-success m-1" *ngIf="disable" (click)="ajouterPayement()" >Ajouter</button>
-
+        <div class="card-footer">
+          <button class="btn btn-success m-1" *ngIf="disable" (click)="ajouterPayement()">Ajouter</button>
+        </div>
+    </div>
+</div>    
 
 
 
