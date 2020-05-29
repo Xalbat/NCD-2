@@ -1,6 +1,8 @@
 <div class="html">
   <br>
-    <div class="card m-3">
+    <div class = "row">
+    <div class = "col-sm-3"></div>  
+    <div class="card m-3  text-white bg-dark boxShadow col-sm-6">
       <div class="card-header">
         <h5>Historique des paiements</h5>
       </div>
@@ -34,32 +36,36 @@
           <br>
       </div>
     </div>
+  </div>
 
-    <div class="card m-3">
+  <div class = "row">
+    <div class = "col-sm-3"></div>  
+    <div class="card m-3  text-white bg-dark boxShadow col-sm-6">
         <div class="car-header">
           <h3>Ajouter un paiement</h3>
         </div>
 
         <div class="card-body">
-          <input type = "number" [(ngModel)]="payement.valeur" placeholder="valeur" >
-          <input type = "date" [(ngModel)]="payement.date">
-
+          <input class = "form-control selectBorder m-2 boxShadow" type = "number" [(ngModel)]="payement.valeur" placeholder="valeur" >
+          <input class = "form-control selectBorder m-2 boxShadow" type = "date" [(ngModel)]="payement.date">
+          
           <label> Moyen de paiement :</label>
-            <select [(ngModel)]="payement.moyenPayement" >
+            <select class = "form-control selectBorder m-2 boxShadow" [(ngModel)]="payement.moyenPayement" >
                 <option *ngFor="let e of etatsPossibles()">{{e}}</option>
             </select>
 
           <label> Parachutiste :</label>
-            <select [(ngModel)]="payement.parachutiste" >
+            <select class = "form-control selectBorder boxShadow m-2" [(ngModel)]="payement.parachutiste" >
                 <option *ngFor="let p of parachutisteSrv.parachutistes" [ngValue]="p" >{{p.prenom}} {{p.nom}}</option>
             </select>
         </div>    
 
         <div class="card-footer">
-          <button class="btn btn-success m-1" *ngIf="disable" (click)="ajouterPayement()">Ajouter</button>
+          <button class="btn jump boxShadow m-1" *ngIf="disable" (click)="ajouterPayement()">Ajouter</button>
         </div>
     </div>
-</div>    
+</div>  
+</div>  
 
 
 

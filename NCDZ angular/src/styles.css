@@ -53,6 +53,36 @@ h5
     background-color:  white ;
 }
 
+.darkJump
+{
+    color: white;
+    border: solid #ce3939 1px;
+    background-color:  #ce3939;
+    transition: 0.25s ease-out;
+}
+
+.darkJump:hover
+{
+    color: white;
+    border: solid rgb(214, 85, 85) 1px;
+    background-color:  rgb(214, 85, 85) ;
+}
+
+.editJump
+{
+    color: white;
+    border: solid #6641ac 1px;
+    background-color:  #6641ac;
+    transition: 0.25s ease-out;
+}
+
+.editJump:hover
+{
+    color: white;
+    border: solid #9463ee 1px;
+    background-color:  #9463ee ;
+}
+
 table{
     background: white;
     border-radius: 10px;
