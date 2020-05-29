@@ -157,7 +157,7 @@
                                 <tbody>
                                     <ng-container *ngFor="let vol of srvVol.vols">
                                                 <tr>
-                                                    <td>Avion n°{{ vol.avion.idAvion }}</td>
+                                                    <td>Avion n°{{ vol.avion?.idAvion }}</td>
                                                     <td>{{ vol.situationVol }}</td>
                                                     <td>Vol n°{{ vol.idVol }}</td>
                                                     <td>

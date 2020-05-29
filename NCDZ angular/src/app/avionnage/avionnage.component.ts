@@ -6,7 +6,6 @@ import { Saut } from '../classes/saut';
 import { Parachutiste } from '../classes/parachutiste';
 import { Avion } from '../classes/avion';
 import { Vol } from '../classes/vol';
-import { AvionService } from '../services/avion.service';
 import { VolService } from '../services/vol.service';
 import { Niveau } from '../enums/niveau.enum';
 
@@ -34,8 +33,10 @@ export class AvionnageComponent implements OnInit {
   indexVol=0;
 
 
-  constructor( public srvSaut: SautService, public srvParachutiste: ParachutisteService,
-              public srvAvion:AvionService, public srvVol: VolService) { }
+  constructor(
+    public srvParachutiste: ParachutisteService,
+    public srvSaut: SautService,
+    public srvVol: VolService) { }
 
   ngOnInit(): void 
   {
@@ -50,7 +51,7 @@ export class AvionnageComponent implements OnInit {
 
 
     this.srvVol.getVol();
-    console.log(this.srvSaut.sauts)
+    console.log(this.srvSaut.sauts);
   }
 
 
@@ -61,7 +62,6 @@ affichageVol(id) {
   this.choixVol 
       ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
       : this.vol = null;
-  console.log(this.srvAvion.avions)
 }
 
   public ajouterSautGroup() 
@@ -69,9 +69,13 @@ affichageVol(id) {
     this.saut.listParachutiste = this.parachutistes;
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
+    this.saut.altitude = 1200;
+    this.saut.tandem = false;
+    this.saut.isVideo = false;
     this.parachutiste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
-    this.listeParachutistes = new Array<Parachutiste>();
+    this.listeParachutistes = this.srvParachutiste.parachutistes;
+    
   }
 
   public ajouterSautSolo() 
@@ -82,6 +86,9 @@ affichageVol(id) {
     console.log(this.saut)
     this.srvSaut.createSaut(this.saut);
     this.saut = new Saut();
+    this.saut.altitude = 1200;
+    this.saut.tandem = false;
+    this.saut.isVideo = false;
     this.parachutiste = new Parachutiste();
     this.videaste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
@@ -133,8 +140,7 @@ affichageVol(id) {
 
   public confirmes()
   {
-    console.log(this.listeParachutistes);
-    return this.srvParachutiste.parachutistes.filter(p => p.niveau.toString() != 'ELEVE')
+    return this.listeParachutistes.filter(p => p.niveau.toString() != 'ELEVE')
   }
 
   public parachutistesAttente(saut)
