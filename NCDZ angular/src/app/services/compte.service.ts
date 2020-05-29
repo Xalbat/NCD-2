@@ -13,7 +13,7 @@ export class CompteService implements CanActivate {
   public compte: Compte = new Compte();
   
   constructor(
-    private appConfig: AppConfigService, 
+    public appConfig: AppConfigService, 
     private http: HttpClient, 
     private router: Router) {
       this.apiUrl = `${ this.appConfig.url }/compte`;

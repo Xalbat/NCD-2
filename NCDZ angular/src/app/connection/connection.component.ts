@@ -19,11 +19,12 @@ export class ConnectionComponent implements OnInit {
   }
 
   public seConnecter() {
-      this.cpmtSrv.seConnecter(this.compte);
-      
+      this.cpmtSrv.seConnecter(this.compte); 
   }
 
-
+  public seDeconnecter() {
+    this.cpmtSrv.appConfig.compte = new Compte; 
+}
 
 
 
