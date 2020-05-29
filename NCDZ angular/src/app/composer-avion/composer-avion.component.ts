@@ -67,7 +67,7 @@ export class ComposerAvionComponent implements OnInit {
 
   listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,200)}
 
-  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,100)}
+  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,500)}
   
   listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),500)}
 
@@ -250,14 +250,14 @@ export class ComposerAvionComponent implements OnInit {
   listePiloteLibre() {
     let list: Array<Pilote>=[];
     let test: boolean;
-    for (let p of this.pilotes)
+    for (let i=0; i<this.pilotes?.length; i++)
     {
       test=true;
       for (let v of this.vols)
       {
-        if (v.pilote?.licence==p.licence) {test=false};
+        if (v.pilote?.licence==this.pilotes[i].licence) {test=false};
       }
-      if (test) {list.push(p);}
+      if (test) {list.push(this.pilotes[i]);}
     }
     return list
   }
