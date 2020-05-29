@@ -86,16 +86,16 @@ h5
 .validateJump
 {
     color: white;
-    border: solid #62dff5 1px;
-    background-color:  #62dff5;
+    border: solid #6295f5 1px;
+    background-color:  #6295f5;
     transition: 0.25s ease-out;
 }
 
 .validateJump:hover
 {
     color: white;
-    border: solid #afffff 1px;
-    background-color:  #afffff ;
+    border: solid #85affc 1px;
+    background-color:  #85affc ;
 }
 
 .cancelJump
