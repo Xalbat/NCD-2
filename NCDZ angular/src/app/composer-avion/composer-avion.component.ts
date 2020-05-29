@@ -143,6 +143,8 @@ export class ComposerAvionComponent implements OnInit {
     this.vol.situationVol=SituationVol.EN_PREPARATION;
     saut.vol=this.vol;
     this.srvSaut.updateSaut(saut);
+    this
+    setTimeout(() => this.listesVols(),300)
     this.nombrePassager();
     this.AltitudeMax();
   }
@@ -150,6 +152,7 @@ export class ComposerAvionComponent implements OnInit {
   supprimerSaut(saut) {
     saut.vol=null;
     this.srvSaut.updateSaut(saut);
+    setTimeout(() => this.listesVols(),300)
     this.nombrePassager();
     this.AltitudeMax();
   }
@@ -312,10 +315,39 @@ export class ComposerAvionComponent implements OnInit {
     this.okSaut=true;
   }
 
+  verificationParachutiste() {
+
+    for (let saut of this.vol.listSaut)
+    {
+      for (let para of saut.listParachutiste)
+      {
+        for (let v of this.vols)
+        {
+          if (this.vol.idVol!=v.idVol)
+          {
+            for (let s of v.listSaut)
+            {
+              for (let p of s.listParachutiste)
+              {
+                if (p.numeroLicence==para.numeroLicence) 
+                {
+                  alert ("Le parachutiste " + para.nom + " " + para.prenom + ". Veuillez le déprogrammer du vol d'id " + v.idVol + ".");
+                  return false;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
+
   attributionVolAvion() {
     if (this.avion==null) {alert('Choissiez un avion !')}
     else if (this.vol==null) {alert('Choissiez un vol !')}
-    else 
+    else if (this.verificationParachutiste())
+    //else
     {
       this.vol.situationVol=SituationVol.EMBARQUEMENT
       this.srvVol.updateVol(this.vol);
@@ -334,6 +366,8 @@ export class ComposerAvionComponent implements OnInit {
       this.avion=null;
       this.choixVol=false;
       this.vol=null;
+      this.choixSaut=false;
+      this.okSaut=false;
     }
   }
 
@@ -351,7 +385,13 @@ export class ComposerAvionComponent implements OnInit {
 
     this.avion.vol=null;
     this.srvAvion.updateAvion(this.avion);
-
+    this
     this.vueVol=false;
+    this.choixVol=false;
+    this.choixAvion=false;
   }
+
+
+
+
 }
