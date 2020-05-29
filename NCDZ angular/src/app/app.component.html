@@ -16,9 +16,7 @@
             <a class="nav-link" routerLink="/payement">Payement</a>
         </li>
 
-        <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
-        </li>
+       
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/inscription">Inscription</a>
           </li>
@@ -29,7 +27,11 @@
 
           <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
               <a class="nav-link" routerLink="/composer-avion">Composer un avion</a>
-          </li>
+            </li>
+            
+            <li *ngIf= "appConfigSrv.compte.typeCompte == 'ADMIN'" class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
+            </li>
 
         </ul>
       </strong>
