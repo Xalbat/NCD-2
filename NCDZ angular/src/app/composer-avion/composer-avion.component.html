@@ -1,0 +1,221 @@
+<div class="html">
+<br>
+
+<div class="container">
+    <div class="row">
+        <label class="text-white"><strong>Listes des avions disponibles</strong></label>
+        <table class="table table-dark text-white table-striped table-hover">
+            <thead>
+                <tr align="center">
+                    <th>Id</th>
+                    <th>Altitude max</th>
+                    <th>Capacité</th>
+                    <th>Etat</th>
+                    <th>Modèle</th>
+                    <th>Rotation(s)</th>
+                    <th>Temps de montée</th>
+                    <th>Situation de l'avion</th>
+                    <th>Vol prévu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let a of avions">
+                    <tr align="center" *ngIf="!choixAvion || a.idAvion==avion.idAvion" (click)="affichageAvion(a.idAvion)" class="choixTableau">
+                        <td>{{a.idAvion}}</td>
+                        <td>{{a.altitudeMax}}m</td>
+                        <td>{{a.capacite}}</td>
+                        <td>
+                            <ng-container *ngIf="a.vol==null">En attente d'un vol</ng-container>
+                            <ng-container *ngIf="a.vol!=null">{{a.vol.situationVol}}</ng-container>
+                        </td>
+                        <td>{{a.modele}}</td>
+                        <td>{{a.rotation}}/{{a.rotationMax}}</td>
+                        <td>{{a.tempsMontee}}min</td>
+                        <td>{{a.situation}}</td>
+                        <td><ng-container *ngIf="a.vol">{{a.vol.idVol}}</ng-container></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+<div class="container" *ngIf="!vueVol && choixAvion">
+    <br>
+    <div class="row">
+        <label class="text-white"><strong>Listes des vols en attente</strong></label>
+        <table class="table table-dark text-white table-striped table-hover">
+            <thead>
+                <tr align="center">
+                    <th>Id</th>
+                    <th>Situation Vol</th>
+                    <th>Pilote Avion</th>
+                    <th>Responsable Sol</th>
+                    <th>Responsable Vol</th>
+                    <th>Date</th>
+                    <th>Liste ID des sauts</th>
+                    <th *ngIf="choixVol">Altitude max</th>
+                    <th *ngIf="choixVol">Nombre de passager(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!choixVol" class="choixTableau">
+                    <td></td>
+                    <td></td>
+                    <td *ngIf="choixVol"></td>
+                    <td colspan="3">Création d'un nouveau vol</td>
+                    <td><input type="date" [(ngModel)]="date" /></td>
+                    <td><button class="btn jump" (click)="creationVol()" [disabled]="date==null">Ajouter un nouveau vol</button></td>
+                </tr>
+                <ng-container *ngFor="let v of volsDispo, let i=index">
+                    <tr align="center" *ngIf="!choixVol || v.idVol==vol.idVol" (click)="affichageVol(v.idVol)" class="choixTableau">
+                        <td>{{v.idVol}}</td>
+                        <td>{{v.situationVol}}</td>
+                        <td>{{v.pilote?.nom}} {{v.pilote?.prenom}}</td>
+                        <td>
+                            <ng-container *ngIf="v.respoSol!=null">
+                                {{v.respoSol.nom}} {{v.respoSol.prenom}}
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="v.respoVol!=null">
+                                {{v.respoVol.nom}} {{v.respoVol.prenom}}
+                            </ng-container>
+                        </td>
+                        <td>{{v.date}}</td>
+                        <td>
+                            <ng-container *ngFor="let s of sauts">
+                                <ng-container *ngIf="s.vol?.idVol==v.idVol">{{s.idSaut}} </ng-container>
+                            </ng-container>
+                        </td>
+                        <td *ngIf="choixVol">{{volAltitudeMax}}m</td>
+                        <td *ngIf="choixVol">{{passagerVol}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && !choixSaut">
+    <br>
+    <div class="row">
+        <label class="text-white"><strong>Listes des sauts en attente</strong></label>
+        <table class="table table-dark text-white table-striped table-hover">
+            <thead>
+                <tr align="center" >
+                    <th>Id Saut</th>
+                    <th>Hauteur du saut</th>
+                    <th>Listes des parachutistes</th>
+                    <th>Id Vol</th>
+                    <th><button class="btn validateJump" [disabled]="passagerVol>avion.capacite || 1>passagerVol || volAltitudeMax>avion.altitudeMax" (click)="validerSaut()">Valider les sauts</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr align="center" *ngFor="let s of sautDispo()">
+                    <td>{{s.idSaut}}</td>
+                    <td>{{s.altitude}}m</td>
+                    <td><p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p></td>
+                    <td>{{s.vol?.idVol}}</td>
+                    <td>
+                        <button *ngIf="s.vol==null" class="btn jump" (click)="ajouterSaut(s)">Ajouter le saut à ce vol</button>
+                        <button *ngIf="s.vol!=null && s.vol?.idVol!=vol.idVol" class="btn editJump" (click)="ajouterSaut(s)">Déplacer le saut à ce vol</button>
+                        <button *ngIf="s.vol?.idVol==vol.idVol" class="btn darkJump" (click)="supprimerSaut(s)">Supprimer le saut de ce vol</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && choixSaut && !okSaut">
+    <br>
+    <div class="row">
+        <label class="text-white"><strong>Choix des responsables au sol et en vol</strong></label>
+        <table class="table table-dark table-striped table-hover">
+            <tr>
+                <td>Choix du pilote : </td>
+                <td>
+                    <select class="form-control" style="align-items: center;" [(ngModel)]="pilote">
+                        <option *ngFor="let p of listePiloteLibre()" [ngValue]="p">{{p.nom}} {{p.prenom}}</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn jump" (click)="attributionPilote()">Attribuer le pilote</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Choix du respo Sol : </td>
+                <td>
+                    <select class="form-control boxShadow" style="align-items: center;" [(ngModel)]="respoSol">
+                        <option *ngFor="let p of ListeInstructeurLibre()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}}</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn editJump" (click)="attributionRespoSol()">Attribuer le Respo sol</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Choix du respo Vol : </td>
+                <td>
+                    <select class="form-control boxShadow" style="align-items: center;" [(ngModel)]="respoVol">
+                        <option *ngFor="let p of ListeParachutiste()" [ngValue]="p">({{p.numeroLicence}}) {{p.nom}} {{p.prenom}} - {{p.niveau}}</option>
+                    </select>
+                </td>
+                <td><button class="btn editJump" (click)="attributionRespoVol()">Attribuer le Respo vol</button></td>
+            </tr>
+            <tr align="center">
+                <td [colSpan]="3">
+                    <button class="btn validateJump" [disabled]="vol.respoSol==null || vol.respoVol==null || vol.pilote==null" (click)="validationRespo()">Valider les responsables sol et vol</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="container" *ngIf="!vueVol && choixAvion && choixVol && choixSaut && okSaut">
+    <br>
+    <button class="btn editJump" (click)="attributionVolAvion()">Attribuer le vol à l'avion</button>
+</div>
+
+<div class="container" *ngIf="vueVol">
+    <br>
+    <div class="row">
+        <label class="text-white" ><strong>Vol prévue</strong></label>
+        <table class="table text-white table-striped table-dark table-hover">
+            <thead>
+                <tr align="center">
+                    <th>Id</th>
+                    <th>Situation Vol</th>
+                    <th>Pilote Avion</th>
+                    <th>Responsable Sol</th>
+                    <th>Responsable Vol</th>
+                    <th>Passager</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr align="center" class="choixTableau">
+                    <td>{{vol.idVol}}</td>
+                    <td>{{vol.situationVol}}</td>
+                    <td>{{vol.pilote?.nom}} {{vol.pilote?.prenom}}</td>
+                    <td>{{vol.respoSol.nom}} {{vol.respoSol.prenom}}</td>
+                    <td>{{vol.respoVol.nom}} {{vol.respoVol.prenom}}</td>
+                    <td>
+                        <ng-container *ngFor="let s of vol.listSaut">
+                            <p *ngFor="let p of s.listParachutiste">{{p.nom}} {{p.prenom}} ({{p.niveau}})</p>
+                        </ng-container>
+                    </td>
+                    <td>{{vol.date}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button class="btn cancelJump" (click)="retirerVol()">Retirer le vol de l'avion</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>
+</div>

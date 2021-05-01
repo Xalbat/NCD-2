@@ -1,0 +1,43 @@
+<div class="html">
+    <br>
+    <div class="container w-75">
+    <div class="row">
+    <table class="table-dark table-striped table-hover">
+        <thead>
+            <th>
+                Id
+            </th>
+            <th>
+                Matricule
+            </th>
+            <th>
+                Modele
+            </th>
+            <th>
+                Alt. max
+            </th>
+            <th>
+                Capacite
+            </th>
+            <th>
+                Rotations
+            </th>
+            <th>
+                Etat
+            </th>
+            <th>
+                Situation
+            </th>
+            <th>
+                Statuts
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of avions" administration-avion-row [avion]="a"></tr>
+            <tr administration-avion-formulaire></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</div>

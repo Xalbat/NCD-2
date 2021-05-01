@@ -1,0 +1,120 @@
+.html 
+{
+    background-image: url(assets/parachute.jpg);
+    background-size: 200% ;
+    background-repeat: no-repeat ;
+    height: 250vh;
+}
+
+h5 
+{
+    text-align: center;
+}
+h3 
+{
+    text-align: center;
+}
+
+h5 
+{
+    text-align: center;
+}
+
+.boxShadow
+{
+    -webkit-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.75);
+}
+
+.selectBorder
+{
+    border: solid #ffcfc6 2px;
+    background-color:  #ffcfc6;
+    transition: 0.25s ease-out;
+}
+
+.selectBorder:hover
+{
+    border: solid white 2px;
+    background-color: white;
+}
+
+.jump
+{
+    border: solid #ffcfc6 1px;
+    background-color:  #ffcfc6 ;
+    transition: 0.25s ease-out;
+}
+
+.jump:hover
+{
+    border: solid white 1px;
+    background-color:  white ;
+}
+
+.darkJump
+{
+    color: white;
+    border: solid #ce3939 1px;
+    background-color:  #ce3939;
+    transition: 0.25s ease-out;
+}
+
+.darkJump:hover
+{
+    color: white;
+    border: solid rgb(214, 85, 85) 1px;
+    background-color:  rgb(214, 85, 85) ;
+}
+
+.editJump
+{
+    color: white;
+    border: solid #6641ac 1px;
+    background-color:  #6641ac;
+    transition: 0.25s ease-out;
+}
+
+.editJump:hover
+{
+    color: white;
+    border: solid #9463ee 1px;
+    background-color:  #9463ee ;
+}
+
+.validateJump
+{
+    color: white;
+    border: solid #6295f5 1px;
+    background-color:  #6295f5;
+    transition: 0.25s ease-out;
+}
+
+.validateJump:hover
+{
+    color: white;
+    border: solid #85affc 1px;
+    background-color:  #85affc ;
+}
+
+.cancelJump
+{
+    color: white;
+    border: solid #f39135 1px;
+    background-color:  #f39135;
+    transition: 0.25s ease-out;
+}
+
+.cancelJump:hover
+{
+    color: white;
+    border: solid #ffc690 1px;
+    background-color:  #ffc690 ;
+}
+
+table{
+    background: white;
+    border-radius: 10px;
+    border: transparent;
+}

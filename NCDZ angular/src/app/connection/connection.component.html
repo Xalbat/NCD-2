@@ -1,0 +1,27 @@
+<div class="html">
+    <br>
+    
+    <div class = "row">
+        <div class = "col-sm-3"></div> 
+        <div class="card col-sm-6 m-3 text-white bg-dark boxShadow">
+            <div class="card-header">
+                <h3 class="card-title">Connexion </h3>
+            </div>
+            <div class="card-body"> 
+                <div class = "row">
+                    <div class = "col-3"></div> 
+                    <div class = "col-6">
+                        <input type="texte" class = "boxShadow selectBorder form-control m-3" name="login" placeholder="Identifiant" [(ngModel)]="compte.login" />
+                        <input type="password" class = "boxShadow selectBorder form-control m-3" name="password" placeholder="mot de passe" [(ngModel)]="compte.password" required />
+                    </div>
+                    <div class = "col-3"></div> 
+                </div>
+            </div>
+            <div class="card-footer">
+                    <input type="submit" class = "btn btn-light jump boxShadow m-2" value="Se connecter" (click)="seConnecter()"/>
+                    <input type="submit" class = "btn btn-light darkJump boxShadow m-2" value="Se Deconnecter" (click)="seDeconnecter()"/>
+            </div>
+        </div>
+        <div class = "col-sm-3"></div> 
+    </div>
+</div>

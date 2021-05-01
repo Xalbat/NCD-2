@@ -1,0 +1,239 @@
+<div class="html">
+	<br>
+
+	<div class = "row">
+		<div class = "col-sm-3"></div>  
+		<div class="card m-3  text-white bg-dark boxShadow col-sm-6">
+		<div class="card-header">
+			<h3 class="card-title">Inscription d'un parachutiste</h3>
+		</div>
+
+		<div class="card-body" >
+			<div class="form-group row">
+				<label for="dateVisite" class="col-sm-2 col-form-label">Nom : </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control selectBorder boxShadow " id="nomParachutiste"  [(ngModel)]="formParachutiste.nom"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="dateVisite" class="col-sm-2 col-form-label">Prenom : </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control selectBorder boxShadow " id="prenomParachutiste"  [(ngModel)]="formParachutiste.prenom"/>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Numero de licence : </label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control selectBorder boxShadow " id="numeroLicence" [(ngModel)]="formParachutiste.numeroLicence"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="prix" class="col-sm-2 col-form-label">Niveau : </label>
+				<div class="col-sm-10">
+					<select id="niveau" class="form-control selectBorder boxShadow "   [(ngModel)]="formParachutiste.niveau">
+						<option value="ELEVE">ELEVE</option>
+						<option value="CONFIRME">CONFIRME</option>
+						<option value="VIDEASTE">VIDEASTE</option>
+						<option value="INSTRUCTEUR">INSTRUCTEUR</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">ID du parachute : </label>
+				<select class="form-control selectBorder boxShadow " id = "parachute" [(ngModel)]="formParachutiste.parachute">
+					
+						<option  *ngFor="let parachute of srvParachute.parachutes" [ngValue] = "parachute">
+							 {{parachute.idParachute}}
+						</option>
+					
+				</select>
+			</div>  
+			
+
+			<div class="card-footer text-right">
+				<button *ngIf="!isEditing" (click)="ajouterParachutiste()" class="btn jump m-1">Ajouter <fa-icon [icon]="faParachuteBox"></fa-icon> </button>
+				<button *ngIf="isEditing" (click)="modifierParachutiste()" class="btn validateJump m-1">Modifier</button>
+				<button *ngIf="isEditing" (click)="annulerModification()" class="btn cancelJump m-1">Annuler</button> 
+			</div>
+		</div>
+	</div>
+	</div>
+
+    <div class = "row">
+		<div class = "col-sm-3"></div>  
+		<div class="card m-3  text-white bg-dark boxShadow col-sm-6">
+		<div class="card-header">
+			<h3>Liste des parachutistes inscrits</h3>
+		</div>
+		<br>
+		<div class="card-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prenom</th>
+						<th>Numero de Licence</th>
+						<th>Niveau</th>
+						<th>ID du parachute</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let parachutiste of srvParachutiste.parachutistes">
+						<td>{{ parachutiste.nom }}</td>
+						<td>{{ parachutiste.prenom }}</td>
+						<td>{{ parachutiste.numeroLicence }}</td>
+						<td>{{ parachutiste.niveau }}</td>
+						<td>{{ parachutiste.parachute?.idParachute }}</td>
+
+						<td> </td>
+						
+
+						<td>
+							<button (click)="editerParachutiste(parachutiste)" class="btn editJump m-1">Editer</button>
+							<button  (click)="supprimerParachutiste(parachutiste)" class="btn darkJump m-1">Supprimer</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+
+		<!-- Ajout saut Tandem et video-->
+		<div class = "row">
+			<div class = "col-sm-3"></div>  
+			<div class="card m-3  text-white bg-dark boxShadow col-sm-6">
+				<div class="card-header">
+					<h3 class="card-title" align="center" >Ajout d'un saut</h3>
+						<div class = "row">
+							<div class = "col-sm-4"></div>  
+							<div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+								<label class="btn btn-outline-light  active">
+									<b><input (click)="changeIsGroup(false)" name="typeSaut" type="radio" value = "Solo"> Solo</b>
+								</label>
+								<label class="btn btn-outline-light">
+									<b><input (click)="changeIsTandem(true)" name="typeSaut" type="radio" value ="Tandem"> Tandem</b>
+								</label>
+								<label class="btn btn-outline-light">
+									<b><input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value ="Group"> Groupe</b>
+								</label>
+							</div>    
+							<div class = "col-sm-4"></div>  
+						</div>         
+				</div>
+				
+				<div class="card-body "> 
+						<!-- SOLO -->
+						<div *ngIf = "!isGroup" class="form-group row">
+							<label for="nom" class="col-sm-2 col-form-label">Participant: </label>
+							<div class="col-sm-10 ">
+								<select class="form-control selectBorder box boxShadow" id = "parachutiste" [(ngModel)]="parachutiste">
+									<ng-container *ngFor="let p of srvParachutiste.parachutistes">
+										<option *ngIf = "p!= videaste && p!= instructeur" [ngValue] = "p">
+											[Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
+										</option>
+									</ng-container>
+								</select>
+							</div>  
+						</div>
+	
+						<div *ngIf = "isTandem && !isGroup" class="form-group row">
+							<label for="nom" class="col-sm-2 col-form-label">Instructeur: </label>
+							<div class="col-sm-10 ">
+								<select class="form-control selectBorder box boxShadow" id = "instructeur" [(ngModel)]="instructeur">
+									<ng-container *ngFor="let p of instructeurs()">
+										<option *ngIf = "p!= videaste && p!= parachutiste" [ngValue] = "p">
+											[Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
+										</option>
+									</ng-container>
+								</select>
+							</div>  
+						</div>
+		
+						<!-- GROUPE -->
+						<div *ngIf = "isGroup" class="form-group row">
+							<label for="nom" class="col-sm-2 col-form-label">Participant: </label>
+							<div class="col-sm-8">
+								<select class="form-control selectBorder boxShadow" id = "parachutiste" [(ngModel)]="parachutiste">
+									<ng-container *ngFor="let p of confirmes()">
+										<option *ngIf="p!= instructeur && p!= videaste" [ngValue] = "p">
+											[Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }}  - {{ p.niveau }}
+										</option>
+									</ng-container>
+								</select>
+							</div>  
+							<div class="col-sm-2">
+								<button (click)="ajouterParachutisteInList()" class="btn btn-light boxShadow jump m-1">Ajouter</button>
+							</div>
+						</div>
+		
+						<table *ngIf = "isGroup && parachutistes.length" class="table table-striped">
+							<thead>
+								<tr>
+									<th>Licence</th>
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th></th>
+								</tr>
+							</thead>
+						
+							<tbody>
+								<tr *ngFor="let parachutiste of parachutistes">
+									<td>{{ parachutiste.numeroLicence }}</td>
+									<td>{{ parachutiste.nom }}</td>
+									<td>{{ parachutiste.prenom }}</td>
+									<td><button (click)="supprimerParachutisteInList(parachutiste)" class="btn btn-danger m-1">Supprimer</button></td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<!-- Videaste -->
+						<div class="form-group row">
+							<label for="nom" class="col-sm-2 col-form-label">Videaste: </label>
+							<div class="col-sm-10 ">
+								<select class="form-control selectBorder box boxShadow" id = "videaste" [(ngModel)]="videaste">
+									<ng-container *ngFor="let p of videastes()">
+										<option *ngIf = "p!= parachutiste && p!= instructeur" [ngValue] = "p">
+											[Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - VIDEASTE
+										</option>
+									</ng-container>
+								</select>
+							</div>  
+						</div>
+		
+					<!-- ALTITUDE -->
+					<div class="form-group row">
+						<label for="altitude" class="col-sm-2 col-form-label"> Altitude : </label>
+						<div class="col-sm-10">
+							<select class="form-control selectBorder boxShadow" name="altitude" [(ngModel)]="saut.altitude">
+								<option value="1200">1200m</option>
+								<option value="1600">1600m</option>
+								<option value="2000">2000m</option>
+								<option value="2500">2500m</option>
+								<option value="4000">4000m</option>
+								<option value="6000">6000m</option>
+							</select>
+						</div>
+					</div>
+		
+				</div>
+					<div *ngIf = "isGroup" class="card-footer text-right">
+						<button (click)="ajouterSautGroup()" class="btn m-1 jump boxShadow">Lets jump now</button>
+					</div>
+		
+					<div *ngIf = "!isGroup" class="card-footer text-right">
+						<button (click)="ajouterSautSolo()" class="btn m-1 jump boxShadow">Lets jump now</button>
+					</div>
+			</div>
+			</div>  
+	
+		<br>
+	<!-- Saut -->
+</div>
+
