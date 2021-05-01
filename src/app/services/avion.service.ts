@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AppConfigService } from './app-config.service';
 import { Avion } from '../classes/avion';
+import { EtatAvion } from '../enums/etat-avion.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AvionService {
   private apiUrl: string="";
-  public avions: Array<Avion>;
+  //public avions: Array<Avion>;
 
   constructor(private appConfig: AppConfigService, 
               private http: HttpClient, 
@@ -18,8 +19,7 @@ export class AvionService {
   }
 
   public getAvions() {
-    this.http.get<Array<Avion>>(this.apiUrl, this.appConfig.httpOptions)
-    .subscribe(avions => this.avions = avions);
+    return this.http.get<Array<Avion>>(this.apiUrl, this.appConfig.httpOptions);
   }
 
   public addAvion(avion: Avion) {

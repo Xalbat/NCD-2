@@ -4,35 +4,34 @@
         <div class="collapse navbar-collapse">
           <strong>
             <ul class="navbar-nav">
+
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/connect">Se connecter</a>
+              </li>
+
               <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/avionnage">Avionnage</a>
               </li>
-        
-              <li class="nav-item" routerLinkActive="active">
-                  <a class="nav-link" routerLink="/connect">Se connecter</a>
+
+              <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/payement">Paiement</a>
               </li>
 
-          <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/payement">Paiement</a>
-        </li>
-
-       
-          <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/inscription">Inscription</a>
-          </li>
+              <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/inscription">Inscription</a>
+              </li>
 
               <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/parachute">Gestion des parachutes</a>
               </li>
 
-          <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
-              <a class="nav-link" routerLink="/composer-avion">Composer un avion</a>
-            </li>
+              <li *ngIf= "appConfigSrv.compte.typeCompte" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/composer-avion">Composer un avion</a>
+              </li>
             
-            <li *ngIf= "appConfigSrv.compte.typeCompte == 'ADMIN'" class="nav-item" routerLinkActive="active">
-              <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
-            </li>
-
+              <li *ngIf= "appConfigSrv.compte.typeCompte == 'ADMIN'" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
+              </li>
             </ul>
           </strong>
         </div>

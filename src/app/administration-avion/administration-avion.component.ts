@@ -11,16 +11,16 @@ export class AdministrationAvionComponent implements OnInit {
 
   avions : Array<Avion>;
 
-  constructor(private avionSvc : AvionService) { }
+  constructor(private srvAvion:AvionService) { }
 
   ngOnInit(): void {
-    this.avionSvc.getAvions()
-    setTimeout(()=> this.avions = this.avionSvc.avions,150)
+    this.reload();
   }
 
   public reload(){
-    this.avionSvc.getAvions()
-    setTimeout(()=> this.avions = this.avionSvc.avions,250)
+    this.srvAvion.getAvions()
+    .toPromise()
+    .then(avions => this.avions = avions)
   }
 
 }

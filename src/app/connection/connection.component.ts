@@ -11,9 +11,7 @@ import { Compte } from '../classes/compte';
 export class ConnectionComponent implements OnInit {
   
   public compte: Compte = new Compte("", 0, "", "");
-
   constructor(public cpmtSrv: CompteService) { }
-
 
   ngOnInit(): void {
   }
@@ -24,8 +22,5 @@ export class ConnectionComponent implements OnInit {
 
   public seDeconnecter() {
     this.cpmtSrv.appConfig.compte = new Compte; 
-}
-
-
-
+  }
 }

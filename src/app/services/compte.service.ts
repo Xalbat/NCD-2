@@ -17,9 +17,7 @@ export class CompteService implements CanActivate {
     private http: HttpClient, 
     private router: Router) {
       this.apiUrl = `${ this.appConfig.url }/compte`;
-    }
-    
-
+      }
     
     public seConnecter(compte: Compte) {
       console.log(compte)
@@ -34,13 +32,10 @@ export class CompteService implements CanActivate {
       });
     }
 
-
-    
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
       if (this.compte && this.compte.idCompte) {
         return true;
       }
       this.router.navigate([ '/avionnage' ]);
     }
-    
   }

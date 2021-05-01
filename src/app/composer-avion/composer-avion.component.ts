@@ -50,8 +50,7 @@ export class ComposerAvionComponent implements OnInit {
               public srvVol: VolService, 
               public srvParachutiste: ParachutisteService,
               public srvSaut: SautService,
-              public srvPilote: PiloteService,
-              private datePipe: DatePipe) { }
+              public srvPilote: PiloteService) { }
 
   ngOnInit(): void {
     this.listeAvions();
@@ -61,7 +60,11 @@ export class ComposerAvionComponent implements OnInit {
     this.listPilote();
   }
 
-  listeAvions() {this.srvAvion.getAvions() ; setTimeout(() => this.avions=this.srvAvion.avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString),500)}
+  listeAvions() { 
+    this.srvAvion.getAvions()
+    .toPromise()
+    .then(avions => this.avions = avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString))
+  }
 
   listesPara() {this.srvParachutiste.reload()}
 
@@ -89,7 +92,7 @@ export class ComposerAvionComponent implements OnInit {
     else
     {
       this.choixAvion=true;
-      this.avion = this.srvAvion.avions.find(a => a.idAvion == id)
+      this.avion = this.avions.find(a => a.idAvion == id)
 
       setTimeout( () => this.vol = this.srvVol.vols.find(v => v.idVol == id),200)
 
