@@ -21,11 +21,9 @@ export class ParachutisteService {
   }
 
 
-  public reload() {
-    this.http.get<Array<Parachutiste>>(this.apiUrl, this.appConfig.httpOptions)
-        .subscribe(parachutistes => this.parachutistes = parachutistes);
+  public getParachutistes() {
+    return this.http.get<Array<Parachutiste>>(this.apiUrl, this.appConfig.httpOptions)
   }
-
 
   public add(parachutiste) {
     this.http.post<Parachutiste>(this.apiUrl, parachutiste, this.appConfig.httpOptions)

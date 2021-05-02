@@ -3,6 +3,7 @@ import { Payement } from '../classes/payement';
 import { PayementService } from '../services/payement.service';
 import { MoyenPayement } from '../enums/moyenPayement.enum';
 import { ParachutisteService } from '../services/parachutiste.service';
+import { Parachutiste } from '../classes/parachutiste';
 
 @Component({
   selector: 'app-payement',
@@ -13,6 +14,7 @@ export class PayementComponent implements OnInit {
 
   payement: Payement = new Payement;
   disable: boolean = true;
+  parachutistes: Array<Parachutiste> = []
 
   constructor(public payementSrv: PayementService,
     public parachutisteSrv: ParachutisteService) {
@@ -20,7 +22,12 @@ export class PayementComponent implements OnInit {
 
   ngOnInit() {
     this.payementSrv.reload();
-    this.parachutisteSrv.reload();
+    this.listeParachutiste();
+  }
+
+  listeParachutiste() {
+    this.parachutisteSrv.getParachutistes()
+    .subscribe(parachutistes => this.parachutistes=parachutistes)
   }
 
   etatsPossibles() {

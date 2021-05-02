@@ -19,8 +19,7 @@ export class SautService {
   }
 
   public loadCurrentSauts() {
-    this.http.get<Array<Saut>>(this.apiUrl, this.appConfig.httpOptions)
-    .subscribe(sauts => this.sauts = sauts);
+    return this.http.get<Array<Saut>>(this.apiUrl, this.appConfig.httpOptions)
   }
 
   public createSaut(saut) {

@@ -13,8 +13,7 @@ export class AvionService {
   //public avions: Array<Avion>;
 
   constructor(private appConfig: AppConfigService, 
-              private http: HttpClient, 
-              private router: Router) { 
+              private http: HttpClient) { 
     this.apiUrl = `${ this.appConfig.url}/avion`
   }
 

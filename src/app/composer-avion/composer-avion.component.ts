@@ -12,7 +12,8 @@ import { Pilote } from '../classes/pilote';
 import { PiloteService } from '../services/pilote.service';
 import { EtatAvion } from '../enums/etat-avion.enum';
 import { SituationVol } from '../enums/situation-vol.enum';
-import { DatePipe } from '@angular/common';
+import { SituationAvion } from '../enums/situation-avion.enum';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 
 @Component({
@@ -62,18 +63,27 @@ export class ComposerAvionComponent implements OnInit {
 
   listeAvions() { 
     this.srvAvion.getAvions()
-    .toPromise()
-    .then(avions => this.avions = avions.filter(a => a.etat.toString==EtatAvion.DISPONIBLE.toString))
+    .subscribe(avions => this.avions = avions.filter(a=> a.etat.toString()==EtatAvion.DISPONIBLE.toString()))
   }
 
-  listesPara() {this.srvParachutiste.reload()}
+  listesPara() {this.srvParachutiste.getParachutistes()}
 
-  listeSauts() {this.srvSaut.loadCurrentSauts() ; setTimeout(() => this.sauts=this.srvSaut.sauts,500)}
+  listeSauts() {
+    this.srvSaut.loadCurrentSauts()
+    .subscribe(sauts => this.sauts=this.srvSaut.sauts)
+  }
 
-  listPilote() {this.srvPilote.getPilote() ; setTimeout(() => this.pilotes=this.srvPilote.pilotes,500)}
+  listPilote() {
+    this.srvPilote.getPilote()
+    .subscribe(pilotes => this.pilotes=pilotes)
+    }
   
-  listesVols() {this.srvVol.getVol() ; setTimeout(() => this.vols=this.srvVol.vols,500); setTimeout(() => this.triListVol(),800)}
-
+  listesVols() {
+    this.srvVol.getVol()
+    .toPromise()
+    .then(vols => this.vols=vols)
+    .then(() => this.triListVol())
+  }
 
   affichageAvion(id) {
 
@@ -94,14 +104,13 @@ export class ComposerAvionComponent implements OnInit {
       this.choixAvion=true;
       this.avion = this.avions.find(a => a.idAvion == id)
 
-      setTimeout( () => this.vol = this.srvVol.vols.find(v => v.idVol == id),200)
+      setTimeout( () => this.vol = this.vols.find(v => v.idVol == id),200)
 
       if (this.avion?.vol!=null)
       {
         this.vueVol=true;
         this.vol=this.vols.find(v => v.idVol == this.avion.vol.idVol);
       }
-
     }
   }
 
@@ -122,11 +131,9 @@ export class ComposerAvionComponent implements OnInit {
 
       this.listesVols();
 
-      setTimeout( () => this.vol = this.srvVol.vols.find(v => v.idVol == id),200)
-
+      setTimeout( () => this.vol = this.vols.find(v => v.idVol == id),200)
       setTimeout(() => this.nombrePassager(),200);
       setTimeout(() => this.AltitudeMax(),200);
-      
     }    
   }
 

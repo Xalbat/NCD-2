@@ -18,8 +18,7 @@ export class PiloteService {
   }
 
   public getPilote() {
-    this.http.get<Array<Pilote>>(this.apiUrl,this.appConfig.httpOptions)
-    .subscribe(pilotes => this.pilotes =pilotes);
+    return this.http.get<Array<Pilote>>(this.apiUrl,this.appConfig.httpOptions)
   }
 
   public addPilote(pilote: Pilote) {

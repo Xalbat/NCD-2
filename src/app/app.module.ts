@@ -28,8 +28,8 @@ const routes: Routes = [
   { path: 'administration-avion', component: AdministrationAvionComponent },
   { path: 'composer-avion', component: ComposerAvionComponent },
   { path: 'composer-vol', component: ComposerVolComponent },
-  { path: '', redirectTo: 'avionnage', pathMatch: 'full' },
-  { path: '**', component: AvionnageComponent }
+  { path: '', redirectTo: 'connect', pathMatch: 'full' },
+  { path: '**', component: ConnectionComponent }
 ];
 
 @NgModule({

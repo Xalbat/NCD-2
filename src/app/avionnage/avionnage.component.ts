@@ -7,7 +7,6 @@ import { Parachutiste } from '../classes/parachutiste';
 import { Avion } from '../classes/avion';
 import { Vol } from '../classes/vol';
 import { VolService } from '../services/vol.service';
-import { Niveau } from '../enums/niveau.enum';
 
 
 @Component({
@@ -29,6 +28,7 @@ export class AvionnageComponent implements OnInit {
   
   public avion : Avion = null;
   public vol: Vol=null;
+  vols : Array<Vol> = []
   avions : Array<Avion> = [];
   volsDisponibles : Array<Vol> = [];
   choixVol = false;
@@ -46,23 +46,31 @@ export class AvionnageComponent implements OnInit {
     this.saut.tandem = false;
     this.saut.isVideo = false;
 
-    this.srvSaut.loadCurrentSauts(); 
-
-    this.srvParachutiste.reload();
-    setTimeout(() => this.listeParachutistes = this.srvParachutiste.parachutistes, 100 )
-
-
-    this.srvVol.getVol();
-    console.log(this.srvSaut.sauts);
+    this.listeSauts();
+    this.listeDeParachutistes()
+    this.listesVols();
   }
 
 
-listesVols() {this.srvVol.getVol()}
+listesVols() {
+  this.srvVol.getVol()
+  .subscribe(vols => this.vols = vols)
+}
+
+listeSauts() {
+  this.srvSaut.loadCurrentSauts()
+  .subscribe(sauts => this.sauts=sauts)
+}
+
+listeDeParachutistes() {
+  this.srvParachutiste.getParachutistes()
+  .subscribe(parachutistes => this.parachutistes=parachutistes)
+}
 
 affichageVol(id) {
   this.choixVol=(!this.choixVol);
   this.choixVol 
-      ? this.vol = this.srvVol.vols.find(v => v.idVol == id) 
+      ? this.vol = this.vols.find(v => v.idVol == id) 
       : this.vol = null;
 }
 

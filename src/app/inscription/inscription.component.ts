@@ -35,7 +35,7 @@ export class InscriptionComponent implements OnInit {
   constructor(public srvParachutiste: ParachutisteService, public srvParachute: ParachuteService, public srvSaut: SautService) { }
 
   ngOnInit(){
-    this.srvParachutiste.reload();
+    this.srvParachutiste.getParachutistes();
     this.srvParachute.reload();
 
     //Ajout saut
@@ -45,7 +45,7 @@ export class InscriptionComponent implements OnInit {
 
     this.srvSaut.loadCurrentSauts(); 
 
-    this.srvParachutiste.reload();
+    this.srvParachutiste.getParachutistes();
     setTimeout(() => this.listeParachutistes = this.srvParachutiste.parachutistes, 100 )
 
     

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class VolService {
   private apiUrl: string="";
-  public vols: Array<Vol>;
+
 
   constructor(private appConfig: AppConfigService, 
               private http: HttpClient, 
@@ -18,8 +18,7 @@ export class VolService {
   }
 
   public getVol() {
-    this.http.get<Array<Vol>>(this.apiUrl,this.appConfig.httpOptions)
-    .subscribe(Vol => this.vols =Vol);
+    return this.http.get<Array<Vol>>(this.apiUrl,this.appConfig.httpOptions)
   }
 
   public addVol(vol: Vol) {
