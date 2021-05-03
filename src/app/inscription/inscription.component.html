@@ -44,13 +44,13 @@
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">ID du parachute : </label>
-				<select class="form-control selectBorder boxShadow " id = "parachute" [(ngModel)]="formParachutiste.parachute">
-					
+				<div class="col-sm-10">
+					<select class="form-control selectBorder boxShadow " id = "parachute" [(ngModel)]="formParachutiste.parachute">
 						<option  *ngFor="let parachute of srvParachute.parachutes" [ngValue] = "parachute">
-							 {{parachute.idParachute}}
+								{{parachute.idParachute}}
 						</option>
-					
-				</select>
+					</select>
+				</div>
 			</div>  
 			
 

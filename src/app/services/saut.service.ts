@@ -18,7 +18,7 @@ export class SautService {
     this.apiUrl = `${ this.appConfig.url}/saut`
   }
 
-  public loadCurrentSauts() {
+  public getSauts() {
     return this.http.get<Array<Saut>>(this.apiUrl, this.appConfig.httpOptions)
   }
 
@@ -31,5 +31,4 @@ export class SautService {
     this.http.put<Saut>(this.apiUrl + "/" + saut.idSaut, saut, this.appConfig.httpOptions)
     .subscribe();
   }
-
 }

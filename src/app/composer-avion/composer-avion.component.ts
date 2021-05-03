@@ -69,17 +69,17 @@ export class ComposerAvionComponent implements OnInit {
   listesPara() {this.srvParachutiste.getParachutistes()}
 
   listeSauts() {
-    this.srvSaut.loadCurrentSauts()
+    this.srvSaut.getSauts()
     .subscribe(sauts => this.sauts=this.srvSaut.sauts)
   }
 
   listPilote() {
-    this.srvPilote.getPilote()
+    this.srvPilote.getPilotes()
     .subscribe(pilotes => this.pilotes=pilotes)
     }
   
   listesVols() {
-    this.srvVol.getVol()
+    this.srvVol.getVols()
     .toPromise()
     .then(vols => this.vols=vols)
     .then(() => this.triListVol())

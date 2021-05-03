@@ -62,7 +62,7 @@ export class ComposerVolComponent implements OnInit {
   }
 
   loadListeSauts(){
-    this.sautSvc.loadCurrentSauts()
+    this.sautSvc.getSauts()
     setTimeout(()=>this.listeSautDemandes = this.sautSvc.sauts,250)
   }
 

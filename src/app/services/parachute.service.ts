@@ -15,8 +15,7 @@ export class ParachuteService {
     this.apiUrl=`${this.appConfig.url}/parachute`;
    }
 
-
-  public reload() {
+  public getParachutes() {
     return this.http.get<Array<Parachute>>(this.apiUrl,this.appConfig.httpOptions)
   }
 
@@ -42,7 +41,4 @@ export class ParachuteService {
           }
         });
   }
-
 }
-
-

@@ -15,7 +15,7 @@ export class ParachuteComponent implements OnInit {
   constructor(public srvParachute:ParachuteService) { }
 
   ngOnInit(){
-    this.srvParachute.reload();
+    this.srvParachute.getParachutes();
     this.formParachute.revision = new RevisionParachute();
   }
 

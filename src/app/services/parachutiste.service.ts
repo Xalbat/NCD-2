@@ -12,14 +12,12 @@ export class ParachutisteService {
   private apiUrl: string = "";
   public parachutistes: Array<Parachutiste> = null;
   
-
   constructor(
     private appConfig: AppConfigService, 
     private http: HttpClient, 
     rooter: Router) { 
     this.apiUrl=`${this.appConfig.url}/parachutiste`;
   }
-
 
   public getParachutistes() {
     return this.http.get<Array<Parachutiste>>(this.apiUrl, this.appConfig.httpOptions)

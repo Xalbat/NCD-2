@@ -10,7 +10,6 @@ import { EtatAvion } from '../enums/etat-avion.enum';
 })
 export class AvionService {
   private apiUrl: string="";
-  //public avions: Array<Avion>;
 
   constructor(private appConfig: AppConfigService, 
               private http: HttpClient) { 

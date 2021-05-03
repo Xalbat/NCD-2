@@ -17,7 +17,7 @@ export class PiloteService {
     this.apiUrl = `${ this.appConfig.url}/pilote`
   }
 
-  public getPilote() {
+  public getPilotes() {
     return this.http.get<Array<Pilote>>(this.apiUrl,this.appConfig.httpOptions)
   }
 
@@ -30,5 +30,4 @@ export class PiloteService {
     this.http.put<Pilote>(this.apiUrl + "/" + pilote.licence, pilote,this.appConfig.httpOptions)
     .subscribe();
   }
-
 }

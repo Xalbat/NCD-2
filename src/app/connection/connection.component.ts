@@ -10,7 +10,7 @@ import { Compte } from '../classes/compte';
 })
 export class ConnectionComponent implements OnInit {
   
-  public compte: Compte = new Compte("", 0, "", "");
+  public compte: Compte = new Compte("admin", 0, "admin", "");
   constructor(public cpmtSrv: CompteService) { }
 
   ngOnInit(): void {

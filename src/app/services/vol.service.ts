@@ -17,7 +17,7 @@ export class VolService {
     this.apiUrl = `${ this.appConfig.url}/vol`
   }
 
-  public getVol() {
+  public getVols() {
     return this.http.get<Array<Vol>>(this.apiUrl,this.appConfig.httpOptions)
   }
 

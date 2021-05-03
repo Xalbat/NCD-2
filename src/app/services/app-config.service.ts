@@ -11,7 +11,6 @@ export class AppConfigService {
   public httpOptions: Object = { headers: new HttpHeaders() };
   public compte: Compte = new Compte;
 
-
   constructor() {
   }
 
@@ -23,6 +22,5 @@ export class AppConfigService {
     headers = headers.append('Authorization', basicAuth);
 
     this.httpOptions = { headers: headers };
-
   }
 }
