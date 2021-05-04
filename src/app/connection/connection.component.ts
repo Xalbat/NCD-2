@@ -11,16 +11,13 @@ import { Compte } from '../classes/compte';
 export class ConnectionComponent implements OnInit {
   
   public compte: Compte = new Compte("admin", 0, "admin", "");
-  constructor(public cpmtSrv: CompteService) { }
+  constructor(public srvCompte: CompteService) { }
 
   ngOnInit(): void {
   }
 
   public seConnecter() {
-      this.cpmtSrv.seConnecter(this.compte); 
+      this.srvCompte.seConnecter(this.compte); 
   }
-
-  public seDeconnecter() {
-    this.cpmtSrv.appConfig.compte = new Compte; 
-  }
+  
 }

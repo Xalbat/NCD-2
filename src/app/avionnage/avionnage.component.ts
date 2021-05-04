@@ -53,12 +53,12 @@ export class AvionnageComponent implements OnInit {
 
 
 listesVols() {
-  this.srvVol.getVol()
+  this.srvVol.getVols()
   .subscribe(vols => this.vols = vols)
 }
 
 listeSauts() {
-  this.srvSaut.loadCurrentSauts()
+  this.srvSaut.getSauts()
   .subscribe(sauts => this.sauts=sauts)
 }
 

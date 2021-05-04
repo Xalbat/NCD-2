@@ -12,8 +12,6 @@ import { Pilote } from '../classes/pilote';
 import { PiloteService } from '../services/pilote.service';
 import { EtatAvion } from '../enums/etat-avion.enum';
 import { SituationVol } from '../enums/situation-vol.enum';
-import { SituationAvion } from '../enums/situation-avion.enum';
-import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 
 @Component({
