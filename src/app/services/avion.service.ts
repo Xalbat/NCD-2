@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { AppConfigService } from './app-config.service';
+import { Injectable } from '@angular/core';
 import { Avion } from '../classes/avion';
-import { EtatAvion } from '../enums/etat-avion.enum';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'

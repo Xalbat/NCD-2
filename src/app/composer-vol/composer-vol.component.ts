@@ -1,15 +1,12 @@
-import { Component, OnInit, SimpleChange } from '@angular/core';
-
-import { ComposerAvionComponent } from '../composer-avion/composer-avion.component';
+import { Component, OnInit } from '@angular/core';
 import { Avion } from '../classes/avion';
 import { Parachutiste } from '../classes/parachutiste';
 import { Saut } from '../classes/saut';
 import { Vol } from '../classes/vol';
-import { SituationVol } from '../enums/situation-vol.enum';
-import { SituationAvion } from '../enums/situation-avion.enum';
-import { EtatAvion } from '../enums/etat-avion.enum';
-import { SautService } from '../services/saut.service';
+import { ComposerAvionComponent } from '../composer-avion/composer-avion.component';
 import { Niveau } from '../enums/niveau.enum';
+import { SautService } from '../services/saut.service';
+
 
 @Component({
   selector: 'composer-vol,[composer-vol]',

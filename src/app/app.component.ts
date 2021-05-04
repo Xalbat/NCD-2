@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Compte } from './classes/compte';
-import { ConnectionComponent } from './connection/connection.component';
 import { AppConfigService } from './services/app-config.service';
-import { CompteService } from './services/compte.service';
 
 @Component({
   selector: 'app-root',
