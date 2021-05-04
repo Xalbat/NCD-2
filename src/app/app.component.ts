@@ -17,5 +17,4 @@ export class AppComponent {
   public seDeconnecter() {
     this.srvAppConfig.compte = new Compte; 
   }
-
 }
