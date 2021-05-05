@@ -23,8 +23,7 @@ export class SautService {
   }
 
   public createSaut(saut) {
-    this.http.post<Saut>(this.apiUrl, saut, this.appConfig.httpOptions)
-    .subscribe(respSaut => this.sauts.push(respSaut));
+    return this.http.post<Saut>(this.apiUrl, saut, this.appConfig.httpOptions);
   }
 
   public updateSaut(saut) {

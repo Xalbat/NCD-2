@@ -47,7 +47,7 @@ export class AvionnageComponent implements OnInit {
     this.saut.isVideo = false;
 
     this.listeSauts();
-    this.listeDeParachutistes()
+    this.listeDeParachutistes();
     this.listesVols();
   }
 
@@ -76,16 +76,18 @@ affichageVol(id) {
 
   public ajouterSautGroup() 
   {
-    this.saut.listParachutiste = this.parachutistes;
-    this.srvSaut.createSaut(this.saut);
+    this.saut.listParachutiste = this.listeParachutistes;
+    this.srvSaut.createSaut(this.saut)
+      .toPromise()
+      .then(respSaut => this.sauts.push(respSaut))
+      .then(() => this.listeDeParachutistes());
     this.saut = new Saut();
     this.saut.altitude = 1200;
     this.saut.tandem = false;
     this.saut.isVideo = false;
     this.parachutiste = new Parachutiste();
-    this.parachutistes = new Array<Parachutiste>();
-    this.listeParachutistes = this.srvParachutiste.parachutistes;
-    
+    this.listeParachutistes = new Array<Parachutiste>();
+    this.listeDeParachutistes();
   }
 
   public ajouterSautSolo() 
@@ -102,26 +104,26 @@ affichageVol(id) {
     this.parachutiste = new Parachutiste();
     this.videaste = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
-    this.listeParachutistes = this.srvParachutiste.parachutistes;
+    this.listeDeParachutistes();
   }
 
   public ajouterParachutiste() 
   {
     if (this.parachutiste.numeroLicence>=0)
     {
-      const index = this.listeParachutistes.indexOf(this.parachutiste);
-      this.listeParachutistes.splice(index, 1);
+      const index = this.parachutistes.indexOf(this.parachutiste);
+      this.parachutistes.splice(index, 1);
 
-      this.parachutistes.push(this.parachutiste)
+      this.listeParachutistes.push(this.parachutiste)
       this.parachutiste = new Parachutiste();
     } 
   }
 
   public supprimerParachutiste(parachutiste) 
   {
-    this.listeParachutistes.push(parachutiste);
-    const index = this.parachutistes.indexOf(parachutiste);
-    this.parachutistes.splice(index, 1);
+    this.parachutistes.push(parachutiste);
+    const index = this.listeParachutistes.indexOf(parachutiste);
+    this.listeParachutistes.splice(index, 1);
   }
 
   public changeIsGroup(boolean) 
@@ -131,7 +133,7 @@ affichageVol(id) {
     this.parachutiste = new Parachutiste();
     this.instructeur = new Parachutiste();
     this.parachutistes = new Array<Parachutiste>();
-    this.listeParachutistes = this.srvParachutiste.parachutistes;
+    this.listeDeParachutistes();
   }
 
   public changeIsVideo(boolean) 
@@ -141,17 +143,17 @@ affichageVol(id) {
 
   public instructeurs()
   {
-    return this.listeParachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
+    return this.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
   }
 
   public videastes()
   {
-    return this.listeParachutistes.filter(p => p.niveau.toString() == 'VIDEASTE' || p.niveau.toString() == 'INSTRUCTEUR')
+    return this.parachutistes.filter(p => p.niveau.toString() == 'VIDEASTE' || p.niveau.toString() == 'INSTRUCTEUR')
   }
 
   public confirmes()
   {
-    return this.listeParachutistes.filter(p => p.niveau.toString() != 'ELEVE')
+    return this.parachutistes.filter(p => p.niveau.toString() != 'ELEVE')
   }
 
   public parachutistesAttente(saut)
