@@ -17,23 +17,21 @@ import { VolService } from '../services/vol.service';
 export class AvionnageComponent implements OnInit {
   public saut: Saut = new Saut();
   public parachutiste: Parachutiste = new Parachutiste();
-  public parachutistes: Array<Parachutiste> = new Array<Parachutiste>();
+  public parachutistes: Array<Parachutiste> = [];
   public isGroup: Boolean = false;
   public instructeur: Parachutiste = new Parachutiste();
   public videaste: Parachutiste = new Parachutiste();
-  public listeParachutistes: Array<Parachutiste> = new Array<Parachutiste>();
-
+  public listeParachutistes: Array<Parachutiste> = [];
 
   public sauts: Array<Saut>;
   
   public avion : Avion = null;
   public vol: Vol=null;
-  vols : Array<Vol> = []
-  avions : Array<Avion> = [];
-  volsDisponibles : Array<Vol> = [];
-  choixVol = false;
-  indexVol=0;
-
+  public vols : Array<Vol> = []
+  public avions : Array<Avion> = [];
+  public volsDisponibles : Array<Vol> = [];
+  public choixVol = false;
+  public indexVol=0;
 
   constructor(
     public srvParachutiste: ParachutisteService,
@@ -51,65 +49,65 @@ export class AvionnageComponent implements OnInit {
     this.listesVols();
   }
 
+  private listesVols() {
+    this.srvVol.getVols()
+    .subscribe(vols => this.vols = vols)
+  }
 
-listesVols() {
-  this.srvVol.getVols()
-  .subscribe(vols => this.vols = vols)
-}
+  private listeSauts() {
+    this.srvSaut.getSauts()
+    .subscribe(sauts => this.sauts=sauts)
+  }
 
-listeSauts() {
-  this.srvSaut.getSauts()
-  .subscribe(sauts => this.sauts=sauts)
-}
-
-listeDeParachutistes() {
-  this.srvParachutiste.getParachutistes()
-  .subscribe(parachutistes => this.parachutistes=parachutistes)
-}
-
-affichageVol(id) {
-  this.choixVol=(!this.choixVol);
-  this.choixVol 
-      ? this.vol = this.vols.find(v => v.idVol == id) 
-      : this.vol = null;
-}
+  private listeDeParachutistes() {
+    this.srvParachutiste.getParachutistes()
+    .subscribe(parachutistes => this.parachutistes=parachutistes)
+  }
 
   public ajouterSautGroup() 
   {
-    this.saut.listParachutiste = this.listeParachutistes;
-    this.srvSaut.createSaut(this.saut)
-      .toPromise()
-      .then(respSaut => this.sauts.push(respSaut))
-      .then(() => this.listeDeParachutistes());
-    this.saut = new Saut();
-    this.saut.altitude = 1200;
-    this.saut.tandem = false;
-    this.saut.isVideo = false;
-    this.parachutiste = new Parachutiste();
-    this.listeParachutistes = new Array<Parachutiste>();
-    this.listeDeParachutistes();
+    if (this.listeParachutistes.length==0) { alert('La liste de parachutiste est vide')}
+    else {
+      this.saut.listParachutiste = this.listeParachutistes;
+      console.log(this.saut);
+      this.srvSaut.createSaut(this.saut)
+        .toPromise()
+        .then(saut => this.sauts.push(saut))
+        .then(() => this.listeDeParachutistes());
+      this.saut = new Saut();
+      this.saut.altitude = 1200;
+      this.saut.tandem = false;
+      this.parachutiste = new Parachutiste();
+      this.listeParachutistes = new Array<Parachutiste>();
+      this.listeDeParachutistes();
+    }
   }
 
   public ajouterSautSolo() 
   {
-    this.parachutistes.push(this.parachutiste)
-    if (this.videaste.numeroLicence >= 0) {this.parachutistes.push(this.videaste);}
-    this.saut.listParachutiste = this.parachutistes;
-    console.log(this.saut)
-    this.srvSaut.createSaut(this.saut);
-    this.saut = new Saut();
-    this.saut.altitude = 1200;
-    this.saut.tandem = false;
-    this.saut.isVideo = false;
-    this.parachutiste = new Parachutiste();
-    this.videaste = new Parachutiste();
-    this.parachutistes = new Array<Parachutiste>();
-    this.listeDeParachutistes();
+    if (this.parachutiste.numeroLicence==undefined) {alert("Aucun parachutiste sélectionné");} 
+    else {
+      this.saut.listParachutiste =[this.parachutiste]
+
+      // Ajoute le saut dans la BDD
+      this.srvSaut.createSaut(this.saut)
+        .toPromise()
+        .then(saut => this.sauts.push(saut))
+        .then(() => this.listeDeParachutistes());
+
+      // Réinitialise les variables
+      this.saut = new Saut();
+      this.saut.altitude = 1200;
+      this.saut.tandem = false;
+      this.parachutiste = new Parachutiste();
+      this.videaste = new Parachutiste();
+      this.parachutistes = new Array<Parachutiste>();
+    }
   }
 
   public ajouterParachutiste() 
   {
-    if (this.parachutiste.numeroLicence>=0)
+    if (!this.parachutiste)
     {
       const index = this.parachutistes.indexOf(this.parachutiste);
       this.parachutistes.splice(index, 1);
@@ -141,16 +139,6 @@ affichageVol(id) {
     this.saut.isVideo = boolean;
   }
 
-  public instructeurs()
-  {
-    return this.parachutistes.filter(p => p.niveau.toString() == 'INSTRUCTEUR')
-  }
-
-  public videastes()
-  {
-    return this.parachutistes.filter(p => p.niveau.toString() == 'VIDEASTE' || p.niveau.toString() == 'INSTRUCTEUR')
-  }
-
   public confirmes()
   {
     return this.parachutistes.filter(p => p.niveau.toString() != 'ELEVE')
@@ -158,12 +146,6 @@ affichageVol(id) {
 
   public parachutistesAttente(saut)
   {
-    if (saut.vol == null)
-    {
-      return saut.listParachutiste;
-    }
+    if (saut.vol == null) {return saut.listParachutiste;}
   }
-
 }
-
-

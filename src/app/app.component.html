@@ -18,10 +18,6 @@
               </li>
 
               <li *ngIf= "srvAppConfig.compte.typeCompte" class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/payement">Paiement</a>
-              </li>
-
-              <li *ngIf= "srvAppConfig.compte.typeCompte" class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/inscription">Inscription</a>
               </li>
 
@@ -36,6 +32,11 @@
               <li *ngIf= "srvAppConfig.compte.typeCompte == 'ADMIN'" class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/administration-avion">Administrer les avions</a>
               </li>
+              
+              <li *ngIf= "srvAppConfig.compte.typeCompte" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/payement">Paiement</a>
+              </li>
+              
             </ul>
           </strong>
         </div>

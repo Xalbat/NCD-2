@@ -19,13 +19,12 @@ export class PayementService {
       this.apiUrl=`${this.appConfigSrv.url}/payement`;
   }
 
-  public reload() {
+  public getPayement() {
     return this.http.get<Array<Payement>>(this.apiUrl, this.appConfigSrv.httpOptions)
   }
 
   public add(payement) {
-    this.http.post<Payement>(this.apiUrl, payement, this.appConfigSrv.httpOptions)
-        .subscribe(resp => this.payements.push(resp));
+    return this.http.post<Payement>(this.apiUrl, payement, this.appConfigSrv.httpOptions) 
   }
 
   public update(payement) {

@@ -27,7 +27,7 @@ export class CompteService implements CanActivate {
         this.compte.login = compte.login;
         this.compte.password = compte.password;
         this.appConfig.setCredentials(this.compte);
-        this.router.navigate([ '/composer-avion' ]);
+        this.router.navigate([ '/avionnage' ]);
         console.log(compte)
       });
     }

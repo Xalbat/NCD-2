@@ -20,7 +20,7 @@
             
             <tbody>
           
-              <tr *ngFor="let p of payementSrv.payements">
+              <tr *ngFor="let p of payements">
                 <td>{{ p.date }}</td>
                 <td>{{ p.valeur }}</td>
                 <td>{{ p.moyenPayement }}</td>
@@ -46,22 +46,27 @@
         </div>
 
         <div class="card-body">
-          <input class = "form-control selectBorder m-2 boxShadow" type = "number" [(ngModel)]="payement.valeur" placeholder="valeur" >
-          <input class = "form-control selectBorder m-2 boxShadow" type = "date" [(ngModel)]="payement.date">
-          
-          <label> Moyen de paiement :</label>
-            <select class = "form-control selectBorder m-2 boxShadow" [(ngModel)]="payement.moyenPayement" >
-                <option *ngFor="let e of etatsPossibles()">{{e}}</option>
-            </select>
 
           <label> Parachutiste :</label>
-            <select class = "form-control selectBorder boxShadow m-2" [(ngModel)]="payement.parachutiste" >
-                <option *ngFor="let p of parachutisteSrv.parachutistes" [ngValue]="p" >{{p.prenom}} {{p.nom}}</option>
-            </select>
+          <select class = "form-control selectBorder boxShadow m-2" [(ngModel)]="payement.parachutiste" >
+              <option *ngFor="let p of parachutistes" [ngValue]="p" >{{p.prenom}} {{p.nom}}</option>
+          </select>
+
+          <label> Moyen de paiement :</label>
+          <select class = "form-control selectBorder m-2 boxShadow" [(ngModel)]="payement.moyenPayement" >
+            <option *ngFor="let e of etatsPossibles()">{{e}}</option>
+          </select>
+
+          <label> Montant du paiement :</label>
+          <input class = "form-control selectBorder m-2 boxShadow" type = "number" [(ngModel)]="payement.valeur" placeholder="Montant" >
+          
+          <label> Date du paiement :</label>
+          <input class = "form-control selectBorder m-2 boxShadow" type = "date" [(ngModel)]="payement.date" placeholder="Date">
+
         </div>    
 
         <div class="card-footer">
-          <button class="btn jump boxShadow m-1" *ngIf="disable" (click)="ajouterPayement()">Ajouter</button>
+          <button class="btn jump boxShadow m-1" (click)="ajouterPayement()">Ajouter</button>
         </div>
     </div>
 </div>  

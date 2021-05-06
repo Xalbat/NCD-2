@@ -12,21 +12,27 @@ import { Parachutiste } from '../classes/parachutiste';
 })
 export class PayementComponent implements OnInit {
 
-  payement: Payement = new Payement;
-  disable: boolean = true;
-  parachutistes: Array<Parachutiste> = []
+  public payement: Payement = new Payement();
 
-  constructor(public payementSrv: PayementService,
-    public parachutisteSrv: ParachutisteService) {
+  public payements: Array<Payement> = []
+  public parachutistes: Array<Parachutiste> = []
+
+  constructor(public srvPayement: PayementService,
+    public srvParachutiste: ParachutisteService) {
    }
 
   ngOnInit() {
-    this.payementSrv.reload();
+    this.listePayements();
     this.listeParachutiste();
   }
 
-  listeParachutiste() {
-    this.parachutisteSrv.getParachutistes()
+  private listePayements() {
+    this.srvPayement.getPayement()
+    .subscribe(payements => this.payements=payements);
+  }
+
+  private listeParachutiste() {
+    this.srvParachutiste.getParachutistes()
     .subscribe(parachutistes => this.parachutistes=parachutistes)
   }
 
@@ -35,10 +41,16 @@ export class PayementComponent implements OnInit {
   }
 
   ajouterPayement() {
-    if (this.payement.moyenPayement == MoyenPayement.REMBOURSEMENT) {
-      this.payement.valeur = -this.payement.valeur;
+    if (this.payement.parachutiste==undefined) { alert("Veuillez sélectionner un parachutiste") }
+    else if (this.payement.moyenPayement==null) { alert("Veuillez sélectionner un moyen de payement") }
+    else if (this.payement.valeur==null) { alert("Veuillez sélectionner un montant") }
+    else if (this.payement.date==null) { alert("Veuillez sélectionner une date") }
+    else {
+      if (this.payement.moyenPayement == MoyenPayement.REMBOURSEMENT) {this.payement.valeur = - this.payement.valeur;}
+      this.srvPayement.add(this.payement)
+      .toPromise()
+      .then(() => this.listePayements() );
+      this.payement = new Payement;
     }
-    this.payementSrv.add(this.payement);
-    this.payement = new Payement;
   }
 }

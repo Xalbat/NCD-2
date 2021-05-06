@@ -10,11 +10,16 @@
                     <div class="col-sm-4"></div>
                     <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
                         <label class="btn btn-outline-light  active">
-                            <b><input (click)="changeIsGroup(false)" name="typeSaut" type="radio" value="Solo"> Solo</b>
+                            <b>
+                                <input (click)="changeIsGroup(false)" name="typeSaut" type="radio" checked>
+                                Solo
+                            </b>
                         </label>
                         <label class="btn btn-outline-light">
-                            <b><input (click)="changeIsGroup(true)" name="typeSaut" type="radio" value="Group">
-                                Groupe</b>
+                            <b>
+                                <input (click)="changeIsGroup(true)" name="typeSaut" type="radio">
+                                Groupe
+                            </b>
                         </label>
                     </div>
                     <div class="col-sm-4"></div>
@@ -26,23 +31,22 @@
                 <div *ngIf="!isGroup" class="form-group row">
                     <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
                     <div class="col-sm-10 ">
-                        <select class="form-control selectBorder box boxShadow" id="parachutiste"
-                            [(ngModel)]="parachutiste">
+                        <select class="form-control selectBorder box boxShadow" id="parachutiste" [(ngModel)]="parachutiste">
                             <ng-container *ngFor="let p of parachutistes">
-                                <option *ngIf="p!= videaste && p!= instructeur" [ngValue]="p">
+                                <option [ngValue]="p">
                                     [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
                                 </option>
                             </ng-container>
                         </select>
                     </div>
                 </div>
+                <!-- SOLO -->
 
                 <!-- GROUPE -->
                 <div *ngIf="isGroup" class="form-group row">
                     <label for="nom" class="col-sm-2 col-form-label">Participant: </label>
                     <div class="col-sm-8">
-                        <select class="form-control selectBorder boxShadow" id="parachutiste"
-                            [(ngModel)]="parachutiste">
+                        <select class="form-control selectBorder boxShadow" id="parachutiste" [(ngModel)]="parachutiste">
                             <option *ngFor="let p of confirmes()" [ngValue]="p">
                                 [Licence n°{{ p.numeroLicence }}] {{ p.prenom }} {{ p.nom }} - {{ p.niveau }}
                             </option>
@@ -74,21 +78,24 @@
                         </tr>
                     </tbody>
                 </table>
+                <!-- GROUPE -->
 
+                <!-- VIDEASTE ? -->
                 <div class="form-group row">
                     <label for="nom" class="col-sm-4 col-form-label">Videaste: </label>
                     <div class="col-sm-4">
                         <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
                             <label class="btn btn-outline-light active">
-                                <input (click)="changeIsVideo(true)" name="video" type="radio" value="true"> OUI
+                                <input (click)="changeIsVideo(false)" name="video" type="radio" value="false" checked> NON
                             </label>
                             <label class="btn btn-outline-light">
-                                <input (click)="changeIsVideo(false)" name="video" type="radio" value="false"> NON
+                                <input (click)="changeIsVideo(true)" name="video" type="radio" value="true"> OUI
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
+                <!-- VIDEASTE ? -->
 
                 <!-- ALTITUDE -->
                 <div class="form-group row">
@@ -104,6 +111,7 @@
                         </select>
                     </div>
                 </div>
+                <!-- ALTITUDE -->
 
             </div>
             <div *ngIf="isGroup" class="card-footer text-right">
@@ -125,7 +133,7 @@
                 <h3 class="card-title">Espace Avionnage</h3>
             </div>
             <div class="card-body text-white">
-                <label><strong>Liste des parachutistes en attente</strong></label>
+                <label><strong>Liste des sauts en attente</strong></label>
                 <table class="table table-light table-hover table-striped boxShadow">
                     <thead>
                         <tr>
